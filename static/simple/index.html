@@ -1,926 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eesh Saxena — CS Engineer & AI Researcher</title>
-  <meta name="description" content="Eesh Saxena — CS Engineering student at IIIT Senapati, Research Intern at IIIT Vadodara & IIT Tirupati, competitive programmer and AI researcher."/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Portfolio of Eesh Saxena — CS Engineering student at IIIT Senapati, Research Intern at IIIT Vadodara & IIT Tirupati. Specialist on Codeforces, Guardian on LeetCode." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green: #00e87a;
-      --green-light: #00ff88;
-      --cyan: #22d3ee;
-      --purple: #a78bfa;
-      --yellow: #fbbf24;
-      --orange: #fb923c;
-      --bg: #050a07;
-      --bg2: #0a110d;
-      --bg3: #0f1a12;
-      --border: rgba(0,232,122,0.12);
-      --text: #f0fdf4;
-      --text-dim: #6b9f7e;
-      --font: 'Inter', sans-serif;
+      --bg: #111113;
+      --bg2: #18181b;
+      --surface: #1c1c1f;
+      --border: rgba(255,255,255,0.07);
+      --text: #e4e4e7;
+      --muted: #71717a;
+      --accent: #00d4ff;
+      --accent2: #a78bfa;
+      --green: #22c55e;
+      --font: 'Inter', system-ui, sans-serif;
       --mono: 'JetBrains Mono', monospace;
-      --max: 1000px;
+      --nav-h: 60px;
+      --max-w: 1100px;
     }
 
     html { scroll-behavior: smooth; }
+
     body {
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(0,232,122,0.25); border-radius: 3px; }
-
-    /* ===== NAV ===== */
+    /* ── NAVBAR ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(5,10,7,0.9);
-      backdrop-filter: blur(20px);
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 3rem);
+      background: rgba(17,17,19,0.85);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      height: 60px;
-      display: flex; align-items: center;
-      padding: 0 clamp(20px, 5vw, 60px);
-    }
-    .nav-inner {
-      width: 100%; max-width: var(--max);
-      margin: 0 auto;
-      display: flex; align-items: center; gap: 0;
     }
     .nav-logo {
-      font-family: var(--mono);
-      font-size: 14px; font-weight: 700;
-      color: var(--green-light);
-      letter-spacing: 1px;
-      margin-right: auto;
-      text-decoration: none;
+      font-weight: 900; font-size: 1.25rem; letter-spacing: -0.03em;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
     }
-    .nav-logo span { color: rgba(255,255,255,0.3); font-weight: 400; }
-    .nav-links {
-      display: flex; gap: 2px;
-      list-style: none;
-    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; }
     .nav-links a {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-dim);
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); background: rgba(0,232,122,0.06); }
-    .nav-resume {
-      margin-left: 12px;
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 7px 16px;
-      background: transparent;
-      border: 1px solid rgba(0,232,122,0.4);
-      border-radius: 6px;
-      color: var(--green);
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .nav-resume:hover { background: rgba(0,232,122,0.08); border-color: var(--green-light); }
-
-    /* ===== SECTIONS ===== */
-    section {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 100px clamp(20px, 5vw, 60px) 0;
-    }
-    section:last-of-type { padding-bottom: 120px; }
-
-    .sec-label {
-      display: flex; align-items: center; gap: 12px;
-      font-family: var(--mono);
-      font-size: 11px; letter-spacing: 4px;
-      color: var(--green);
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-    .sec-label::after {
-      content: '';
-      flex: 1; height: 1px;
-      background: linear-gradient(90deg, rgba(0,232,122,0.3), transparent);
-      max-width: 200px;
-    }
-
-    /* ===== HERO ===== */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding-top: 60px;
-    }
-    .hero-tag {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--green);
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .hero-tag::before {
-      content: '';
-      width: 40px; height: 1px;
-      background: var(--green);
-    }
-    .hero-h1 {
-      font-size: clamp(42px, 8vw, 80px);
-      font-weight: 900;
-      letter-spacing: -3px;
-      line-height: 0.95;
-      margin-bottom: 24px;
-    }
-    .hero-h1 .accent { color: var(--green); }
-    .hero-h1 .dim { color: rgba(255,255,255,0.2); }
-    .hero-desc {
-      font-size: 17px;
-      color: var(--text-dim);
-      max-width: 520px;
-      line-height: 1.75;
-      margin-bottom: 36px;
-    }
-    .hero-desc strong { color: var(--text); font-weight: 600; }
-    .hero-actions {
-      display: flex; gap: 14px; flex-wrap: wrap;
-      margin-bottom: 60px;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 28px;
-      background: var(--green);
-      color: #000;
-      font-family: var(--mono);
-      font-size: 13px; font-weight: 700;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.2s;
-      box-shadow: 0 0 30px rgba(0,232,122,0.2);
-    }
-    .btn-primary:hover { background: var(--green-light); box-shadow: 0 0 40px rgba(0,255,136,0.35); transform: translateY(-1px); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 24px;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      font-family: var(--mono);
-      font-size: 13px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-outline:hover { border-color: rgba(0,232,122,0.4); color: var(--text); background: rgba(0,232,122,0.04); }
-
-    .hero-stats {
-      display: flex; gap: 40px; flex-wrap: wrap;
-    }
-    .stat-item { }
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 28px; font-weight: 700;
-      color: var(--text);
-      line-height: 1;
-    }
-    .stat-num .unit { font-size: 16px; color: var(--green); }
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-top: 3px;
-    }
-
-    /* ===== ABOUT ===== */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 15px;
-      color: var(--text-dim);
-      line-height: 1.85;
-      margin-bottom: 16px;
-    }
-    .about-text p:last-child { margin-bottom: 0; }
-    .about-text strong { color: var(--text); font-weight: 600; }
-    .about-text a { color: var(--green); text-decoration: none; }
-    .about-text a:hover { text-decoration: underline; }
-
-    .about-details { display: flex; flex-direction: column; gap: 0; }
-    .detail-row {
-      display: flex;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      gap: 16px;
-    }
-    .detail-row:first-child { border-top: 1px solid var(--border); }
-    .detail-key {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 1px;
-      min-width: 80px;
-      padding-top: 1px;
-    }
-    .detail-val {
-      font-size: 14px;
-      color: var(--text);
-    }
-    .detail-val a { color: var(--green); text-decoration: none; }
-    .detail-val a:hover { text-decoration: underline; }
-
-    /* ===== EXPERIENCE ===== */
-    .exp-list { display: flex; flex-direction: column; gap: 16px; }
-    .exp-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 32px;
-      transition: border-color 0.2s, background 0.2s;
+      color: var(--muted); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      padding: 0.5rem 0.875rem; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
       position: relative;
-      overflow: hidden;
     }
-    .exp-card::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, var(--green), var(--cyan));
-      border-radius: 3px 0 0 3px;
-      opacity: 0;
-      transition: opacity 0.2s;
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 4px; left: 0.875rem; right: 0.875rem;
+      height: 2px; background: var(--accent);
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.25s ease;
     }
-    .exp-card:hover { border-color: rgba(0,232,122,0.3); background: var(--bg3); }
-    .exp-card:hover::before { opacity: 1; }
-
-    .exp-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 12px; margin-bottom: 6px; flex-wrap: wrap;
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .nav-icons { display: flex; align-items: center; gap: 0.5rem; }
+    .nav-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s, background 0.2s;
     }
-    .exp-org { font-size: 17px; font-weight: 700; color: var(--text); }
-    .exp-badge {
-      font-family: var(--mono);
-      font-size: 11px; padding: 3px 10px;
-      background: rgba(0,232,122,0.08);
-      border: 1px solid rgba(0,232,122,0.2);
-      border-radius: 20px;
-      color: var(--green);
-      white-space: nowrap;
-    }
-    .exp-role { font-size: 14px; color: var(--green); font-weight: 600; margin-bottom: 4px; }
-    .exp-meta {
-      font-family: var(--mono);
-      font-size: 12px; color: var(--text-dim);
-      margin-bottom: 16px;
-      display: flex; gap: 16px; flex-wrap: wrap;
-    }
-    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .exp-bullets li {
-      position: relative; padding-left: 18px;
-      font-size: 14px; color: rgba(240,253,244,0.7);
-      line-height: 1.7;
-    }
-    .exp-bullets li::before {
-      content: '▸';
-      position: absolute; left: 0;
-      color: var(--green); font-size: 11px; top: 3px;
-    }
-
-    /* ===== PROJECTS ===== */
-    .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .proj-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.25s;
-      display: flex; flex-direction: column;
-    }
-    .proj-card:hover {
-      border-color: rgba(0,232,122,0.35);
-      background: var(--bg3);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    }
-    .proj-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .proj-icon { font-size: 24px; }
-    .proj-links { display: flex; gap: 8px; }
-    .proj-link {
-      font-size: 14px;
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .proj-link:hover { color: var(--green); }
-    .proj-name {
-      font-size: 16px; font-weight: 700;
-      color: var(--text); margin-bottom: 8px;
-    }
-    .proj-desc {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.65;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
-    .proj-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 8px;
-      background: rgba(34,211,238,0.07);
-      border: 1px solid rgba(34,211,238,0.18);
-      border-radius: 4px;
-      color: var(--cyan);
-    }
-
-    /* ===== SKILLS ===== */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-    }
-    .skill-group {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-    }
-    .skill-group-title {
-      font-family: var(--mono);
-      font-size: 11px; letter-spacing: 2px;
-      color: var(--green);
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .skill-group-title span { font-size: 14px; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .skill-tag {
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 4px 10px;
-      background: rgba(0,232,122,0.06);
-      border: 1px solid rgba(0,232,122,0.18);
-      border-radius: 5px;
-      color: var(--text);
-      transition: all 0.15s;
-    }
-    .skill-tag:hover { background: rgba(0,232,122,0.12); border-color: var(--green); color: var(--green); }
-
-    /* ===== ACHIEVEMENTS ===== */
-    .ach-top {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .ach-stat {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
+    .nav-icon:hover { color: var(--accent); background: rgba(0,212,255,0.08); }
+    .nav-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .switch-btn {
+      margin-left: 1rem;
+      padding: 0.4rem 0.875rem; border-radius: 20px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: var(--accent); font-size: 0.75rem; font-weight: 600;
+      text-decoration: none; font-family: var(--mono);
       transition: all 0.2s;
     }
-    .ach-stat:hover { border-color: rgba(0,232,122,0.35); transform: translateY(-2px); }
-    .ach-platform {
-      font-family: var(--mono);
-      font-size: 11px; letter-spacing: 2px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .ach-rating {
-      font-family: var(--mono);
-      font-size: 36px; font-weight: 700;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .ach-rank { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .ach-pct { font-size: 12px; color: var(--text-dim); }
+    .switch-btn:hover { background: rgba(0,212,255,0.15); border-color: var(--accent); }
 
-    .contest-list { display: flex; flex-direction: column; gap: 8px; }
-    .contest {
-      display: flex; align-items: center; gap: 16px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 20px;
-      transition: border-color 0.15s;
-    }
-    .contest:hover { border-color: rgba(251,191,36,0.3); }
-    .contest-rank {
-      font-family: var(--mono);
-      font-weight: 700; font-size: 15px;
-      color: var(--yellow);
-      min-width: 100px;
-    }
-    .contest-name { font-size: 14px; color: var(--text-dim); }
+    /* ── LAYOUT ── */
+    main { padding-top: var(--nav-h); }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 2rem); }
+    section { padding: 6rem 0; }
+    section:nth-child(even) { background: var(--bg2); }
 
-    /* ===== CONTACT ===== */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px; align-items: center;
+    /* ── HERO ── */
+    #hero {
+      min-height: calc(100vh - var(--nav-h));
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
     }
-    .contact-left h2 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 900; letter-spacing: -1.5px;
-      margin-bottom: 16px;
+    #hero-canvas {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.35;
     }
-    .contact-left p {
-      font-size: 15px; color: var(--text-dim); line-height: 1.75;
-      margin-bottom: 28px;
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem;
     }
-    .contact-links { display: flex; flex-direction: column; gap: 10px; }
-    .contact-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 18px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
+    }
+    h1.hero-title {
+      font-size: clamp(2.75rem, 7vw, 5rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.04em; margin-bottom: 1.5rem;
+    }
+    .hero-role {
+      display: block; color: var(--text);
+    }
+    .hero-discipline {
+      display: block; color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.125rem; color: var(--muted); line-height: 1.75;
+      max-width: 560px; margin-bottom: 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.8rem 1.75rem; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #000; font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; transition: opacity 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-secondary {
+      padding: 0.8rem 1.75rem; border-radius: 10px;
+      border: 1px solid var(--border); color: var(--text);
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { border-color: var(--accent); background: rgba(0,212,255,0.05); transform: translateY(-2px); }
+
+    /* ── STATS ── */
+    .hero-stats {
+      display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 3rem;
+      padding-top: 3rem; border-top: 1px solid var(--border);
+    }
+    .stat { text-align: left; }
+    .stat-num { font-size: 2rem; font-weight: 900; color: var(--text); letter-spacing: -0.03em; line-height: 1; }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; font-family: var(--mono); }
+
+    /* ── SECTION HEADERS ── */
+    .section-header { margin-bottom: 3.5rem; }
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-eyebrow::before {
+      content: ''; display: block; width: 24px; height: 1px; background: var(--accent);
+    }
+    h2.section-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.1;
+    }
+    .section-desc { color: var(--muted); margin-top: 0.75rem; font-size: 1.05rem; line-height: 1.7; max-width: 560px; }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; gap: 1.5rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; transition: border-color 0.25s, transform 0.25s;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 768px) { .project-card { grid-template-columns: 1fr; } }
+    .project-card:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-3px); }
+    .project-card.alt { direction: rtl; }
+    .project-card.alt > * { direction: ltr; }
+    .project-img {
+      aspect-ratio: 16/10; overflow: hidden;
+      background: linear-gradient(135deg, #0d1f3c, #111827);
+      position: relative;
+    }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-img .img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(167,139,250,0.05));
+    }
+    .project-body { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+    .project-index {
+      font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+      letter-spacing: 0.1em; margin-bottom: 0.75rem;
+    }
+    h3.project-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.875rem; line-height: 1.2; }
+    .project-desc { color: var(--muted); font-size: 0.925rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag {
+      font-family: var(--mono); font-size: 0.7rem;
+      padding: 0.25rem 0.625rem; border-radius: 6px;
+      background: rgba(0,212,255,0.08); color: var(--accent);
+      border: 1px solid rgba(0,212,255,0.15);
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--text); font-weight: 600; font-size: 0.875rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--accent); }
+    .project-link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1.25rem; font-size: 1.025rem; }
+    .about-text a { color: var(--accent); text-decoration: none; }
+    .about-text a:hover { text-decoration: underline; }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .skill-group h4 {
+      font-size: 0.75rem; font-family: var(--mono); color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.625rem;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-pill {
+      font-family: var(--mono); font-size: 0.7rem;
+      padding: 0.2rem 0.5rem; border-radius: 5px;
+      background: var(--bg2); border: 1px solid var(--border); color: var(--text);
+    }
+    .cp-cards { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; }
+    .cp-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
+      transition: border-color 0.2s;
+    }
+    .cp-card:hover { border-color: rgba(0,212,255,0.3); }
+    .cp-platform { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .cp-rating { font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
+    .cp-label { font-size: 0.7rem; color: var(--accent); font-weight: 600; }
+
+    /* ── ARTICLES ── */
+    .articles-list { display: grid; gap: 1rem; }
+    .article-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.75rem 2rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 1.5rem; transition: border-color 0.25s, transform 0.25s;
       text-decoration: none;
-      color: var(--text);
-      font-size: 14px;
-      transition: all 0.2s;
     }
-    .contact-item:hover {
-      border-color: rgba(0,232,122,0.35);
-      background: var(--bg3);
-      color: var(--green);
-    }
-    .contact-item-icon { font-size: 18px; }
-    .contact-item-label { font-family: var(--mono); font-size: 13px; }
+    .article-card:hover { border-color: rgba(0,212,255,0.25); transform: translateX(4px); }
+    .article-body { flex: 1; }
+    .article-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 0.625rem; }
+    h3.article-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; line-height: 1.3; }
+    .article-abstract { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+    .article-arrow { color: var(--muted); flex-shrink: 0; transition: color 0.2s, transform 0.2s; }
+    .article-card:hover .article-arrow { color: var(--accent); transform: translateX(4px); }
 
-    /* ===== FOOTER ===== */
+    /* ── CONTACT ── */
+    .contact-inner {
+      background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(167,139,250,0.04));
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: clamp(2.5rem, 5vw, 4rem);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    @media (max-width: 768px) { .contact-inner { grid-template-columns: 1fr; } }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem; border-radius: 12px;
+      background: var(--bg2); border: 1px solid var(--border);
+      text-decoration: none; color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover { border-color: rgba(0,212,255,0.25); background: rgba(0,212,255,0.04); }
+    .contact-link-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-link-icon svg { width: 18px; height: 18px; fill: var(--accent); }
+    .contact-link-label { font-size: 0.75rem; color: var(--muted); }
+    .contact-link-value { font-weight: 600; font-size: 0.9rem; }
+
+    /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px clamp(20px, 5vw, 60px);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
+      border-top: 1px solid var(--border); padding: 2.5rem 0;
+      text-align: center; color: var(--muted); font-size: 0.825rem;
     }
-    .footer-inner {
-      max-width: var(--max); margin: 0 auto;
-      width: 100%;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-text {
-      font-family: var(--mono);
-      font-size: 12px; color: var(--text-dim);
-    }
-    .footer-links { display: flex; gap: 16px; }
-    .footer-links a {
-      font-family: var(--mono);
-      font-size: 12px; color: var(--text-dim);
-      text-decoration: none; transition: color 0.15s;
-    }
-    .footer-links a:hover { color: var(--green); }
-    .back-link {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(0,232,122,0.5);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 6px;
-      transition: color 0.15s;
-    }
-    .back-link:hover { color: var(--green); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
 
-    /* ===== ANIMATIONS ===== */
-    .fade-in {
+    /* ── ANIMATIONS ── */
+    .fade-up {
       opacity: 0; transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.visible { opacity: 1; transform: none; }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .ach-top { grid-template-columns: 1fr 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      nav .nav-links { display: none; }
-    }
-    @media (max-width: 500px) {
-      .ach-top { grid-template-columns: 1fr; }
-      .hero-stats { gap: 24px; }
-    }
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="#">ES <span>// portfolio</span></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#achievements">Awards</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a class="nav-resume" href="/resume/index.html" target="_blank">Resume ↗</a>
+  <a href="#hero" class="nav-logo">E<span>S</span></a>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#articles">Articles</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:0.5rem">
+    <div class="nav-icons">
+      <a href="https://github.com/eeshsaxena" target="_blank" class="nav-icon" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/eeshsaxena" target="_blank" class="nav-icon" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <a href="/choose.html" class="switch-btn" onclick="localStorage.removeItem('portfolioChoice')">⬡ Switch</a>
   </div>
 </nav>
 
+<main>
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-tag">Hi, I'm Eesh</div>
-  <h1 class="hero-h1">
-    Building<br>
-    <span class="accent">intelligent</span><br>
-    <span class="dim">systems.</span>
-  </h1>
-  <p class="hero-desc">
-    CS Engineering student at <strong>IIIT Senapati</strong>, Manipur. Research intern at <strong>IIIT Vadodara</strong> &amp; <strong>IIT Tirupati</strong>. Passionate about AI/ML, NLP, and competitive programming.
-  </p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="#projects">View My Work ↓</a>
-    <a class="btn-outline" href="/choose.html">← Switch View</a>
+  <canvas id="hero-canvas"></canvas>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">CS Engineer &amp; AI Researcher</div>
+      <h1 class="hero-title">
+        <span class="hero-role">Eesh Saxena</span>
+        <span class="hero-discipline" id="discipline-text">AI Researcher</span>
+      </h1>
+      <p class="hero-desc">
+        CS Engineering student at IIIT Senapati · Research Intern at IIIT Vadodara &amp; IIT Tirupati SEVA Lab · Building intelligent systems at the intersection of NLP, computer vision, and edge AI.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Projects <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">1582<span>✦</span></div><div class="stat-label">Codeforces Rating</div></div>
+        <div class="stat"><div class="stat-num">1873<span>✦</span></div><div class="stat-label">LeetCode Rating</div></div>
+        <div class="stat"><div class="stat-num">1500<span>+</span></div><div class="stat-label">Problems Solved</div></div>
+        <div class="stat"><div class="stat-num">4<span>★</span></div><div class="stat-label">CodeChef (1866)</div></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">1,500<span class="unit">+</span></div>
-      <div class="stat-label">Problems Solved</div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">Selected Work</div>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-desc">Research and engineering projects spanning NLP, computer vision, graph AI, and edge computing.</p>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">51<span class="unit"></span></div>
-      <div class="stat-label">GitHub Repos</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">2<span class="unit"></span></div>
-      <div class="stat-label">Research Internships</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">50<span class="unit">+</span></div>
-      <div class="stat-label">Contests</div>
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card fade-up">
+        <div class="project-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1628,#0d2444);display:flex;align-items:center;justify-content:center;font-family:var(--mono);padding:1.5rem;">
+            <svg viewBox="0 0 340 200" width="100%" style="max-width:340px">
+              <circle cx="170" cy="100" r="18" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="1.5"/>
+              <circle cx="80" cy="60" r="12" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1"/>
+              <circle cx="260" cy="60" r="12" fill="rgba(167,139,250,0.15)" stroke="#a78bfa" stroke-width="1"/>
+              <circle cx="60" cy="140" r="10" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1"/>
+              <circle cx="280" cy="140" r="10" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="1"/>
+              <circle cx="120" cy="165" r="8" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1"/>
+              <circle cx="220" cy="165" r="8" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1"/>
+              <line x1="170" y1="100" x2="80" y2="60" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+              <line x1="170" y1="100" x2="260" y2="60" stroke="rgba(167,139,250,0.4)" stroke-width="1"/>
+              <line x1="170" y1="100" x2="60" y2="140" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+              <line x1="170" y1="100" x2="280" y2="140" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
+              <line x1="80" y1="60" x2="120" y2="165" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+              <line x1="260" y1="60" x2="220" y2="165" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+              <line x1="60" y1="140" x2="120" y2="165" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+              <line x1="280" y1="140" x2="220" y2="165" stroke="rgba(167,139,250,0.2)" stroke-width="1"/>
+              <text x="152" y="104" fill="#00d4ff" font-size="9" font-family="monospace">RAG</text>
+              <text x="66" y="64" fill="#00d4ff" font-size="7" font-family="monospace">Entity</text>
+              <text x="246" y="64" fill="#a78bfa" font-size="7" font-family="monospace">Concept</text>
+              <text x="40" y="144" fill="#00d4ff" font-size="6" font-family="monospace">Fact</text>
+              <text x="265" y="144" fill="#a78bfa" font-size="6" font-family="monospace">Relation</text>
+            </svg>
+          </div>
+          <div class="img-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-index">001 — Research</div>
+          <h3 class="project-title">Conflict-Aware Graph RAG</h3>
+          <p class="project-desc">Graph-based RAG pipeline converting text to knowledge triples via LLMs. Entropy-based conflict module reduces hallucination on multi-hop QA benchmarks.</p>
+          <div class="project-tags">
+            <span class="tag">LangChain</span><span class="tag">Neo4j</span><span class="tag">GPT-4o</span><span class="tag">Python</span>
+          </div>
+          <a href="https://github.com/eeshsaxena" target="_blank" class="project-link">View on GitHub <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card alt fade-up">
+        <div class="project-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0f1a0f,#1a2e0a);display:flex;align-items:center;justify-content:center;padding:1.5rem;font-family:var(--mono);">
+            <div style="width:100%;max-width:300px">
+              <div style="color:#22c55e;font-size:0.65rem;margin-bottom:0.5rem;opacity:0.7">RajNLP-50K Dataset</div>
+              <div style="display:grid;gap:0.3rem">
+                <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.6rem;color:#86efac">मैं अर्जुन हूँ → NER: PER ✓</div>
+                <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.6rem;color:#86efac">जयपुर रो खाणो → NER: LOC ✓</div>
+                <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.6rem;color:#c4b5fd">Sentiment: Positive · Score: 0.92</div>
+                <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:6px;padding:0.4rem 0.6rem;font-size:0.6rem;color:#67e8f9">MuRIL F1: 84.3% &gt; GPT-4o: 61.2%</div>
+              </div>
+              <div style="margin-top:0.75rem;display:flex;gap:0.5rem">
+                <div style="flex:84.3;background:#22c55e;height:6px;border-radius:3px;opacity:0.8"></div>
+                <div style="flex:15.7;background:rgba(255,255,255,0.1);height:6px;border-radius:3px"></div>
+              </div>
+              <div style="color:rgba(255,255,255,0.3);font-size:0.55rem;margin-top:0.25rem">MuRIL Fine-tuned — 84.3% NER F1</div>
+            </div>
+          </div>
+          <div class="img-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-index">002 — NLP Research</div>
+          <h3 class="project-title">RajNLP-50K Corpus</h3>
+          <p class="project-desc">India's first open Rajasthani-Hindi code-switched corpus — 50K sentences. Fine-tuned MuRIL outperforms GPT-4o on NER, sentiment &amp; toxicity tasks.</p>
+          <div class="project-tags">
+            <span class="tag">PyTorch</span><span class="tag">HuggingFace</span><span class="tag">MuRIL</span><span class="tag">NLP</span>
+          </div>
+          <a href="https://github.com/eeshsaxena" target="_blank" class="project-link">View on HuggingFace <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card fade-up">
+        <div class="project-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0a0a,#2d1010);display:flex;align-items:center;justify-content:center;padding:1.5rem">
+            <svg viewBox="0 0 300 180" width="100%" style="max-width:300px">
+              <polyline points="0,100 20,80 35,110 50,60 65,95 80,50 95,90 110,55 125,100 140,70 155,95 170,60 185,90 200,75 215,95 230,70 250,90 270,80 300,100" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.8"/>
+              <polyline points="0,120 20,100 35,130 50,80 65,115 80,70 95,110 110,75 125,120 140,90 155,115 170,80 185,110 200,95 215,115 230,90 250,110 270,100 300,120" fill="none" stroke="#f97316" stroke-width="1.5" opacity="0.5"/>
+              <rect x="220" y="30" width="70" height="50" rx="6" fill="rgba(0,0,0,0.5)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+              <text x="230" y="48" fill="#ef4444" font-size="8" font-family="monospace">CLASS: V</text>
+              <text x="230" y="60" fill="#f97316" font-size="7" font-family="monospace">Ventricular</text>
+              <text x="230" y="72" fill="#22c55e" font-size="7" font-family="monospace">F1: 98.7%</text>
+              <text x="5" y="170" fill="rgba(255,255,255,0.3)" font-size="7" font-family="monospace">Arduino Nano 33 BLE · TFLite Micro · 120KB</text>
+            </svg>
+          </div>
+          <div class="img-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-index">003 — Edge AI</div>
+          <h3 class="project-title">Cardiac Edge AI</h3>
+          <p class="project-desc">5-class arrhythmia detector on Arduino Nano 33 BLE. 140× model compression via spectral knowledge distillation — ~99% F1 with ECG+PPG sensor fusion.</p>
+          <div class="project-tags">
+            <span class="tag">TFLite</span><span class="tag">PyTorch</span><span class="tag">Arduino</span><span class="tag">C++</span>
+          </div>
+          <a href="https://github.com/eeshsaxena" target="_blank" class="project-link">View on GitHub <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card alt fade-up">
+        <div class="project-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a0a1a,#0d0d2e);display:flex;align-items:center;justify-content:center;padding:1rem;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,212,255,0.08),transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(0,255,100,0.06),transparent 60%)"></div>
+            <div style="display:flex;width:100%;gap:1px;position:relative;z-index:1">
+              <div style="flex:1;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:8px 0 0 8px;padding:0.75rem;text-align:center">
+                <div style="font-family:monospace;font-size:0.5rem;color:#00d4ff;margin-bottom:0.5rem">3D SCENE</div>
+                <div style="font-size:1.2rem">🖥️</div>
+                <div style="font-family:monospace;font-size:0.45rem;color:rgba(0,212,255,0.5);margin-top:0.5rem">Three.js</div>
+              </div>
+              <div style="display:flex;align-items:center;padding:0 0.25rem">
+                <div style="font-size:0.8rem">⚡</div>
+              </div>
+              <div style="flex:1;background:rgba(0,255,100,0.04);border:1px solid rgba(0,255,100,0.15);border-radius:0 8px 8px 0;padding:0.75rem;text-align:center">
+                <div style="font-family:monospace;font-size:0.5rem;color:#00ff88;margin-bottom:0.5rem">SIMPLE</div>
+                <div style="font-size:1.2rem">📄</div>
+                <div style="font-family:monospace;font-size:0.45rem;color:rgba(0,255,100,0.5);margin-top:0.5rem">Remix</div>
+              </div>
+            </div>
+          </div>
+          <div class="img-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-index">004 — Full Stack</div>
+          <h3 class="project-title">Personal Portfolio</h3>
+          <p class="project-desc">Cinematic dual-mode portfolio — choose between an immersive 3D computer-desk scene (Three.js/WebGL) or this clean scrollable view. Built with Remix and vanilla JS.</p>
+          <div class="project-tags">
+            <span class="tag">Three.js</span><span class="tag">Remix</span><span class="tag">WebGL</span><span class="tag">JS</span>
+          </div>
+          <a href="https://github.com/eeshsaxena/portfolio" target="_blank" class="project-link">View on GitHub <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="fade-in">
-  <div class="sec-label">About</div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>
-        I'm a <strong>Computer Science undergraduate</strong> at IIIT Senapati, Manipur, with a deep focus on artificial intelligence, machine learning, and NLP. I love building systems that push the boundary between research and real-world application.
-      </p>
-      <p>
-        Currently, I'm working on <strong>reversible data hiding in encrypted images</strong> at IIIT Vadodara under Dr. Abhisek Paul, and previously interned at <strong>IIT Tirupati's SEVA Lab</strong> on multi-object tracking using transformer-based approaches.
-      </p>
-      <p>
-        Outside research, I'm a passionate <strong>competitive programmer</strong> — rated Specialist on Codeforces, 4★ on CodeChef, and Guardian on LeetCode — with 1500+ problems solved and global top rankings in individual contests.
-      </p>
-      <p>
-        I build open-source projects at the intersection of NLP, edge AI, and graph-based reasoning. Check out my <a href="https://github.com/eeshsaxena" target="_blank">GitHub</a> for the latest work.
-      </p>
+<section id="about">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">About Me</div>
+      <h2 class="section-title">Hi there</h2>
     </div>
-    <div class="about-details">
-      <div class="detail-row">
-        <div class="detail-key">Name</div>
-        <div class="detail-val">Eesh Saxena</div>
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p>I'm Eesh, a CS Engineering student at <a href="https://iiitmanipur.ac.in" target="_blank">IIIT Senapati</a>, Manipur. I'm currently a Research Intern at <a href="https://iiitvadodara.ac.in" target="_blank">IIIT Vadodara</a> working on Reversible Data Hiding in Encrypted Images, and previously interned at <a href="https://iittp.ac.in" target="_blank">IIT Tirupati's SEVA Lab</a> on multi-object tracking using transformer-based approaches (MOTIP, CVPR 2025).</p>
+        <p>Outside research, I'm a passionate competitive programmer — Specialist on Codeforces (1582), Guardian on LeetCode (1873), and 4★ on CodeChef (1866). I've solved 1500+ problems and ranked globally in contests.</p>
+        <p>Always open to research collaborations, internships, or interesting conversations about AI.</p>
+        <div style="margin-top:1.5rem">
+          <a href="/resume.pdf" target="_blank" class="btn-secondary" style="display:inline-flex">Download Resume ↓</a>
+        </div>
+        <div class="cp-cards">
+          <div class="cp-card"><div class="cp-platform">Codeforces</div><div class="cp-rating">1582</div><div class="cp-label">Specialist</div></div>
+          <div class="cp-card"><div class="cp-platform">LeetCode</div><div class="cp-rating">1873</div><div class="cp-label">Guardian</div></div>
+          <div class="cp-card"><div class="cp-platform">CodeChef</div><div class="cp-rating">1866</div><div class="cp-label">4★</div></div>
+        </div>
       </div>
-      <div class="detail-row">
-        <div class="detail-key">Location</div>
-        <div class="detail-val">Gandhinagar, Gujarat, India</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-key">Education</div>
-        <div class="detail-val">B.Tech CSE — IIIT Senapati</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-key">Email</div>
-        <div class="detail-val"><a href="mailto:eeshsaxena@gmail.com">eeshsaxena@gmail.com</a></div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-key">Phone</div>
-        <div class="detail-val">+91 7976212108</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-key">GitHub</div>
-        <div class="detail-val"><a href="https://github.com/eeshsaxena" target="_blank">github.com/eeshsaxena</a></div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-key">LinkedIn</div>
-        <div class="detail-val"><a href="https://linkedin.com/in/eeshsaxena" target="_blank">linkedin.com/in/eeshsaxena</a></div>
+      <div class="fade-up">
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>Languages</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">C++</span><span class="skill-pill">Python</span><span class="skill-pill">JavaScript</span><span class="skill-pill">TypeScript</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>ML / AI</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">PyTorch</span><span class="skill-pill">HuggingFace</span><span class="skill-pill">LangChain</span><span class="skill-pill">TFLite</span><span class="skill-pill">OpenCV</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Backend</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Node.js</span><span class="skill-pill">Express</span><span class="skill-pill">FastAPI</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Databases</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">MongoDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">Neo4j</span><span class="skill-pill">Firebase</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Frontend</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">React</span><span class="skill-pill">Remix</span><span class="skill-pill">Three.js</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>DevOps</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Git</span><span class="skill-pill">AWS</span><span class="skill-pill">Vercel</span><span class="skill-pill">Linux</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience" class="fade-in">
-  <div class="sec-label">Experience</div>
-  <div class="exp-list">
-
-    <div class="exp-card">
-      <div class="exp-header">
-        <div class="exp-org">🏛 IIIT Vadodara</div>
-        <span class="exp-badge">Research Intern · 2026</span>
-      </div>
-      <div class="exp-role">Research Intern — Under Dr. Abhisek Paul</div>
-      <div class="exp-meta">
-        <span>📅 2026 · 6-month</span>
-        <span>📍 Vadodara, Gujarat</span>
-      </div>
-      <ul class="exp-bullets">
-        <li>Secured internship to analyze the Zhang (IEEE SPL 2011) framework on Reversible Data Hiding in Encrypted Images.</li>
-        <li>Evaluated 30+ related works to compare embedding strategies and reversibility guarantees.</li>
-        <li>Built the full encryption–data embedding–extraction pipeline ensuring separability of data retrieval and image reconstruction.</li>
-        <li>Measured embedding capacity and fidelity using PSNR and embedding-rate metrics toward publication.</li>
-        <li>Implemented algorithms in Python with near real-time encryption and hiding speeds.</li>
-      </ul>
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">Writing</div>
+      <h2 class="section-title">Articles</h2>
+      <p class="section-desc">Deep-dives into my research projects and engineering decisions.</p>
     </div>
-
-    <div class="exp-card">
-      <div class="exp-header">
-        <div class="exp-org">🏛 IIT Tirupati — SEVA Lab</div>
-        <span class="exp-badge">Winter Intern · 2025</span>
-      </div>
-      <div class="exp-role">Winter Research Intern — Under Dr. Chalavadi Vishnu</div>
-      <div class="exp-meta">
-        <span>📅 Winter 2025</span>
-        <span>📍 Online</span>
-      </div>
-      <ul class="exp-bullets">
-        <li>Reproduced and analyzed the MOTIP (CVPR 2025) framework for Multiple Object Tracking with transformer-based identity prediction.</li>
-        <li>Studied spatio-temporal embeddings under occlusion and dense-scene conditions with temporal regularization.</li>
-        <li>Evaluated MOTA, IDF1, and HOTA metrics after tuning learning rate and query initialization to improve tracking stability.</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="fade-in">
-  <div class="sec-label">Projects</div>
-  <div class="proj-grid">
-
-    <div class="proj-card">
-      <div class="proj-top">
-        <div class="proj-icon">🧠</div>
-        <div class="proj-links">
-          <a class="proj-link" href="https://github.com/eeshsaxena" target="_blank" title="GitHub">⌥ GitHub</a>
+    <div class="articles-list">
+      <a href="#" class="article-card fade-up">
+        <div class="article-body">
+          <div class="article-date">November 2024</div>
+          <h3 class="article-title">Conflict-Aware Graph RAG: Reducing Hallucination in Multi-Hop QA</h3>
+          <p class="article-abstract">A graph-based RAG pipeline converting text to knowledge triples via LLMs. Entropy-based conflict detection module reduces confident hallucination on complex reasoning tasks.</p>
         </div>
-      </div>
-      <div class="proj-name">Conflict-Aware Graph RAG</div>
-      <div class="proj-desc">Graph-based RAG pipeline converting unstructured text to knowledge triples via LLMs. Entropy-based conflict module (ΔH) comparing parametric vs. graph-augmented responses — reduced hallucination on multi-hop QA.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span>
-        <span class="proj-tag">LangChain</span>
-        <span class="proj-tag">Neo4j</span>
-        <span class="proj-tag">Ollama</span>
-      </div>
-    </div>
-
-    <div class="proj-card">
-      <div class="proj-top">
-        <div class="proj-icon">📚</div>
-        <div class="proj-links">
-          <a class="proj-link" href="https://github.com/eeshsaxena" target="_blank">⌥ GitHub</a>
+        <div class="article-arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-      </div>
-      <div class="proj-name">RajNLP-50K</div>
-      <div class="proj-desc">India's first open Rajasthani-Hindi code-switched corpus — 50K sentences from Twitter/ShareChat. Fine-tuned MuRIL outperforming GPT-4o on NER, sentiment &amp; toxicity. Published on HuggingFace.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span>
-        <span class="proj-tag">HuggingFace</span>
-        <span class="proj-tag">MuRIL</span>
-        <span class="proj-tag">NLP</span>
-      </div>
-    </div>
-
-    <div class="proj-card">
-      <div class="proj-top">
-        <div class="proj-icon">💓</div>
-        <div class="proj-links">
-          <a class="proj-link" href="https://github.com/eeshsaxena" target="_blank">⌥ GitHub</a>
+      </a>
+      <a href="#" class="article-card fade-up">
+        <div class="article-body">
+          <div class="article-date">August 2024</div>
+          <h3 class="article-title">RajNLP-50K: India's First Open Rajasthani-Hindi Code-Switched Corpus</h3>
+          <p class="article-abstract">Building India's first open-source Rajasthani-Hindi NLP corpus of 50,000 sentences, and showing fine-tuned MuRIL outperforms GPT-4o on NER, sentiment, and toxicity detection.</p>
         </div>
-      </div>
-      <div class="proj-name">Cardiac Edge AI</div>
-      <div class="proj-desc">5-class cardiac arrhythmia detector on Arduino Nano 33 BLE. 140× model compression (1.27M→9.1K params, 23.4KB INT8) via spectral knowledge distillation. ~99% F1 with ECG+PPG fusion.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">PyTorch</span>
-        <span class="proj-tag">TFLite</span>
-        <span class="proj-tag">Arduino</span>
-        <span class="proj-tag">Edge AI</span>
-      </div>
-    </div>
-
-    <div class="proj-card" style="border-style: dashed; opacity: 0.6;">
-      <div class="proj-top">
-        <div class="proj-icon">📁</div>
-        <div class="proj-links">
-          <a class="proj-link" href="https://github.com/eeshsaxena" target="_blank">View all →</a>
+        <div class="article-arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-      </div>
-      <div class="proj-name">48 more repositories</div>
-      <div class="proj-desc">Competitive programming solutions, web apps, ML experiments, and more on GitHub.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">C++</span>
-        <span class="proj-tag">React</span>
-        <span class="proj-tag">Node.js</span>
-        <span class="proj-tag">+more</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="fade-in">
-  <div class="sec-label">Skills</div>
-  <div class="skills-grid">
-    <div class="skill-group">
-      <div class="skill-group-title"><span>⌨</span> Languages</div>
-      <div class="skill-tags">
-        <span class="skill-tag">C++</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">PHP</span>
-        <span class="skill-tag">SQL</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🧩</span> Frameworks</div>
-      <div class="skill-tags">
-        <span class="skill-tag">React.js</span>
-        <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">Express.js</span>
-        <span class="skill-tag">PyTorch</span>
-        <span class="skill-tag">NumPy</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🗄</span> Databases</div>
-      <div class="skill-tags">
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">MongoDB</span>
-        <span class="skill-tag">Neo4j</span>
-        <span class="skill-tag">Firebase</span>
-        <span class="skill-tag">Supabase</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>☁</span> Cloud & Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">AWS</span>
-        <span class="skill-tag">Vercel</span>
-        <span class="skill-tag">Railway</span>
-        <span class="skill-tag">Linux</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🤖</span> AI / ML</div>
-      <div class="skill-tags">
-        <span class="skill-tag">LangChain</span>
-        <span class="skill-tag">HuggingFace</span>
-        <span class="skill-tag">Ollama</span>
-        <span class="skill-tag">TFLite</span>
-        <span class="skill-tag">OpenCV</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🏆</span> Competitive</div>
-      <div class="skill-tags">
-        <span class="skill-tag">DSA</span>
-        <span class="skill-tag">Graphs</span>
-        <span class="skill-tag">DP</span>
-        <span class="skill-tag">Segment Trees</span>
-        <span class="skill-tag">Math</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="fade-in">
-  <div class="sec-label">Achievements</div>
-  <div class="ach-top">
-    <div class="ach-stat">
-      <div class="ach-platform">Codeforces</div>
-      <div class="ach-rating" style="color:var(--cyan)">1582</div>
-      <div class="ach-rank" style="color:var(--cyan)">Specialist</div>
-      <div class="ach-pct">Top 1% in India</div>
-    </div>
-    <div class="ach-stat">
-      <div class="ach-platform">CodeChef</div>
-      <div class="ach-rating" style="color:var(--yellow)">1866</div>
-      <div class="ach-rank" style="color:var(--yellow)">4 ★ Star</div>
-      <div class="ach-pct">Top 1% in India</div>
-    </div>
-    <div class="ach-stat">
-      <div class="ach-platform">LeetCode</div>
-      <div class="ach-rating" style="color:var(--orange)">1873</div>
-      <div class="ach-rank" style="color:var(--orange)">Guardian</div>
-      <div class="ach-pct">Top 5% Worldwide</div>
-    </div>
-  </div>
-  <div class="contest-list">
-    <div class="contest">
-      <div class="contest-rank">🥇 Rank 1</div>
-      <div class="contest-name">CodeChef Starters 180 (Div. 3) — 10,000+ participants</div>
-    </div>
-    <div class="contest">
-      <div class="contest-rank">🥈 Rank 75</div>
-      <div class="contest-name">LeetCode Weekly Contest 446 — 27,686 participants</div>
-    </div>
-    <div class="contest">
-      <div class="contest-rank">🥈 Rank 78</div>
-      <div class="contest-name">CodeChef Starters 183 (Div. 2)</div>
+      </a>
+      <a href="#" class="article-card fade-up">
+        <div class="article-body">
+          <div class="article-date">June 2024</div>
+          <h3 class="article-title">Cardiac Edge AI: 5-Class Arrhythmia Detection on Arduino Nano 33 BLE</h3>
+          <p class="article-abstract">A 140× compressed deep learning model for real-time arrhythmia detection on a $30 microcontroller, using spectral knowledge distillation and ECG+PPG sensor fusion at ~99% F1.</p>
+        </div>
+        <div class="article-arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="fade-in">
-  <div class="sec-label">Contact</div>
-  <div class="contact-grid">
-    <div class="contact-left">
-      <h2>Let's work<br><span style="color:var(--green)">together.</span></h2>
-      <p>Whether it's a research collaboration, internship, or just a chat about AI — feel free to reach out. I'm always open to interesting conversations.</p>
-      <a class="btn-primary" href="mailto:eeshsaxena@gmail.com">Send a Message ✉</a>
-    </div>
-    <div class="contact-links">
-      <a class="contact-item" href="mailto:eeshsaxena@gmail.com">
-        <span class="contact-item-icon">✉</span>
-        <div>
-          <div class="contact-item-label">eeshsaxena@gmail.com</div>
-        </div>
-      </a>
-      <a class="contact-item" href="https://github.com/eeshsaxena" target="_blank">
-        <span class="contact-item-icon">⌥</span>
-        <div>
-          <div class="contact-item-label">github.com/eeshsaxena</div>
-        </div>
-      </a>
-      <a class="contact-item" href="https://linkedin.com/in/eeshsaxena" target="_blank">
-        <span class="contact-item-icon">🔗</span>
-        <div>
-          <div class="contact-item-label">linkedin.com/in/eeshsaxena</div>
-        </div>
-      </a>
-      <a class="contact-item" href="tel:+917976212108">
-        <span class="contact-item-icon">📞</span>
-        <div>
-          <div class="contact-item-label">+91 7976212108</div>
-        </div>
-      </a>
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner fade-up">
+      <div>
+        <div class="section-eyebrow">Get in touch</div>
+        <h2 class="section-title">Let's work<br/>together</h2>
+        <p class="section-desc" style="margin-top:1rem">Open to research collaborations, internships, and interesting conversations about AI, NLP, and competitive programming.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:eeshsaxena@gmail.com" class="contact-link">
+          <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div><div class="contact-link-label">Email</div><div class="contact-link-value">eeshsaxena@gmail.com</div></div>
+        </a>
+        <a href="https://github.com/eeshsaxena" target="_blank" class="contact-link">
+          <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg></div>
+          <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/eeshsaxena</div></div>
+        </a>
+        <a href="https://linkedin.com/in/eeshsaxena" target="_blank" class="contact-link">
+          <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/eeshsaxena</div></div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
+</main>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-text">© 2026 Eesh Saxena · Built with ♥</div>
-    <div class="footer-links">
-      <a href="https://github.com/eeshsaxena" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/eeshsaxena" target="_blank">LinkedIn</a>
-      <a href="/resume/index.html" target="_blank">Resume</a>
-    </div>
-    <a class="back-link" href="/choose.html">⬡ Switch view</a>
+  <div class="container">
+    <p>© 2026 Eesh Saxena · Built with ❤️ · <a href="https://github.com/eeshsaxena/portfolio">Source</a> · <a href="/choose.html" onclick="localStorage.removeItem('portfolioChoice')">Switch to 3D View</a></p>
   </div>
 </footer>
 
 <script>
-  // Scroll-triggered fade-in
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+// Discipline cycle
+const disciplines = ['AI Researcher','ML Engineer','NLP Engineer','Competitive Programmer','Full-Stack Dev'];
+let di = 0;
+const el = document.getElementById('discipline-text');
+function cycleDiscipline(){
+  el.style.opacity='0';
+  el.style.transform='translateY(8px)';
+  setTimeout(()=>{
+    di=(di+1)%disciplines.length;
+    el.textContent=disciplines[di];
+    el.style.transition='opacity 0.4s,transform 0.4s';
+    el.style.opacity='1';
+    el.style.transform='none';
+  },300);
+}
+el.style.transition='opacity 0.4s,transform 0.4s';
+setInterval(cycleDiscipline,3000);
 
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+// Scroll animations
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 
-  // Active nav link
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : '';
-    });
+// Hero canvas — particle field
+const canvas=document.getElementById('hero-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+resize(); window.addEventListener('resize',resize);
+for(let i=0;i<80;i++) particles.push({
+  x:Math.random()*2000,y:Math.random()*1000,
+  vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+  r:Math.random()*1.5+.5,
+  opacity:Math.random()*.4+.1
+});
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(0,212,255,${p.opacity})`;
+    ctx.fill();
   });
+  // Connect nearby particles
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x;
+      const dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(0,212,255,${0.07*(1-d/120)})`;
+        ctx.lineWidth=.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
-
 </body>
 </html>

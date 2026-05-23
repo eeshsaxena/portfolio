@@ -199,6 +199,39 @@ export const Navbar = () => {
           </nav>
         )}
       </Transition>
+      {!isMobile && (
+        <a
+          href="http://localhost:8080/choose.html"
+          data-navbar-item
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '6px 14px',
+            borderRadius: '20px',
+            border: '1px solid rgba(var(--rgbAccent), 0.3)',
+            color: 'rgb(var(--rgbAccent))',
+            fontSize: '12px',
+            fontWeight: 600,
+            textDecoration: 'none',
+            fontFamily: 'var(--fontMono)',
+            letterSpacing: '0.5px',
+            transition: 'all 0.2s',
+            background: 'rgba(var(--rgbAccent), 0.06)',
+            marginRight: '8px',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = 'rgba(var(--rgbAccent), 0.14)';
+            e.currentTarget.style.borderColor = 'rgba(var(--rgbAccent), 0.6)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'rgba(var(--rgbAccent), 0.06)';
+            e.currentTarget.style.borderColor = 'rgba(var(--rgbAccent), 0.3)';
+          }}
+        >
+          ⬡ 3D View
+        </a>
+      )}
       {!isMobile && <ThemeToggle data-navbar-item />}
     </header>
   );

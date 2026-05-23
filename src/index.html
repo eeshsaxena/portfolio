@@ -156,12 +156,14 @@
 </head>
 
 <body>
-  <!-- First-time visitors go to choose page; returning 3D visitors stay here -->
+  <!-- Route returning visitors to their chosen view -->
   <script>
     (function() {
       var choice = localStorage.getItem('portfolioChoice');
       if (!choice) {
         window.location.replace('/choose.html');
+      } else if (choice === 'simple') {
+        window.location.replace('/simple/index.html');
       }
     })();
   </script>
