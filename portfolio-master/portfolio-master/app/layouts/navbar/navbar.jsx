@@ -1,5 +1,4 @@
 import { Icon } from '~/components/icon';
-import { Monogram } from '~/components/monogram';
 import { useTheme } from '~/components/theme-provider';
 import { tokens } from '~/components/theme-provider/theme';
 import { Transition } from '~/components/transition';
@@ -141,17 +140,6 @@ export const Navbar = () => {
 
   return (
     <header className={styles.navbar} ref={headerRef}>
-      <RouterLink
-        unstable_viewTransition
-        prefetch="intent"
-        to={location.pathname === '/' ? '/#intro' : '/'}
-        data-navbar-item
-        className={styles.logo}
-        aria-label={`${config.name}, ${config.role}`}
-        onClick={handleMobileNavClick}
-      >
-        <Monogram highlight />
-      </RouterLink>
       <NavToggle onClick={() => setMenuOpen(!menuOpen)} menuOpen={menuOpen} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
@@ -195,13 +183,20 @@ export const Navbar = () => {
               </RouterLink>
             ))}
             <NavbarIcons />
+            <a
+              href="https://eeshsaxena-portfolio.pages.dev"
+              className={styles.mobileNavLink}
+              style={{ opacity: 1, transform: 'none', color: 'var(--accent)', fontFamily: 'var(--fontMono)', fontSize: '13px' }}
+            >
+              ⬡ Switch to 3D View
+            </a>
             <ThemeToggle isMobile />
           </nav>
         )}
       </Transition>
       {!isMobile && (
         <a
-          href="http://localhost:8080/choose.html"
+          href="https://eeshsaxena-portfolio.pages.dev"
           data-navbar-item
           style={{
             display: 'inline-flex',
