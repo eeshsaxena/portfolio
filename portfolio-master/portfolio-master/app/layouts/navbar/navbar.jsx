@@ -140,6 +140,18 @@ export const Navbar = () => {
 
   return (
     <header className={styles.navbar} ref={headerRef}>
+      <RouterLink
+        unstable_viewTransition
+        prefetch="intent"
+        to="/"
+        data-navbar-item
+        className={styles.logo}
+        aria-label={config.name}
+        onClick={handleMobileNavClick}
+        style={{ textDecoration: 'none', color: 'var(--textBody)', fontFamily: 'var(--fontMono)', fontSize: '13px', letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.8 }}
+      >
+        {config.name}
+      </RouterLink>
       <NavToggle onClick={() => setMenuOpen(!menuOpen)} menuOpen={menuOpen} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
