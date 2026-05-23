@@ -313,79 +313,106 @@
 
     /* ─ Tablet portrait / large mobile (≤768px) ─ */
     @media(max-width:768px){
-      /* Stack vertically */
+      /* Hide desktop-only elements */
+      #cbadge, .div-line, #bolt-divider { display: none; }
+      #top { display: none; }
+
+      /* Stack sides vertically, each fills half screen */
       .split {
         flex-direction: column;
         height: auto;
-        min-height: 100vh;
+        min-height: 100dvh;
       }
       .side {
-        flex: 1 0 auto;
-        min-height: 50vh;
-        padding: 32px 28px;
-        justify-content: flex-end;
-        cursor: auto;
+        flex: 1 0 50dvh;
+        min-height: 50dvh;
+        padding: 0 28px;
+        justify-content: center;
+        align-items: flex-start;
+        cursor: pointer;
       }
-      .side:hover { flex: 1 0 auto; }
+      .side:hover { flex: 1 0 50dvh; }
 
-      /* Show sub + stats always on mobile (no hover) */
+      /* Hide the large floating decorations — too cluttered on mobile */
+      .deco3d, .deco-term { display: none; }
+
+      /* Always show sub-text and stats (no hover on touch) */
       .side-sub {
-        opacity: .55;
-        transform: translateY(0);
+        opacity: .6;
+        transform: none;
+        max-width: 100%;
+        font-size: 12.5px;
+        line-height: 1.65;
       }
       .side-stats {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
       }
 
-      /* Hide center badge & divider */
-      #cbadge, .div-line { display: none; }
+      /* Typography */
+      .side-h {
+        font-size: clamp(36px, 9vw, 52px);
+        letter-spacing: -2px;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .side-eyebrow {
+        font-size: 9px;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+      }
 
-      /* Horizontal divider between sides */
+      /* Content spacing */
+      .side-content { gap: 10px; }
+
+      /* Full-width tappable button */
+      .side-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 11px;
+        margin-top: 6px;
+        border-radius: 6px;
+      }
+
+      /* Compact stats */
+      .side-stats { gap: 16px; margin-top: 0; }
+      .stat-n { font-size: 17px; }
+      .stat-l { font-size: 9px; }
+
+      /* Subtle divider between the two halves */
       .split::after {
         content: '';
         position: absolute;
-        top: 50%; left: 5%; right: 5%;
+        top: 50%; left: 0; right: 0;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+        background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.12) 50%, transparent 95%);
         z-index: 30;
+        pointer-events: none;
       }
-
-      /* Scale down decorations */
-      .deco3d {
-        top: 40%; left: 50%;
-        transform: translate(-50%,-40%) scale(.7);
-        animation: none;
-      }
-      .deco-term {
-        top: 38%; left: 50%;
-        transform: translate(-50%,-38%) scale(.7);
-        animation: none;
-      }
-
-      /* Top bar */
-      #top { padding: 16px 24px; }
-      .t-name { font-size: 11px; }
-
-      .side-h { font-size: clamp(38px,8vw,56px); letter-spacing:-2px; }
-      .side-btn { padding: 11px 22px; font-size: 11px; }
-      .stat-n { font-size: 18px; }
     }
 
     /* ─ Small mobile (≤480px) ─ */
     @media(max-width:480px){
-      .side { padding: 24px 20px; min-height: 48vh; }
-      .side-h { font-size: clamp(32px,9vw,48px); letter-spacing:-1.5px; }
-      .side-eyebrow { font-size: 10px; letter-spacing: 2px; }
-      .side-sub { font-size: 12px; max-width: 100%; }
-      .side-btn { padding: 10px 18px; font-size: 11px; }
-      .deco3d { transform: translate(-50%,-40%) scale(.55); }
-      .deco-term { transform: translate(-50%,-38%) scale(.55); }
-      .mon-wrap { width: 150px; }
-      .term-window { width: 180px; }
-      #top { padding: 14px 20px; }
-      .t-dots { gap: 5px; }
-      .t-dot { width: 5px; height: 5px; }
+      .side {
+        padding: 0 20px;
+        min-height: 48dvh;
+        flex: 1 0 48dvh;
+      }
+      .side:hover { flex: 1 0 48dvh; }
+      .side-h { font-size: clamp(30px, 10vw, 44px); letter-spacing: -1.5px; }
+      .side-eyebrow { font-size: 8.5px; letter-spacing: 2.5px; }
+      .side-sub { font-size: 12px; }
+      .side-btn { font-size: 10.5px; padding: 13px 16px; }
+      .stat-n { font-size: 15px; }
+    }
+
+    /* ─ Very small phones (≤360px) ─ */
+    @media(max-width:360px){
+      .side { padding: 0 16px; }
+      .side-h { font-size: 28px; }
+      .side-stats { gap: 12px; }
+      .stat-n { font-size: 14px; }
     }
   </style>
 </head>
