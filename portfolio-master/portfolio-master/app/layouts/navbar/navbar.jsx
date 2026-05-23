@@ -186,9 +186,9 @@ export const Navbar = () => {
             <a
               href="https://eeshsaxena-portfolio.pages.dev"
               className={styles.mobileNavLink}
-              style={{ opacity: 1, transform: 'none', color: 'var(--accent)', fontFamily: 'var(--fontMono)', fontSize: '13px' }}
+              style={{ opacity: 1, transform: 'none', color: 'var(--accent)', fontFamily: 'var(--fontMono)', fontSize: '13px', letterSpacing: '0.05em' }}
             >
-              ⬡ Switch to 3D View
+              &#8599; Switch to 3D View
             </a>
             <ThemeToggle isMobile />
           </nav>
@@ -224,7 +224,7 @@ export const Navbar = () => {
             e.currentTarget.style.borderColor = 'rgba(var(--rgbAccent), 0.3)';
           }}
         >
-          ⬡ 3D View
+          &#8599; 3D View
         </a>
       )}
       {!isMobile && <ThemeToggle data-navbar-item />}
