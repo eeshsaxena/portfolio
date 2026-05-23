@@ -16,13 +16,11 @@
   @media (--mediaTablet) {
     height: auto;
     margin: var(--space3XL) 0;
-    overflow: hidden;
   }
 
   @media (--mediaMobile) {
     padding-bottom: var(--space4XL);
     margin-bottom: 0;
-    overflow: hidden;
   }
 
   &[data-first='true'] {
