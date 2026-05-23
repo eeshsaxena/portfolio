@@ -1,5 +1,5 @@
 .profile {
-  width: 100vw;
+  max-width: 100%;
   min-height: 100vh;
   margin-top: 60px;
   margin-bottom: 40px;
@@ -7,11 +7,12 @@
   padding-bottom: 40px;
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 
   @media (--mediaTablet) {
     padding-top: 50px;
-    padding-right: 80px;
-    padding-left: 160px;
+    padding-right: var(--spaceXL);
+    padding-left: var(--spaceXL);
     height: auto;
     margin-top: 40px;
     margin-bottom: 20px;
@@ -57,10 +58,10 @@
 }
 
 .title {
-  white-space: nowrap;
   margin-bottom: var(--spaceL);
   opacity: 0;
   transition: opacity var(--durationXL) ease var(--durationM);
+  word-break: break-word;
 
   &[data-visible='true'] {
     opacity: 1;
@@ -78,7 +79,7 @@
 }
 
 .tag {
-  margin-top: 220px;
+  margin-top: clamp(40px, 10vw, 220px);
   margin-bottom: 40px;
   display: grid;
   grid-template-columns: var(--space4XL) 1fr;
