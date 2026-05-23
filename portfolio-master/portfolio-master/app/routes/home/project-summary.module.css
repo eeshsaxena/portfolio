@@ -8,7 +8,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 
   @media (--mediaDesktop) {
     margin: var(--space2XL) 0;
@@ -17,13 +16,13 @@
   @media (--mediaTablet) {
     height: auto;
     margin: var(--space3XL) 0;
-    overflow: visible;
+    overflow: hidden;
   }
 
   @media (--mediaMobile) {
     padding-bottom: var(--space4XL);
     margin-bottom: 0;
-    overflow: visible;
+    overflow: hidden;
   }
 
   &[data-first='true'] {
