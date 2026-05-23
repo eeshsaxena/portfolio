@@ -153,6 +153,7 @@ export const Navbar = () => {
         {config.name}
       </RouterLink>
       <NavToggle onClick={() => setMenuOpen(!menuOpen)} menuOpen={menuOpen} />
+      <ThemeToggle data-navbar-item style={{ marginRight: isMobile ? '48px' : undefined }} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
           {navLinks.map(({ label, pathname }) => (
