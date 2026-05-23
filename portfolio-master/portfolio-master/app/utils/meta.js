@@ -9,7 +9,7 @@ export function baseMeta({
   prefix = name,
   ogImage = defaultOgImage,
 }) {
-  const titleText = [prefix, title].filter(Boolean).join(' | ');
+  const titleText = [prefix, title].filter(Boolean).join(' — ');
 
   return [
     { title: titleText },
