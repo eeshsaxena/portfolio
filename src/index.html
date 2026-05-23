@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at 50% 60%, #0d1a2e 0%, #060b12 45%, #030508 100%);
+      background-attachment: fixed;
+    }
+
+    /* Subtle ambient glow layers */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 80%, rgba(0,80,255,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(100,0,255,0.03) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 60% at 50% 100%, rgba(0,200,150,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    #webgl {
+      pointer-events: none;
+    }
+
+    #ui-app {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    #ui {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    #monitor-videos {
+      pointer-events: none;
+      position: 'absolute';
+      opacity: 0;
+      width: 0;
+      height: 0;
+      top: 0;
+      left: 0;
+
+    }
+
+    #css {
+      cursor: pointer;
+    }
+
+    #ui-interactive {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 256px;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      pointer-events: none;
+    }
+
+    /* Switch view button */
+    #switch-view {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 9999;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      background: rgba(5,10,7,0.85);
+      border: 1px solid rgba(0,255,136,0.25);
+      border-radius: 50px;
+      color: rgba(0,255,136,0.8);
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 12px;
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      transition: all 0.2s;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+    }
+    #switch-view:hover {
+      background: rgba(5,15,10,0.95);
+      border-color: rgba(0,255,136,0.6);
+      color: #00ff88;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 20px rgba(0,255,136,0.1);
+    }
+  </style>
+
+  <!-- Primary Meta Tags -->
+  <title>Eesh Saxena - Portfolio 2026</title>
+  <meta name="title" content="Eesh Saxena - CS Engineer & AI Researcher">
+  <meta name="description"
+    content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eeshsaxena.github.io/">
+  <meta property="og:title" content="Eesh Saxena - CS Engineer & AI Researcher">
+  <meta property="og:description"
+    content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
+
+  <!-- Twitter -->
+
+
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta property="twitter:url" content="https://eeshsaxena.github.io/">
+  <meta name="twitter:url" content="https://eeshsaxena.github.io/">
+
+  <meta property="twitter:title" content="Eesh Saxena - CS Engineer & AI Researcher">
+  <meta name="twitter:title" content="Eesh Saxena - CS Engineer & AI Researcher">
+
+  <meta property="twitter:description"
+    content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
+  <meta name="twitter:description"
+    content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
+
+  <meta property="twitter:image" content="https://henryheffernan.com/images/preview-new.jpg">
+  <meta name="twitter:image" content="https://henryheffernan.com/images/preview-new.jpg">
+
+  <!-- Images -->
+  <meta property="og:image" content="https://henryheffernan.com/images/preview-new.jpg">
+  <meta property="og:image:secure" content="https://henryheffernan.com/images/preview-new.jpg">
+
+  <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FJBF6WF60"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-4FJBF6WF60');
+  </script>
+</head>
+
+<body>
+  <!-- First-time visitors go to choose page; returning 3D visitors stay here -->
+  <script>
+    (function() {
+      var choice = localStorage.getItem('portfolioChoice');
+      if (!choice) {
+        window.location.replace('/choose.html');
+      }
+    })();
+  </script>
+  <div id="css"></div>
+  <div id="webgl"></div>
+  <div id="overlay"></div>
+  <div id="ui-interactive"></div>
+  <div id="ui"></div>
+
+  <!-- Switch view button -->
+  <a id="switch-view" href="/choose.html" onclick="localStorage.removeItem('portfolioChoice')">
+    <span>⬡</span> Switch View
+  </a>
+  <div id="monitor-videos">
+    <video id="video-1" muted loop autoplay width="0" height="0" src="../static/textures/monitor/video/base-static.mp4"
+      style="opacity: 0;"></video>
+    <video id="video-2" muted loop autoplay width="0" height="0"
+      src="../static/textures/monitor/video/static-texture-layer.mp4" style="opacity: 0;"></video>
+  </div>
+</body>
+
+</html>

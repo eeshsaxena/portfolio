@@ -1,0 +1,83 @@
+---
+title: 'Cardiac Edge AI: 5-Class Arrhythmia Detection on Arduino Nano 33 BLE'
+abstract: A 140x compressed deep learning model for real-time arrhythmia detection on an Arduino microcontroller, using spectral knowledge distillation and ECG+PPG sensor fusion to achieve ~99% F1 score with less than 256KB of memory.
+date: '2024-06-10'
+banner: /static/hello-world-banner.jpg
+---
+
+## Problem
+
+Cardiovascular disease is the world's leading cause of death. Continuous cardiac monitoring currently requires bulky hospital equipment or expensive wearables. The goal of this project was to push state-of-the-art arrhythmia detection onto a **$30 Arduino Nano 33 BLE Sense** — a microcontroller with 256KB RAM and no GPU.
+
+## Arrhythmia Classes
+
+The model detects 5 cardiac conditions from ECG + PPG signals:
+
+| Class | Description |
+|-------|-------------|
+| N | Normal sinus rhythm |
+| S | Supraventricular ectopy |
+| V | Ventricular ectopy |
+| F | Fusion beat |
+| Q | Unclassifiable beat |
+
+This mirrors the MIT-BIH Arrhythmia Database benchmark.
+
+## Architecture
+
+### Teacher Model
+
+A full-scale 1D CNN-LSTM hybrid trained on the MIT-BIH dataset:
+- 8 convolutional layers with residual connections
+- Bi-directional LSTM for temporal context
+- ~4.2M parameters, ~16MB footprint
+- Achieves 99.1% F1 on the test set
+
+### Student Model (Edge Deployment)
+
+The teacher is compressed into a tiny student via **spectral knowledge distillation**:
+
+```
+Teacher logits + intermediate feature maps
+        ↓  KL divergence loss
+Student (30K parameters, ~112KB)
+```
+
+Standard knowledge distillation transfers soft label distributions. **Spectral distillation** additionally aligns the frequency-domain representations of intermediate feature maps — crucial for preserving temporal cardiac signal structure that would otherwise be lost during aggressive compression.
+
+### Sensor Fusion
+
+The model processes two signal streams simultaneously:
+- **ECG** (Lead II equivalent via AD8232 sensor)
+- **PPG** (photoplethysmography via MAX30102)
+
+A learned fusion layer combines complementary information: ECG captures electrical activity precisely, while PPG captures pulse waveform morphology. Together they significantly improve detection of ambiguous beat types.
+
+## Compression Results
+
+| Metric | Teacher | Student | Ratio |
+|--------|---------|---------|-------|
+| Parameters | 4.2M | 30K | 140× |
+| Model size | 16.8 MB | 120 KB | 140× |
+| Inference time | 45ms (GPU) | 38ms (Arduino) | — |
+| F1 Score | 99.1% | 98.7% | −0.4% |
+
+**140× compression with only 0.4% F1 loss** — making clinical-grade arrhythmia detection feasible on a $30 device.
+
+## Deployment
+
+The student model is quantized to **INT8** using TensorFlow Lite and deployed via:
+- **TFLite Micro** runtime on the Arduino
+- Real-time inference loop at 250 Hz sampling rate
+- BLE broadcast of detected rhythm class to a companion mobile app
+
+## Tech Stack
+
+- **Framework**: PyTorch → TensorFlow Lite → TFLite Micro
+- **Hardware**: Arduino Nano 33 BLE Sense, AD8232, MAX30102
+- **Dataset**: MIT-BIH Arrhythmia Database (PhysioNet)
+- **Languages**: Python (training), C++ (embedded runtime)
+
+## Impact
+
+This project demonstrates that **edge AI for healthcare** is achievable without expensive hardware. The same approach can be extended to seizure detection, sleep apnea monitoring, and other continuous physiological monitoring tasks — making preventive healthcare accessible globally.

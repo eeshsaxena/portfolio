@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EeshOS v1.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #00ff88;
+      --green-dim: #00dd77;
+      --green-dark: #003322;
+      --cyan: #33e0ff;
+      --purple: #bb88ff;
+      --orange: #ffaa66;
+      --red: #ff6b7a;
+      --yellow: #ffe866;
+      --bg: #080d0a;
+      --bg2: #0f151c;
+      --bg3: #151e27;
+      --border: #1e3a2a;
+      --text: #e8fff0;
+      --text-dim: #b0e8c0;
+      --win-bg: rgba(8,16,12,0.98);
+      --win-border: #00ff88;
+      --taskbar-h: 48px;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-title: 'Orbitron', monospace;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      cursor: default;
+      user-select: none;
+    }
+
+    /* ===== WALLPAPER ===== */
+    #wallpaper {
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, #001a0f 0%, #000000 40%, #00020a 100%);
+      overflow: hidden;
+    }
+    #wallpaper canvas { position: absolute; inset: 0; }
+    .wp-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .wp-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 80%, rgba(0,255,136,0.06) 0%, transparent 70%);
+    }
+    .wp-scanlines {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px
+      );
+      pointer-events: none;
+    }
+    .wp-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+    }
+    .wp-name {
+      position: absolute;
+      bottom: calc(var(--taskbar-h) + 60px);
+      left: 50%; transform: translateX(-50%);
+      font-family: var(--font-title);
+      font-size: 11px;
+      letter-spacing: 6px;
+      color: rgba(0,255,136,0.12);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ===== DESKTOP ===== */
+    #desktop {
+      position: fixed; inset: 0;
+      bottom: var(--taskbar-h);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 88px);
+      grid-template-rows: repeat(auto-fill, 88px);
+      align-content: start;
+      padding: 24px;
+      gap: 8px;
+    }
+
+    /* ===== ICONS ===== */
+    .icon {
+      width: 80px; height: 80px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      padding: 6px;
+    }
+    .icon:hover { background: rgba(0,255,136,0.08); transform: translateY(-2px); }
+    .icon:active { transform: scale(0.95); }
+    .icon-img {
+      font-size: 32px;
+      line-height: 1;
+      filter: drop-shadow(0 0 8px var(--green));
+    }
+    .icon-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.2;
+      text-shadow: 0 0 6px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.9);
+    }
+
+    /* ===== TASKBAR ===== */
+    #taskbar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: var(--taskbar-h);
+      background: rgba(5,10,8,0.95);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      backdrop-filter: blur(12px);
+    }
+    .taskbar-logo {
+      font-family: var(--font-title);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 2px;
+      margin-right: 8px;
+      text-shadow: 0 0 10px var(--green);
+    }
+    .taskbar-sep {
+      width: 1px; height: 28px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+    .taskbar-btn {
+      height: 32px;
+      padding: 0 10px;
+      background: rgba(0,255,136,0.06);
+      border: 1px solid rgba(0,255,136,0.2);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .taskbar-btn:hover { background: rgba(0,255,136,0.14); color: var(--green); border-color: rgba(0,255,136,0.5); }
+    .taskbar-btn.active { background: rgba(0,255,136,0.22); color: var(--green); border-color: var(--green); }
+    #taskbar-clock {
+      margin-left: auto;
+      font-family: var(--font-title);
+      font-size: 12px;
+      color: var(--green);
+      text-shadow: 0 0 8px var(--green);
+      letter-spacing: 2px;
+    }
+    #taskbar-date {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== WINDOWS ===== */
+    .window {
+      position: fixed;
+      background: var(--win-bg);
+      border: 1px solid var(--win-border);
+      border-radius: 6px;
+      box-shadow: 0 0 0 1px rgba(0,255,136,0.1), 0 0 40px rgba(0,255,136,0.08), 0 24px 80px rgba(0,0,0,0.8);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      min-width: 360px;
+      animation: winOpen 0.18s ease-out;
+      z-index: 100;
+    }
+    @keyframes winOpen {
+      from { opacity: 0; transform: scale(0.94) translateY(10px); }
+      to   { opacity: 1; transform: scale(1)   translateY(0); }
+    }
+    .window.hidden { display: none; }
+
+    .win-titlebar {
+      height: 36px;
+      background: linear-gradient(90deg, rgba(0,255,136,0.12) 0%, rgba(0,255,136,0.04) 100%);
+      border-bottom: 1px solid rgba(0,255,136,0.2);
+      display: flex; align-items: center;
+      padding: 0 12px;
+      cursor: grab;
+      flex-shrink: 0;
+      gap: 8px;
+    }
+    .win-titlebar:active { cursor: grabbing; }
+    .win-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: filter 0.15s;
+    }
+    .win-dot:hover { filter: brightness(1.5); }
+    .win-dot.close { background: #ff5f57; }
+    .win-dot.min   { background: #febc2e; }
+    .win-dot.max   { background: #28c840; }
+    .win-title {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-title);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px var(--green);
+    }
+
+    .win-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0;
+    }
+    .win-body::-webkit-scrollbar { width: 6px; }
+    .win-body::-webkit-scrollbar-track { background: rgba(0,255,136,0.02); }
+    .win-body::-webkit-scrollbar-thumb { background: rgba(0,255,136,0.2); border-radius: 3px; }
+    .win-body::-webkit-scrollbar-thumb:hover { background: rgba(0,255,136,0.4); }
+
+    /* ===== WINDOW CONTENT STYLES ===== */
+    .section {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(0,255,136,0.08);
+    }
+    .section:last-child { border-bottom: none; }
+
+    .sec-header {
+      font-family: var(--font-title);
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--green);
+      text-shadow: 0 0 8px var(--green);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-header::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(0,255,136,0.3), transparent);
+    }
+
+    .label { font-size: 11px; color: var(--green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; opacity: 0.8; }
+    .value { font-size: 13px; color: var(--text); line-height: 1.6; }
+    .value-green { color: var(--green); }
+    .value-cyan { color: var(--cyan); }
+    .value-yellow { color: var(--yellow); }
+    .value-orange { color: var(--orange); }
+    .value-purple { color: var(--purple); }
+
+    /* About */
+    .about-hero {
+      display: flex; align-items: center; gap: 20px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(0,255,136,0.05) 0%, transparent 60%);
+      border-bottom: 1px solid rgba(0,255,136,0.08);
+    }
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      box-shadow: 0 0 20px rgba(0,255,136,0.3);
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 60%);
+    }
+    .about-name {
+      font-family: var(--font-title);
+      font-size: 18px;
+      color: var(--green);
+      text-shadow: 0 0 12px var(--green);
+      letter-spacing: 2px;
+    }
+    .about-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cyan);
+      margin-top: 4px;
+    }
+    .about-loc {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    .contact-links {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 14px;
+    }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px;
+      border: 1px solid rgba(0,255,136,0.25);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text);
+      background: rgba(0,255,136,0.05);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .contact-btn:hover {
+      background: rgba(0,255,136,0.12);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* Skills grid */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .skill-category { }
+    .skill-cat-name {
+      font-size: 11px; color: var(--cyan); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-tag {
+      padding: 4px 10px;
+      border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 3px;
+      font-size: 12px;
+      color: var(--text);
+      background: rgba(0,255,136,0.06);
+      transition: all 0.15s;
+    }
+    .skill-tag:hover { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.12); }
+
+    /* Experience */
+    .exp-item { margin-bottom: 20px; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-org {
+      font-family: var(--font-title);
+      font-size: 12px;
+      color: var(--cyan);
+      letter-spacing: 1px;
+    }
+    .exp-role {
+      font-size: 12px;
+      color: var(--green);
+      margin: 3px 0;
+    }
+    .exp-date {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      margin-bottom: 5px;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--green);
+    }
+
+    /* Projects */
+    .project-card {
+      background: rgba(0,255,136,0.03);
+      border: 1px solid rgba(0,255,136,0.1);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .project-card:hover { border-color: rgba(0,255,136,0.35); background: rgba(0,255,136,0.06); }
+    .project-card:last-child { margin-bottom: 0; }
+    .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .proj-name {
+      font-family: var(--font-title);
+      font-size: 12px;
+      color: var(--green);
+      letter-spacing: 1px;
+    }
+    .proj-year {
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+    .proj-stack {
+      display: flex; flex-wrap: wrap; gap: 4px;
+      margin-bottom: 10px;
+    }
+    .proj-tech {
+      font-size: 10px;
+      padding: 2px 6px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 3px;
+      color: var(--cyan);
+    }
+    .proj-bullets { list-style: none; }
+    .proj-bullets li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      margin-bottom: 4px;
+    }
+    .proj-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--green); }
+
+    /* Achievements */
+    .ach-rating-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .ach-card {
+      background: rgba(0,255,136,0.04);
+      border: 1px solid rgba(0,255,136,0.12);
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .ach-card:hover { border-color: rgba(0,255,136,0.35); transform: translateY(-2px); }
+    .ach-platform { font-size: 11px; color: var(--text); letter-spacing: 1px; margin-bottom: 6px; font-weight: bold; }
+    .ach-rating { font-family: var(--font-title); font-size: 22px; margin-bottom: 4px; }
+    .ach-title { font-size: 11px; margin-bottom: 2px; }
+    .ach-pct { font-size: 11px; color: var(--text-dim); }
+
+    .ach-contests { list-style: none; }
+    .ach-contests li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+      border-bottom: 1px solid rgba(0,255,136,0.08);
+      padding-bottom: 7px;
+      margin-bottom: 7px;
+    }
+    .ach-contests li:last-child { border-bottom: none; margin-bottom: 0; }
+    .ach-contests li::before { content: '🏆'; position: absolute; left: 0; font-size: 12px; top: 2px; }
+    .ach-contests li span { color: var(--yellow); font-weight: 600; }
+
+    /* Education */
+    .edu-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 12px;
+      font-size: 10px;
+      color: var(--green);
+      background: rgba(0,255,136,0.06);
+      margin-bottom: 10px;
+    }
+    .edu-courses { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .course-tag {
+      padding: 4px 10px;
+      background: rgba(155,89,255,0.10);
+      border: 1px solid rgba(155,89,255,0.35);
+      border-radius: 3px;
+      font-size: 12px;
+      color: var(--purple);
+    }
+
+    /* Progress bar */
+    .prog-bar-wrap { margin-top: 4px; }
+    .prog-bar-bg {
+      height: 4px;
+      background: rgba(0,255,136,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .prog-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      border-radius: 2px;
+      animation: progFill 1s ease-out;
+    }
+    @keyframes progFill { from { width: 0; } }
+
+    /* Terminal prompt line */
+    .prompt-line {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(0,255,136,0.12);
+      padding: 10px 24px;
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(0,255,136,0.03);
+    }
+    .prompt-sym { color: var(--green); font-weight: bold; }
+
+    /* Glow text utility */
+    .glow-green { text-shadow: 0 0 10px var(--green); }
+    .glow-cyan  { text-shadow: 0 0 10px var(--cyan); }
+
+    /* Resize handle */
+    .win-resize {
+      position: absolute;
+      right: 0; bottom: 0;
+      width: 16px; height: 16px;
+      cursor: se-resize;
+      display: flex; align-items: flex-end; justify-content: flex-end;
+      padding: 3px;
+    }
+    .win-resize svg { opacity: 0.3; }
+    .win-resize:hover svg { opacity: 0.8; }
+
+    /* Boot screen */
+    #boot-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #000;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      gap: 12px;
+      transition: opacity 0.5s;
+    }
+    #boot-screen.fade-out { opacity: 0; pointer-events: none; }
+    .boot-logo {
+      font-family: var(--font-title);
+      font-size: 28px;
+      color: var(--green);
+      text-shadow: 0 0 30px var(--green);
+      letter-spacing: 6px;
+    }
+    .boot-sub {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 3px;
+    }
+    .boot-bar-wrap {
+      width: 200px; height: 3px;
+      background: rgba(0,255,136,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .boot-bar-fill {
+      height: 100%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      animation: bootLoad 1.2s ease-in-out forwards;
+    }
+    @keyframes bootLoad { from { width:0; } to { width:100%; } }
+    .boot-log {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(0,255,136,0.4);
+      letter-spacing: 1px;
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BOOT SCREEN -->
+<div id="boot-screen">
+  <div class="boot-logo">EESH OS</div>
+  <div class="boot-sub">VERSION 1.0 — 2026</div>
+  <div class="boot-bar-wrap"><div class="boot-bar-fill"></div></div>
+  <div class="boot-log" id="boot-log">Initializing...</div>
+</div>
+
+<!-- WALLPAPER -->
+<div id="wallpaper">
+  <canvas id="particle-canvas"></canvas>
+  <div class="wp-grid"></div>
+  <div class="wp-glow"></div>
+  <div class="wp-scanlines"></div>
+  <div class="wp-vignette"></div>
+  <div class="wp-name">EESH SAXENA // PORTFOLIO OS // v1.0</div>
+</div>
+
+<!-- DESKTOP ICONS -->
+<div id="desktop">
+  <div class="icon" onclick="openWindow('about')">
+    <div class="icon-img">👤</div>
+    <div class="icon-label">About.exe</div>
+  </div>
+  <div class="icon" onclick="openWindow('education')">
+    <div class="icon-img">🎓</div>
+    <div class="icon-label">Education.exe</div>
+  </div>
+  <div class="icon" onclick="openWindow('experience')">
+    <div class="icon-img">💼</div>
+    <div class="icon-label">Experience.exe</div>
+  </div>
+  <div class="icon" onclick="openWindow('projects')">
+    <div class="icon-img">📁</div>
+    <div class="icon-label">Projects.exe</div>
+  </div>
+  <div class="icon" onclick="openWindow('achievements')">
+    <div class="icon-img">🏆</div>
+    <div class="icon-label">Achievements.exe</div>
+  </div>
+  <div class="icon" onclick="openWindow('skills')">
+    <div class="icon-img">🛠️</div>
+    <div class="icon-label">Skills.exe</div>
+  </div>
+  <div class="icon" onclick="openResumeLink()">
+    <div class="icon-img">📄</div>
+    <div class="icon-label">Resume.pdf</div>
+  </div>
+</div>
+
+<!-- TASKBAR -->
+<div id="taskbar">
+  <div class="taskbar-logo">⬡ EESH OS</div>
+  <div class="taskbar-sep"></div>
+  <div id="tb-about"     class="taskbar-btn" onclick="toggleWindow('about')">👤 About</div>
+  <div id="tb-education" class="taskbar-btn" onclick="toggleWindow('education')">🎓 Edu</div>
+  <div id="tb-experience"class="taskbar-btn" onclick="toggleWindow('experience')">💼 Exp</div>
+  <div id="tb-projects"  class="taskbar-btn" onclick="toggleWindow('projects')">📁 Projects</div>
+  <div id="tb-achievements" class="taskbar-btn" onclick="toggleWindow('achievements')">🏆 Achieve</div>
+  <div id="tb-skills"    class="taskbar-btn" onclick="toggleWindow('skills')">🛠️ Skills</div>
+  <div class="taskbar-sep"></div>
+  <div class="taskbar-btn" onclick="openResumeLink()" style="border-color:rgba(0,255,136,0.4);color:var(--green)">📄 Resume</div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;margin-left:auto">
+    <div id="taskbar-clock">00:00:00</div>
+    <div id="taskbar-date">--/--/----</div>
+  </div>
+</div>
+
+<!-- ============================= WINDOWS ============================= -->
+
+<!-- ABOUT WINDOW -->
+<div class="window hidden" id="win-about" style="width:460px;top:60px;left:80px">
+  <div class="win-titlebar" data-win="about">
+    <div class="win-dot close" onclick="closeWindow('about')"></div>
+    <div class="win-dot min"   onclick="minWindow('about')"></div>
+    <div class="win-dot max"   onclick="maxWindow('about')"></div>
+    <div class="win-title">ABOUT.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="about-hero">
+      <div class="avatar">🧑‍💻</div>
+      <div>
+        <div class="about-name glow-green">EESH SAXENA</div>
+        <div class="about-title">&gt; CS Engineer &amp; AI Researcher</div>
+        <div class="about-loc">📍 Gandhinagar, Gujarat, India</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">IDENTITY</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <div class="label">Institution</div>
+          <div class="value value-cyan">IIIT Senapati, Manipur</div>
+        </div>
+        <div>
+          <div class="label">Degree</div>
+          <div class="value">B.Tech — CSE</div>
+        </div>
+        <div>
+          <div class="label">Phone</div>
+          <div class="value">+91 7976212108</div>
+        </div>
+        <div>
+          <div class="label">Email</div>
+          <div class="value">eeshsaxena@gmail.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">CONNECT</div>
+      <div class="contact-links">
+        <a class="contact-btn" href="https://github.com/eeshsaxena" target="_blank">⌥ github.com/eeshsaxena</a>
+        <a class="contact-btn" href="https://linkedin.com/in/eeshsaxena" target="_blank">🔗 linkedin/eeshsaxena</a>
+        <a class="contact-btn" href="mailto:eeshsaxena@gmail.com">✉ eeshsaxena@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">BIO</div>
+      <div class="value" style="font-size:12px;line-height:1.8;color:var(--text-dim)">
+        CS undergrad at IIIT Senapati passionate about AI/ML, NLP, and competitive programming.
+        Research intern at IIIT Vadodara (Reversible Data Hiding) and IIT Tirupati (Multi-Object Tracking).
+        Building open-source NLP corpora and deploying edge AI on embedded hardware.
+        Competitive programmer with 1500+ problems solved and global ranks across Codeforces, CodeChef &amp; LeetCode.
+      </div>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> whoami</div>
+  </div>
+</div>
+
+<!-- EDUCATION WINDOW -->
+<div class="window hidden" id="win-education" style="width:440px;top:80px;left:180px">
+  <div class="win-titlebar" data-win="education">
+    <div class="win-dot close" onclick="closeWindow('education')"></div>
+    <div class="win-dot min"   onclick="minWindow('education')"></div>
+    <div class="win-dot max"   onclick="maxWindow('education')"></div>
+    <div class="win-title">EDUCATION.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="section">
+      <div class="sec-header">DEGREE</div>
+      <div class="exp-org">Indian Institute of Information Technology Senapati</div>
+      <div class="exp-role">Bachelor of Technology — Computer Science &amp; Engineering</div>
+      <div class="exp-date">📅 Oct 2023 – Present &nbsp;|&nbsp; 📍 Manipur, Imphal</div>
+      <div class="edu-badge">🎓 B.Tech CSE — Active</div>
+      <div class="label">Focus Areas</div>
+      <div class="edu-courses">
+        <div class="course-tag">AI / Machine Learning</div>
+        <div class="course-tag">Natural Language Processing</div>
+        <div class="course-tag">Computer Vision</div>
+        <div class="course-tag">Data Structures &amp; Algorithms</div>
+        <div class="course-tag">Embedded Systems</div>
+        <div class="course-tag">Database Systems</div>
+        <div class="course-tag">Operating Systems</div>
+        <div class="course-tag">Reversible Data Hiding</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">RESEARCH PROFILE</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <div class="label">Problems Solved</div>
+          <div class="value value-green" style="font-family:var(--font-title);font-size:22px">1,500+</div>
+          <div style="font-size:10px;color:var(--text-dim)">across all platforms</div>
+        </div>
+        <div>
+          <div class="label">Contests Participated</div>
+          <div class="value value-cyan" style="font-family:var(--font-title);font-size:22px">50+</div>
+          <div style="font-size:10px;color:var(--text-dim)">competitive programming</div>
+        </div>
+        <div>
+          <div class="label">Research Internships</div>
+          <div class="value value-yellow" style="font-family:var(--font-title);font-size:22px">2</div>
+          <div style="font-size:10px;color:var(--text-dim)">IIIT Vadodara + IIT Tirupati</div>
+        </div>
+        <div>
+          <div class="label">GitHub Repositories</div>
+          <div class="value value-purple" style="font-family:var(--font-title);font-size:22px">51</div>
+          <div style="font-size:10px;color:var(--text-dim)">public repos</div>
+        </div>
+      </div>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> cat education.txt</div>
+  </div>
+</div>
+
+<!-- EXPERIENCE WINDOW -->
+<div class="window hidden" id="win-experience" style="width:500px;top:100px;left:220px">
+  <div class="win-titlebar" data-win="experience">
+    <div class="win-dot close" onclick="closeWindow('experience')"></div>
+    <div class="win-dot min"   onclick="minWindow('experience')"></div>
+    <div class="win-dot max"   onclick="maxWindow('experience')"></div>
+    <div class="win-title">EXPERIENCE.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="section">
+      <div class="sec-header">RESEARCH INTERNSHIPS</div>
+
+      <div class="exp-item">
+        <div class="exp-org">🏛 IIIT Vadodara — Under Dr. Abhisek Paul</div>
+        <div class="exp-role">Research Intern (2026)</div>
+        <div class="exp-date">📅 2026 &nbsp;|&nbsp; 6-month internship</div>
+        <ul class="exp-bullets">
+          <li>Secured internship to analyze Zhang (IEEE SPL 2011) framework on Reversible Data Hiding in Encrypted Images.</li>
+          <li>Studied and evaluated techniques from 30+ related research works to compare embedding strategies.</li>
+          <li>Developed the encryption–data embedding–extraction pipeline ensuring separability between data retrieval and image reconstruction.</li>
+          <li>Measured embedding capacity and fidelity using PSNR and embedding-rate metrics for publication.</li>
+          <li>Implemented embedding algorithms in Python with near real-time encryption and data hiding speeds.</li>
+        </ul>
+      </div>
+
+      <div style="height:1px;background:rgba(0,255,136,0.08);margin:16px 0"></div>
+
+      <div class="exp-item">
+        <div class="exp-org">🏛 IIT Tirupati (Online) — SEVA Lab — Under Dr. Chalavadi Vishnu</div>
+        <div class="exp-role">Winter Research Intern (2025)</div>
+        <div class="exp-date">📅 Winter 2025 &nbsp;|&nbsp; Online</div>
+        <ul class="exp-bullets">
+          <li>Reproduced and analyzed the MOTIP (CVPR 2025) framework for Multiple Object Tracking.</li>
+          <li>Focused on transformer-based identity prediction without Hungarian-based association.</li>
+          <li>Examined spatio-temporal feature embeddings under occlusion and dense-scene conditions.</li>
+          <li>Applied temporal regularization to reduce identity switches in tracking scenarios.</li>
+          <li>Evaluated performance using MOTA, IDF1, and HOTA metrics after adjusting optimization parameters.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> ls ./experience/</div>
+  </div>
+</div>
+
+<!-- PROJECTS WINDOW -->
+<div class="window hidden" id="win-projects" style="width:540px;top:50px;left:300px">
+  <div class="win-titlebar" data-win="projects">
+    <div class="win-dot close" onclick="closeWindow('projects')"></div>
+    <div class="win-dot min"   onclick="minWindow('projects')"></div>
+    <div class="win-dot max"   onclick="maxWindow('projects')"></div>
+    <div class="win-title">PROJECTS.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="section">
+      <div class="sec-header">FEATURED PROJECTS</div>
+
+      <div class="project-card">
+        <div class="proj-header">
+          <div class="proj-name">⬡ Conflict-Aware Graph RAG</div>
+          <div class="proj-year">2026</div>
+        </div>
+        <div class="proj-stack">
+          <div class="proj-tech">Python</div><div class="proj-tech">LangChain</div>
+          <div class="proj-tech">Neo4j</div><div class="proj-tech">Ollama</div>
+        </div>
+        <ul class="proj-bullets">
+          <li>Graph-based RAG pipeline converting unstructured text into structured triples using LLMs.</li>
+          <li>Query-aware reasoning-path retrieval over Neo4j knowledge graph with Ref(p) scoring.</li>
+          <li>Entropy-based conflict module (ΔH) comparing parametric and graph-augmented responses.</li>
+          <li>Reduced hallucination vs vector RAG on multi-hop QA benchmarks.</li>
+          <li>Integrated with Ollama for local open-source LLMs ensuring data privacy.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-header">
+          <div class="proj-name">⬡ RajNLP-50K</div>
+          <div class="proj-year">2026</div>
+        </div>
+        <div class="proj-stack">
+          <div class="proj-tech">Python</div><div class="proj-tech">HuggingFace</div><div class="proj-tech">MuRIL</div>
+        </div>
+        <ul class="proj-bullets">
+          <li>India's first open Rajasthani-Hindi code-switched NLP corpus — 50,000 sentences from Twitter/X &amp; ShareChat.</li>
+          <li>Fine-tuned MuRIL models outperforming GPT-4o on sentiment analysis, NER, and toxicity detection.</li>
+          <li>Extended pipeline to feed ASR and NLU components of BolKota, a Rajasthani voice assistant.</li>
+          <li>Published dataset and model checkpoints on HuggingFace Hub.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-header">
+          <div class="proj-name">⬡ Cardiac Edge AI</div>
+          <div class="proj-year">2026</div>
+        </div>
+        <div class="proj-stack">
+          <div class="proj-tech">Python</div><div class="proj-tech">PyTorch</div>
+          <div class="proj-tech">TFLite</div><div class="proj-tech">Arduino</div>
+        </div>
+        <ul class="proj-bullets">
+          <li>5-class cardiac arrhythmia detector on Arduino Nano 33 BLE via PyTorch &amp; TensorFlow Lite.</li>
+          <li>Novel spectral knowledge-distillation loss (Lspectral) — 140× compression (1.27M → 9.1K params, 23.4KB INT8).</li>
+          <li>∼99% F1 via multimodal ECG &amp; PPG fusion with temporal signal preprocessing.</li>
+          <li>Real-time serial dashboard in C++ to monitor inference outputs with minimal latency.</li>
+        </ul>
+      </div>
+
+      <div style="text-align:center;margin-top:4px">
+        <a class="contact-btn" href="https://github.com/eeshsaxena" target="_blank" style="justify-content:center">
+          ⌥ View all 51 repos on GitHub →
+        </a>
+      </div>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> ls ./projects/ | wc -l</div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS WINDOW -->
+<div class="window hidden" id="win-achievements" style="width:500px;top:70px;left:160px">
+  <div class="win-titlebar" data-win="achievements">
+    <div class="win-dot close" onclick="closeWindow('achievements')"></div>
+    <div class="win-dot min"   onclick="minWindow('achievements')"></div>
+    <div class="win-dot max"   onclick="maxWindow('achievements')"></div>
+    <div class="win-title">ACHIEVEMENTS.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="section">
+      <div class="sec-header">COMPETITIVE RATINGS</div>
+      <div class="ach-rating-grid">
+        <div class="ach-card">
+          <div class="ach-platform">CODEFORCES</div>
+          <div class="ach-rating" style="color:var(--cyan)">1582</div>
+          <div class="ach-title" style="color:var(--cyan)">Specialist</div>
+          <div class="ach-pct">Top 1% in India</div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-platform">CODECHEF</div>
+          <div class="ach-rating" style="color:var(--yellow)">1866</div>
+          <div class="ach-title" style="color:var(--yellow)">4 ★ Star</div>
+          <div class="ach-pct">Top 1% in India</div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-platform">LEETCODE</div>
+          <div class="ach-rating" style="color:var(--orange)">1873</div>
+          <div class="ach-title" style="color:var(--orange)">Guardian</div>
+          <div class="ach-pct">Top 5% Worldwide</div>
+        </div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div class="label">Problems Solved</div>
+        <div class="value" style="font-family:var(--font-title);font-size:26px;color:var(--green)">1,500+</div>
+        <div class="prog-bar-wrap">
+          <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:92%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">CONTEST HIGHLIGHTS</div>
+      <ul class="ach-contests">
+        <li><span>Global Rank 1</span> in CodeChef Starters 180 (Div. 3) — 10,000 participants</li>
+        <li><span>Global Rank 75</span> in LeetCode Weekly Contest 446 — 27,686 participants</li>
+        <li><span>Global Rank 78</span> in CodeChef Starters 183 (Div. 2)</li>
+        <li>Participated in <span>50+ contests</span> across Codeforces, CodeChef &amp; LeetCode</li>
+      </ul>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> cat achievements.log</div>
+  </div>
+</div>
+
+<!-- SKILLS WINDOW -->
+<div class="window hidden" id="win-skills" style="width:460px;top:90px;left:250px">
+  <div class="win-titlebar" data-win="skills">
+    <div class="win-dot close" onclick="closeWindow('skills')"></div>
+    <div class="win-dot min"   onclick="minWindow('skills')"></div>
+    <div class="win-dot max"   onclick="maxWindow('skills')"></div>
+    <div class="win-title">SKILLS.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="section">
+      <div class="sec-header">TECHNICAL STACK</div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="skill-cat-name">Languages</div>
+          <div class="skill-tags">
+            <div class="skill-tag">C++</div>
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">JavaScript</div>
+            <div class="skill-tag">PHP</div>
+            <div class="skill-tag">SQL</div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-name">Frameworks</div>
+          <div class="skill-tags">
+            <div class="skill-tag">React.js</div>
+            <div class="skill-tag">Node.js</div>
+            <div class="skill-tag">Express.js</div>
+            <div class="skill-tag">PyTorch</div>
+            <div class="skill-tag">LangChain</div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-name">Libraries / ML</div>
+          <div class="skill-tags">
+            <div class="skill-tag">NumPy</div>
+            <div class="skill-tag">Pandas</div>
+            <div class="skill-tag">Matplotlib</div>
+            <div class="skill-tag">HuggingFace</div>
+            <div class="skill-tag">TFLite</div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-name">Databases</div>
+          <div class="skill-tags">
+            <div class="skill-tag">MySQL</div>
+            <div class="skill-tag">MongoDB</div>
+            <div class="skill-tag">Neo4j</div>
+            <div class="skill-tag">Supabase</div>
+            <div class="skill-tag">Firebase</div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-name">Tools</div>
+          <div class="skill-tags">
+            <div class="skill-tag">Git</div>
+            <div class="skill-tag">Linux</div>
+            <div class="skill-tag">Postman</div>
+            <div class="skill-tag">Arduino</div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-name">Cloud / Deploy</div>
+          <div class="skill-tags">
+            <div class="skill-tag">AWS</div>
+            <div class="skill-tag">Vercel</div>
+            <div class="skill-tag">Netlify</div>
+            <div class="skill-tag">Railway</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">RESEARCH AREAS</div>
+      <div class="skill-tags">
+        <div class="skill-tag" style="border-color:rgba(155,89,255,0.3);color:var(--purple);background:rgba(155,89,255,0.05)">Reversible Data Hiding</div>
+        <div class="skill-tag" style="border-color:rgba(155,89,255,0.3);color:var(--purple);background:rgba(155,89,255,0.05)">Multiple Object Tracking</div>
+        <div class="skill-tag" style="border-color:rgba(155,89,255,0.3);color:var(--purple);background:rgba(155,89,255,0.05)">NLP / Low-Resource Languages</div>
+        <div class="skill-tag" style="border-color:rgba(155,89,255,0.3);color:var(--purple);background:rgba(155,89,255,0.05)">Edge AI / TinyML</div>
+        <div class="skill-tag" style="border-color:rgba(155,89,255,0.3);color:var(--purple);background:rgba(155,89,255,0.05)">Knowledge Graphs / RAG</div>
+        <div class="skill-tag" style="border-color:rgba(155,89,255,0.3);color:var(--purple);background:rgba(155,89,255,0.05)">Graph Neural Networks</div>
+      </div>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> which skills</div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+// ===== CLOCK =====
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('taskbar-clock').textContent = `${h}:${m}:${s}`;
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('taskbar-date').textContent =
+    `${String(now.getDate()).padStart(2,'0')} ${months[now.getMonth()]} ${now.getFullYear()}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ===== BOOT SEQUENCE =====
+const bootLog = document.getElementById('boot-log');
+const bootMessages = [
+  'Initializing EeshOS kernel...',
+  'Loading system modules...',
+  'Mounting filesystem...',
+  'Starting desktop environment...',
+  'Ready.'
+];
+let msgIdx = 0;
+const bootInterval = setInterval(() => {
+  if (msgIdx < bootMessages.length) {
+    bootLog.textContent = bootMessages[msgIdx++];
+  } else {
+    clearInterval(bootInterval);
+  }
+}, 230);
+
+setTimeout(() => {
+  document.getElementById('boot-screen').classList.add('fade-out');
+  setTimeout(() => document.getElementById('boot-screen').remove(), 600);
+}, 1400);
+
+// ===== PARTICLE CANVAS =====
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    size: Math.random() * 1.5 + 0.5,
+    alpha: Math.random() * 0.5 + 0.1,
+    pulse: Math.random() * Math.PI * 2
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const t = Date.now() * 0.001;
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.pulse += 0.02;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+    const a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0,255,136,${a})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===== WINDOW MANAGEMENT =====
+const windows = {};
+let zCounter = 100;
+
+function openWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  win.classList.remove('hidden');
+  win.style.display = 'flex';
+  bringToFront(id);
+  setTaskbarActive(id, true);
+}
+
+function closeWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  win.classList.add('hidden');
+  win.style.display = '';
+  setTaskbarActive(id, false);
+}
+
+function toggleWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  if (win.classList.contains('hidden') || win.style.display === 'none' || !win.style.display) {
+    openWindow(id);
+  } else {
+    closeWindow(id);
+  }
+}
+
+function minWindow(id) { closeWindow(id); }
+
+function maxWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  if (win._maximized) {
+    win.style.width  = win._prevW;
+    win.style.height = win._prevH;
+    win.style.left   = win._prevL;
+    win.style.top    = win._prevT;
+    win._maximized = false;
+  } else {
+    win._prevW = win.style.width;
+    win._prevH = win.style.height;
+    win._prevL = win.style.left;
+    win._prevT = win.style.top;
+    win.style.left = '0';
+    win.style.top  = '0';
+    win.style.width  = '100vw';
+    win.style.height = `calc(100vh - var(--taskbar-h))`;
+    win._maximized = true;
+  }
+}
+
+function bringToFront(id) {
+  zCounter++;
+  document.getElementById('win-' + id).style.zIndex = zCounter;
+}
+
+function setTaskbarActive(id, active) {
+  const btn = document.getElementById('tb-' + id);
+  if (btn) btn.classList.toggle('active', active);
+}
+
+// ===== DRAGGABLE WINDOWS =====
+document.querySelectorAll('.win-titlebar').forEach(bar => {
+  bar.addEventListener('mousedown', e => {
+    if (e.target.classList.contains('win-dot')) return;
+    const win = bar.parentElement;
+    const id = bar.dataset.win;
+    bringToFront(id);
+    const startX = e.clientX - win.offsetLeft;
+    const startY = e.clientY - win.offsetTop;
+
+    function onMove(e2) {
+      let nx = e2.clientX - startX;
+      let ny = e2.clientY - startY;
+      // clamp
+      nx = Math.max(0, Math.min(nx, window.innerWidth - win.offsetWidth));
+      ny = Math.max(0, Math.min(ny, window.innerHeight - 48 - win.offsetHeight));
+      win.style.left = nx + 'px';
+      win.style.top  = ny + 'px';
+    }
+    function onUp() {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    e.preventDefault();
+  });
+});
+
+// Click anywhere on window brings to front
+document.querySelectorAll('.window').forEach(win => {
+  win.addEventListener('mousedown', () => {
+    const id = win.id.replace('win-','');
+    bringToFront(id);
+  });
+});
+
+// Open about on start
+setTimeout(() => { openWindow('about'); }, 1600);
+
+// Resume link — open the beautiful web resume
+function openResumeLink() {
+  window.open('/resume/index.html', '_blank');
+}
+
+// Prevent right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+</script>
+
+</body>
+</html>
