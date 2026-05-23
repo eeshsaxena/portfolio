@@ -149,7 +149,10 @@
     --backdrop: blur(24px) saturate(120%);
 
     position: fixed;
-    inset: 0;
+    top: var(--space2XL);
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: color-mix(in lab, var(--background) 70%, transparent);
     transform: translate3d(0, -100%, 0);
     transition-property: background;
