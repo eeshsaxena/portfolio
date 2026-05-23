@@ -156,13 +156,11 @@
 </head>
 
 <body>
-  <!-- Route returning visitors to their chosen view -->
+  <!-- Redirect 'simple' choice users away from the 3D scene -->
   <script>
     (function() {
       var choice = localStorage.getItem('portfolioChoice');
-      if (!choice) {
-        window.location.replace('/choose.html');
-      } else if (choice === 'simple') {
+      if (choice === 'simple') {
         var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
         window.location.replace(isLocal
           ? location.protocol + '//' + location.hostname + ':7777/'
