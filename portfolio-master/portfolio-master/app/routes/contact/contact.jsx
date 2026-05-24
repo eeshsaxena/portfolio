@@ -42,6 +42,7 @@ const contactInfo = [
 
 export const Contact = () => {
   const errorRef = useRef();
+  const name = useFormInput('');
   const email = useFormInput('');
   const message = useFormInput('');
   const initDelay = tokens.base.durationS;
@@ -53,6 +54,9 @@ export const Contact = () => {
     e.preventDefault();
     const newErrors = {};
 
+    if (!name.value) {
+      newErrors.name = 'Please enter your name.';
+    }
     if (!email.value || !EMAIL_PATTERN.test(email.value)) {
       newErrors.email = 'Please enter a valid email address.';
     }
@@ -81,9 +85,10 @@ export const Contact = () => {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: '7ecdf435-8b50-4208-8004-6846b623f457',
-          from_name: 'Portfolio Contact',
-          subject: `Portfolio message from ${email.value}`,
+          from_name: name.value,
+          subject: `Portfolio message from ${name.value}`,
           email: email.value,
+          name: name.value,
           message: message.value,
           botcheck: false,
         }),
@@ -93,15 +98,15 @@ export const Contact = () => {
         setSuccess(true);
       } else {
         // Fallback: open mailto
-        const subj = encodeURIComponent(`Portfolio message from ${email.value}`);
-        const body = encodeURIComponent(`From: ${email.value}\n\n${message.value}`);
+        const subj = encodeURIComponent(`Portfolio message from ${name.value}`);
+        const body = encodeURIComponent(`From: ${name.value} <${email.value}>\n\n${message.value}`);
         window.open(`mailto:eeshsaxena@gmail.com?subject=${subj}&body=${body}`);
         setSuccess(true);
       }
     } catch {
       // Offline fallback
-      const subj = encodeURIComponent(`Portfolio message from ${email.value}`);
-      const body = encodeURIComponent(`From: ${email.value}\n\n${message.value}`);
+      const subj = encodeURIComponent(`Portfolio message from ${name.value}`);
+      const body = encodeURIComponent(`From: ${name.value} <${email.value}>\n\n${message.value}`);
       window.open(`mailto:eeshsaxena@gmail.com?subject=${subj}&body=${body}`);
       setSuccess(true);
     } finally {
@@ -182,6 +187,18 @@ export const Contact = () => {
                 required
                 className={styles.input}
                 data-status={status}
+                style={getDelay(tokens.base.durationXS, initDelay, 0.9)}
+                autoComplete="name"
+                label="Your name"
+                type="text"
+                name="name"
+                maxLength={MAX_EMAIL_LENGTH}
+                {...name}
+              />
+              <Input
+                required
+                className={styles.input}
+                data-status={status}
                 style={getDelay(tokens.base.durationXS, initDelay)}
                 autoComplete="email"
                 label="Your email"
@@ -207,7 +224,7 @@ export const Contact = () => {
                   <div className={styles.formErrorContent}>
                     <div className={styles.formErrorMessage}>
                       <Icon className={styles.formErrorIcon} icon="error" />
-                      {errors.email || errors.message}
+                      {errors.name || errors.email || errors.message}
                     </div>
                   </div>
                 </div>
