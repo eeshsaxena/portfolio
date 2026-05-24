@@ -106,7 +106,7 @@
   </style>
 
   <!-- Primary Meta Tags -->
-  <title>Eesh Saxena - Portfolio 2026</title>
+  <title>Eesh Saxena - Portfolio</title>
   <meta name="title" content="Eesh Saxena - CS Engineer & AI Researcher">
   <meta name="description"
     content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
@@ -156,15 +156,12 @@
 </head>
 
 <body>
-  <!-- Redirect 'simple' choice users away from the 3D scene -->
+  <!-- Redirect to 2D by default; only load 3D when ?scene=3d is present -->
   <script>
     (function() {
-      var choice = localStorage.getItem('portfolioChoice');
-      if (choice === 'simple') {
-        var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-        window.location.replace(isLocal
-          ? location.protocol + '//' + location.hostname + ':7777/'
-          : 'https://eeshsaxena-portfolio-simple.pages.dev');
+      var params = new URLSearchParams(window.location.search);
+      if (!params.has('scene')) {
+        window.location.replace('https://eeshsaxena-portfolio-simple.pages.dev');
       }
     })();
   </script>
