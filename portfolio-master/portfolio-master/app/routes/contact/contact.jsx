@@ -23,6 +23,11 @@ export const meta = () => {
   });
 };
 
+// No-op action — form is handled client-side via Web3Forms
+export async function action() {
+  return null;
+}
+
 const MAX_EMAIL_LENGTH = 512;
 const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
