@@ -18,30 +18,22 @@ import styles from './profile.module.css';
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
-      <DecoderText text="About me" start={visible} delay={500} />
+      <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Growing up, I had two very different dreams — studying an MBA to build businesses, and
-      diving deep into technology. Then in 7th standard, I opened a text editor for the first
-      time and wrote my first HTML and CSS page. Seeing a webpage come to life from a few
-      lines of code was enough to change everything.
+      I'm Eesh, a CS Engineering student at{' '}
+      <Link href="https://iiitmanipur.ac.in">IIIT Senapati</Link>, Manipur. I'm a Research
+      Intern at <Link href="https://iiitvadodara.ac.in">IIIT Vadodara</Link> working on
+      Reversible Data Hiding in Encrypted Images, and previously interned at{' '}
+      <Link href="https://iittp.ac.in">IIT Tirupati's SEVA Lab</Link> on multi-object tracking
+      using transformer-based approaches (MOTIP, CVPR 2025).
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Since that day I never stopped building. From simple static sites to full-stack apps,
-      from competitive programming marathons to ML research — every project has been a step
-      forward. Today I'm a CS Engineering student at{' '}
-      <Link href="https://iiitmanipur.ac.in">IIIT Senapati</Link>, a Research Intern at{' '}
-      <Link href="https://iiitvadodara.ac.in">IIIT Vadodara</Link> working on encrypted
-      image steganography, and I previously interned at{' '}
-      <Link href="https://iittp.ac.in">IIT Tirupati's SEVA Lab</Link> on transformer-based
-      multi-object tracking.
-    </Text>
-    <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Outside the lab I'm a competitive programmer — Specialist on Codeforces (1582),
-      Guardian on LeetCode (1873), 4★ on CodeChef. The MBA dream never fully left either;
-      I still think about the intersection of technology and business every day. Feel free
-      to <Link href="/contact">reach out</Link> — always open to collaborations, research,
-      or a good conversation about what we're building next.
+      Outside research, I'm a passionate competitive programmer — Specialist on Codeforces
+      (1582), Guardian on LeetCode (1873), and 4★ on CodeChef (1866). I've solved 1500+
+      problems and ranked globally in contests. Feel free to{' '}
+      <Link href="/contact">reach out</Link> — always open to research collaborations,
+      internships, or interesting conversations about AI.
     </Text>
   </Fragment>
 );
