@@ -20,7 +20,7 @@ export const Navbar = () => {
   const location = useLocation();
   const windowSize = useWindowSize();
   const headerRef = useRef();
-  const isMobile = windowSize.width <= media.mobile || windowSize.height <= 696;
+  const isMobile = windowSize.width <= media.mobile || (windowSize.height <= 696 && windowSize.width <= 1040);
   const scrollToHash = useScrollToHash();
 
   useEffect(() => {
@@ -197,7 +197,7 @@ export const Navbar = () => {
             ))}
             <NavbarIcons />
             <a
-              href="https://eeshsaxena-portfolio.pages.dev?scene=3d"
+              href="https://eeshsaxena-portfolio.pages.dev/3d.html"
               className={styles.mobileNavLink}
               style={{ opacity: 1, transform: 'none', color: 'var(--accent)', fontFamily: 'var(--fontMono)', fontSize: '13px', letterSpacing: '0.05em' }}
             >
@@ -208,7 +208,7 @@ export const Navbar = () => {
       </Transition>
       {!isMobile && (
         <a
-          href="https://eeshsaxena-portfolio.pages.dev?scene=3d"
+          href="https://eeshsaxena-portfolio.pages.dev/3d.html"
           data-navbar-item
           style={{
             display: 'inline-flex',
