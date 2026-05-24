@@ -57,14 +57,7 @@ export const Post = ({ children, title, date, banner, timecode }) => {
           <div className={styles.headerText}>
             <Transition in timeout={msToNum(tokens.base.durationM)}>
               {({ visible, nodeRef }) => (
-                <div className={styles.date} ref={nodeRef}>
-                  <Divider notchWidth="64px" notchHeight="8px" collapsed={!visible} />
-                  <Text className={styles.dateText} data-visible={visible}>
-                    {dateTime}
-                  </Text>
-                </div>
-              )}
-            </Transition>
+
             <Heading level={2} as="h1" className={styles.title} aria-label={title}>
               {title.split(' ').map((word, index) => (
                 <span className={styles.titleWordWrapper} key={`${word}-${index}`}>
