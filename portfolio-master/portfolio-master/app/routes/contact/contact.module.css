@@ -140,6 +140,11 @@
   color: var(--textBody);
   text-decoration: none;
   word-break: break-all;
+  overflow-wrap: anywhere;
+
+  @media (--mediaMobileS) {
+    font-size: var(--fontSizeBodyXS);
+  }
 
   &:is(a):hover {
     color: var(--accent);

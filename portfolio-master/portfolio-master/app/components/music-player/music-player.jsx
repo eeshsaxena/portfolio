@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './music-player.module.css';
 
-// "I Ain't Worried" - OneRepublic (Top Gun: Maverick)
+// "Stay" - The Kid LAROI & Justin Bieber
 const YOUTUBE_VIDEO_ID = 'kTJczUoc26U';
 
 export const MusicPlayer = () => {
@@ -98,7 +98,7 @@ export const MusicPlayer = () => {
         )}
       </button>
       <div className={`${styles.label} ${playing ? styles.labelVisible : ''}`}>
-        I Ain't Worried · OneRepublic
+        Stay · Justin Bieber
       </div>
     </div>
   );

@@ -88,6 +88,11 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  overflow: clip;
+
+  @media (--mediaMobile) {
+    min-height: 280px;
+  }
 }
 
 .model {
@@ -111,6 +116,13 @@
       --width: 140%;
 
       top: 10%;
+      left: 0;
+    }
+
+    @media (--mediaMobile) {
+      --width: 100%;
+
+      top: 0;
       left: 0;
     }
   }
@@ -250,6 +262,8 @@
   transition-duration: var(--durationXL);
   transition-delay: var(--durationL);
   opacity: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 
   @media (--mediaUseMotion) {
     transition-property: transform, opacity;
