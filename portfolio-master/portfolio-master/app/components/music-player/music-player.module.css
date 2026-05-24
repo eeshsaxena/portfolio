@@ -1,0 +1,129 @@
+.wrapper {
+  position: fixed;
+  bottom: var(--spaceXL);
+  right: var(--spaceXL);
+  z-index: var(--zIndex4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spaceS);
+
+  @media (max-width: 480px) {
+    bottom: var(--spaceL);
+    right: var(--spaceL);
+  }
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.button {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: color-mix(in lab, var(--accent) 15%, var(--background) 70%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in lab, var(--accent) 40%, transparent);
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 24px color-mix(in lab, var(--accent) 20%, transparent);
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.1);
+    background: color-mix(in lab, var(--accent) 25%, var(--background) 60%);
+    box-shadow: 0 4px 32px color-mix(in lab, var(--accent) 40%, transparent);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+
+  &.ringActive {
+    border-color: color-mix(in lab, var(--accent) 70%, transparent);
+    animation: rotate 3s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.bars {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+
+.bar {
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: equalizer 0.8s ease infinite alternate;
+
+  &:nth-child(1) { animation-delay: 0s; }
+  &:nth-child(2) { animation-delay: 0.15s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.45s; }
+}
+
+@keyframes equalizer {
+  0%  { height: 3px; }
+  100% { height: 10px; }
+}
+
+.label {
+  background: color-mix(in lab, var(--background) 85%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in lab, var(--accent) 20%, transparent);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-family: var(--monoFontStack);
+  color: var(--accent);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+
+  &.labelVisible {
+    opacity: 1;
+    transform: none;
+  }
+}
