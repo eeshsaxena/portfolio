@@ -25,8 +25,8 @@
     max-width: 100%;
     overflow-x: hidden;
     opacity: 1;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--rgbAccent)) transparent;
 
     &:focus {
       outline: none;
@@ -38,7 +38,22 @@
   }
 
   :global(::-webkit-scrollbar) {
-    display: none;
+    width: 4px;
+  }
+
+  :global(::-webkit-scrollbar-track) {
+    background: transparent;
+  }
+
+  :global(::-webkit-scrollbar-thumb) {
+    background: rgb(var(--rgbAccent));
+    border-radius: 4px;
+    opacity: 0.6;
+  }
+
+  :global(::-webkit-scrollbar-thumb:hover) {
+    background: rgb(var(--rgbAccent));
+    opacity: 1;
   }
 
   :global(::selection) {
