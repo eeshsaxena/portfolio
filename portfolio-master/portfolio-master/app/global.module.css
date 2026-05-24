@@ -25,6 +25,8 @@
     max-width: 100%;
     overflow-x: hidden;
     opacity: 1;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
     &:focus {
       outline: none;
@@ -33,6 +35,10 @@
 
   :global(:where(code, pre)) {
     font-family: var(--monoFontStack);
+  }
+
+  :global(::-webkit-scrollbar) {
+    display: none;
   }
 
   :global(::selection) {
