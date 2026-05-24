@@ -153,7 +153,7 @@ export const Navbar = () => {
         {config.name}
       </RouterLink>
       <NavToggle onClick={() => setMenuOpen(!menuOpen)} menuOpen={menuOpen} />
-      <ThemeToggle data-navbar-item style={{ marginRight: isMobile ? '48px' : undefined }} />
+      {isMobile && <ThemeToggle data-navbar-item style={{ marginRight: '52px' }} />}
       <nav className={styles.nav}>
         <div className={styles.navList}>
           {navLinks.map(({ label, pathname }) => (
@@ -203,7 +203,6 @@ export const Navbar = () => {
             >
               &#8599; Switch to 3D View
             </a>
-            <ThemeToggle isMobile />
           </nav>
         )}
       </Transition>
