@@ -80,7 +80,7 @@ export const Contact = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_KEY', // replace after checking email
+          access_key: '7ecdf435-8b50-4208-8004-6846b623f457',
           from_name: 'Portfolio Contact',
           subject: `Portfolio message from ${email.value}`,
           email: email.value,
