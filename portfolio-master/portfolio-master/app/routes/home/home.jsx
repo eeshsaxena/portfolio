@@ -134,12 +134,12 @@ export const Home = () => {
           alt: 'RajNLP dataset interface',
           textures: [
             {
-              srcSet: `${gamestackTexture} 375w, ${gamestackTextureLarge} 750w`,
-              placeholder: gamestackTexturePlaceholder,
+              srcSet: `/static/rajnlp-phone-1.png 375w, /static/rajnlp-phone-1.png 750w`,
+              placeholder: `/static/rajnlp-phone-1.png`,
             },
             {
-              srcSet: `${gamestackTexture2} 375w, ${gamestackTexture2Large} 750w`,
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: `/static/rajnlp-phone-2.png 375w, /static/rajnlp-phone-2.png 750w`,
+              placeholder: `/static/rajnlp-phone-2.png`,
             },
           ],
         }}
@@ -158,8 +158,8 @@ export const Home = () => {
           alt: 'Cardiac arrhythmia detection dashboard',
           textures: [
             {
-              srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
-              placeholder: sprTexturePlaceholder,
+              srcSet: `/static/cardiac-dashboard.png 1280w, /static/cardiac-dashboard.png 2560w`,
+              placeholder: `/static/cardiac-dashboard.png`,
             },
           ],
         }}
