@@ -130,16 +130,12 @@ export const Home = () => {
         buttonText="View on HuggingFace"
         buttonLink="https://github.com/eeshsaxena"
         model={{
-          type: 'phone',
-          alt: 'RajNLP dataset interface',
+          type: 'laptop',
+          alt: 'RajNLP NLP knowledge graph dashboard',
           textures: [
             {
-              srcSet: `/static/rajnlp-phone-1.png 375w, /static/rajnlp-phone-1.png 750w`,
-              placeholder: `/static/rajnlp-phone-1.png`,
-            },
-            {
-              srcSet: `/static/rajnlp-phone-2.png 375w, /static/rajnlp-phone-2.png 750w`,
-              placeholder: `/static/rajnlp-phone-2.png`,
+              srcSet: `/static/rajnlp-laptop.png 1280w, /static/rajnlp-laptop.png 2560w`,
+              placeholder: `/static/rajnlp-laptop.png`,
             },
           ],
         }}
