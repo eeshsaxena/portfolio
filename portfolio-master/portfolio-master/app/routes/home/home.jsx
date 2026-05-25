@@ -1,12 +1,3 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
 import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
 import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
@@ -16,6 +7,8 @@ import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
+import { ExperienceSection } from './experience-section';
+import { SkillsSection } from './skills-section';
 import { useEffect, useRef, useState } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
@@ -53,12 +46,12 @@ export const Home = () => {
   const intro = useRef();
   const projectOne = useRef();
   const projectTwo = useRef();
-  const projectThree = useRef();
-  const projectFour = useRef();
+  const experienceRef = useRef();
+  const skillsRef = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, projectFour, details];
+    const sections = [intro, projectOne, projectTwo, experienceRef, skillsRef, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -123,11 +116,12 @@ export const Home = () => {
       />
       <ProjectSummary
         id="project-2"
+        alternate
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
         title="RajNLP-50K Corpus"
-        description="India's first open Rajasthani-Hindi code-switched corpus — 50K sentences. Fine-tuned MuRIL outperforms GPT-4o on NER, sentiment & toxicity tasks."
+        description="India's first open Rajasthani-Hindi code-switched corpus — 50K sentences. Fine-tuned MuRIL outperforms GPT-4o on NER, sentiment &amp; toxicity tasks."
         buttonText="View on HuggingFace"
         buttonLink="https://github.com/eeshsaxena"
         model={{
@@ -141,46 +135,15 @@ export const Home = () => {
           ],
         }}
       />
-      <ProjectSummary
-        id="project-3"
-        sectionRef={projectThree}
-        visible={visibleSections.includes(projectThree.current)}
-        index={3}
-        title="Cardiac Edge AI"
-        description="5-class arrhythmia detector on Arduino Nano 33 BLE. 140× model compression via spectral knowledge distillation — ~99% F1 with ECG+PPG sensor fusion."
-        buttonText="View on GitHub"
-        buttonLink="https://github.com/eeshsaxena"
-        model={{
-          type: 'laptop',
-          alt: 'Cardiac arrhythmia detection dashboard',
-          textures: [
-            {
-              srcSet: `/static/cardiac-dashboard.png 1280w, /static/cardiac-dashboard.png 2560w`,
-              placeholder: `/static/cardiac-dashboard.png`,
-            },
-          ],
-        }}
+      <ExperienceSection
+        id="experience"
+        sectionRef={experienceRef}
+        visible={visibleSections.includes(experienceRef.current)}
       />
-      <ProjectSummary
-        id="project-4"
-        alternate
-        sectionRef={projectFour}
-        visible={visibleSections.includes(projectFour.current)}
-        index={4}
-        title="Personal Portfolio Website"
-        description="A cinematic dual-mode portfolio — choose between an immersive 3D computer-desk scene or a clean scrollable portfolio. Built with Three.js, WebGL, and vanilla JS."
-        buttonText="View website"
-        buttonLink="https://eeshsaxena.github.io"
-        model={{
-          type: 'laptop',
-          alt: 'Portfolio website choose screen',
-          textures: [
-            {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
-            },
-          ],
-        }}
+      <SkillsSection
+        id="skills"
+        sectionRef={skillsRef}
+        visible={visibleSections.includes(skillsRef.current)}
       />
       <Profile
         sectionRef={details}
