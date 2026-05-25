@@ -1,53 +1,47 @@
 import { Link } from '@remix-run/react';
 import styles from './achievements-section.module.css';
 
-// ── Update these with your real ratings ──────────────────────
+// ── Real ratings from resume ──────────────────────────────────
 const CP_PROFILES = [
   {
     platform: 'Codeforces',
     handle: 'eeshsaxena',
     rank: 'Specialist',
-    rating: 1543,
-    maxRating: 1543,
+    rating: 1582,
     color: '#5b8dd9',
-    bg: '#1a2744',
     icon: 'CF',
     url: 'https://codeforces.com/profile/eeshsaxena',
     badge: '● Specialist',
-    problems: '400+',
+    extra: 'Top 1% in India',
   },
   {
     platform: 'LeetCode',
     handle: 'eeshsaxena',
     rank: 'Guardian',
-    rating: 2247,
-    maxRating: 2247,
+    rating: 1873,
     color: '#ffa116',
-    bg: '#2a1f00',
     icon: 'LC',
     url: 'https://leetcode.com/eeshsaxena',
     badge: '◆ Guardian',
-    problems: '800+',
+    extra: 'Top 5% World',
   },
   {
     platform: 'CodeChef',
     handle: 'eeshsaxena',
     rank: '4★ Coder',
-    rating: 1823,
-    maxRating: 1823,
-    color: '#7d5334',
-    bg: '#1f1208',
+    rating: 1866,
+    color: '#c97b3a',
     icon: 'CC',
     url: 'https://www.codechef.com/users/eeshsaxena',
-    badge: '★★★★ Expert',
-    problems: '300+',
+    badge: '★★★★ 4 Star',
+    extra: 'Top 1% in India',
   },
 ];
 
 const EXTRAS = [
-  { label: 'Contests participated', value: '120+', icon: '🏁' },
   { label: 'Problems solved (total)', value: '1500+', icon: '✅' },
-  { label: 'Global rank (LeetCode)', value: 'Top 0.5%', icon: '🌐' },
+  { label: 'Contests participated', value: '50+', icon: '🏁' },
+  { label: 'Best — CodeChef Starters 180', value: 'Global #1', icon: '🥇' },
 ];
 // ─────────────────────────────────────────────────────────────
 
@@ -71,7 +65,7 @@ export const AchievementsSection = ({ id, sectionRef, visible }) => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.card}
-              style={{ '--delay': `${i * 100}ms`, '--card-color': p.color, '--card-bg': p.bg }}
+              style={{ '--delay': `${i * 100}ms`, '--card-color': p.color }}
             >
               {/* Glow bar */}
               <div className={styles.cardGlow} />
@@ -96,7 +90,7 @@ export const AchievementsSection = ({ id, sectionRef, visible }) => {
               {/* Handle + stats */}
               <div className={styles.cardBottom}>
                 <span className={styles.handle}>@{p.handle}</span>
-                <span className={styles.problems}>{p.problems} solved</span>
+                <span className={styles.problems}>{p.extra}</span>
               </div>
 
               {/* Arrow */}

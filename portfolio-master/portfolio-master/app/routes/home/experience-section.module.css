@@ -120,6 +120,14 @@
   font-size: 11px;
 }
 
+.supervisor {
+  font-size: 11px;
+  font-family: var(--monoFontStack);
+  color: var(--accent);
+  margin: 2px 0 0;
+  opacity: 0.8;
+}
+
 .badge {
   flex-shrink: 0;
   font-size: 11px;

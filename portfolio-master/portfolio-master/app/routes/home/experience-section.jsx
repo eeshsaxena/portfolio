@@ -6,20 +6,22 @@ const EXPERIENCES = [
   {
     role: 'Research Intern',
     org: 'IIIT Vadodara',
-    period: 'Jan 2025 – Present',
-    type: 'AI / NLP',
+    supervisor: 'Under Dr. Abhisek Paul',
+    period: '2026 (6 months)',
+    type: 'Image Security / RDH',
     description:
-      'Built the RajNLP-50K code-switched Rajasthani-Hindi corpus. Fine-tuned MuRIL transformer — outperforms GPT-4o on NER, sentiment and toxicity tasks for low-resource Indic languages.',
-    tags: ['NLP', 'PyTorch', 'HuggingFace', 'Python', 'Transformers'],
+      'Analysed Zhang (IEEE SPL 2011) on Reversible Data Hiding in Encrypted Images. Studied 30+ related works, implemented the encryption–embedding–extraction pipeline in Python, and achieved 100% reconstruction fidelity with a 0.5 bpp embedding rate.',
+    tags: ['Python', 'Image Encryption', 'RDH', 'PSNR', 'IEEE'],
   },
   {
-    role: 'Research Intern',
-    org: 'IIT Tirupati',
-    period: 'Jul 2024 – Dec 2024',
-    type: 'Edge AI / ML',
+    role: 'Winter Research Intern',
+    org: 'IIT Tirupati — SEVA Lab',
+    supervisor: 'Under Dr. Chalavadi Vishnu',
+    period: '2025 (Winter)',
+    type: 'Computer Vision / MOT',
     description:
-      'Designed a 5-class arrhythmia detector on Arduino Nano 33 BLE with ECG+PPG sensor fusion. Applied spectral knowledge distillation for 140× model compression achieving ~99% F1.',
-    tags: ['TFLite', 'Edge AI', 'ECG', 'OpenCV', 'Python'],
+      'Reproduced MOTIP (CVPR 2025) for Multiple Object Tracking. Evaluated transformer-based identity prediction, achieving 68.2 MOTA and 64.5 HOTA on MOT17 datasets by optimizing query initialization and spatio-temporal embeddings for dense scenes.',
+    tags: ['CVPR 2025', 'MOT', 'Transformers', 'MOTA', 'IDF1', 'HOTA'],
   },
 ];
 
@@ -48,6 +50,9 @@ export const ExperienceSection = ({ id, sectionRef, visible }) => {
                       {exp.org}
                       <span className={styles.period}> · {exp.period}</span>
                     </p>
+                    {exp.supervisor && (
+                      <p className={styles.supervisor}>{exp.supervisor}</p>
+                    )}
                   </div>
                   <span className={styles.badge}>{exp.type}</span>
                 </div>
