@@ -40,6 +40,7 @@
 
   @media (--singleColumnWidth), (--mediaMobileLS) {
     padding-right: 0;
+    padding-left: var(--spaceL);
     grid-template-columns: 100%;
   }
 
@@ -47,6 +48,8 @@
     gap: var(--space2XL);
     padding-bottom: var(--spaceXL);
     padding-top: var(--mobileNavOffset);
+    padding-left: var(--spaceM);
+    padding-right: var(--spaceM);
   }
 }
 
