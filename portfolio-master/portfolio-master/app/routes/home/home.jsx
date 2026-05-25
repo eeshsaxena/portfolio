@@ -93,6 +93,80 @@ export const Home = () => {
         sectionRef={intro}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
+
+      {/* ── Top Works intro ── */}
+      <div style={{
+        width: '100%',
+        maxWidth: 'var(--maxWidthL)',
+        margin: '0 auto',
+        padding: 'var(--space3XL) var(--spaceXL) var(--spaceL)',
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+        gap: 'var(--spaceL)',
+        flexWrap: 'wrap',
+        borderBottom: '1px solid color-mix(in lab, var(--text) 10%, transparent)',
+        marginBottom: 0,
+      }}>
+        <div>
+          <span style={{
+            fontFamily: 'var(--monoFontStack)',
+            fontSize: '12px',
+            color: 'var(--accent)',
+            letterSpacing: '0.08em',
+            display: 'block',
+            marginBottom: '10px',
+          }}>// Top Works</span>
+          <h2 style={{
+            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+            fontWeight: 'var(--fontWeightMedium)',
+            color: 'var(--textTitle)',
+            margin: 0,
+            lineHeight: 1.15,
+          }}>Selected<br />Projects</h2>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
+          <span style={{
+            fontFamily: 'var(--monoFontStack)',
+            fontSize: '11px',
+            color: 'var(--textLight)',
+            background: 'color-mix(in lab, var(--text) 6%, transparent)',
+            border: '1px solid color-mix(in lab, var(--text) 12%, transparent)',
+            borderRadius: '20px',
+            padding: '4px 14px',
+          }}>02 Projects featured</span>
+          <p style={{
+            fontFamily: 'var(--fontStack)',
+            fontSize: 'var(--fontSizeBodyS)',
+            color: 'var(--textBody)',
+            margin: 0,
+            maxWidth: '320px',
+            textAlign: 'right',
+            lineHeight: 1.6,
+          }}>
+            AI research at the intersection of NLP, Edge Computing, and Graph-based reasoning.
+          </p>
+          <a
+            href="https://github.com/eeshsaxena"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: 'var(--monoFontStack)',
+              fontSize: '12px',
+              color: 'var(--accent)',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'opacity 0.2s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          >
+            View all on GitHub →
+          </a>
+        </div>
+      </div>
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
