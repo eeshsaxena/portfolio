@@ -5,6 +5,7 @@ import { useInViewport, useWindowSize } from '~/hooks';
 import { startTransition, useEffect, useRef } from 'react';
 import {
   AmbientLight,
+  Color,
   DirectionalLight,
   LinearSRGBColorSpace,
   Mesh,
@@ -100,11 +101,11 @@ export const DisplacementSphere = props => {
   }, []);
 
   useEffect(() => {
-    const dirLight = new DirectionalLight(0xffffff, theme === 'light' ? 1.5 : 2.0);
-    const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 0.5 : 0.4);
+    const dirLight = new DirectionalLight(0xffffff, theme === 'light' ? 1.2 : 2.0);
+    const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 0.2 : 0.4);
     const accentLight = new DirectionalLight(
-      theme === 'light' ? 0x00c8ff : 0x0070ff,
-      theme === 'light' ? 2.5 : 1.0
+      theme === 'light' ? 0x0066cc : 0x0070ff,
+      theme === 'light' ? 3.5 : 1.0
     );
 
     dirLight.position.z = 200;
@@ -112,8 +113,15 @@ export const DisplacementSphere = props => {
     dirLight.position.y = 100;
 
     accentLight.position.z = 100;
-    accentLight.position.x = -100;
-    accentLight.position.y = -50;
+    accentLight.position.x = -80;
+    accentLight.position.y = -80;
+
+    // Force dark blue emissive in light mode so sphere is always visible
+    if (material.current) {
+      material.current.emissive = new Color(theme === 'light' ? 0x001a44 : 0x000000);
+      material.current.emissiveIntensity = theme === 'light' ? 0.9 : 0;
+      material.current.needsUpdate = true;
+    }
 
     lights.current = [dirLight, ambientLight, accentLight];
     lights.current.forEach(light => scene.current.add(light));

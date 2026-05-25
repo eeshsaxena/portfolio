@@ -35,7 +35,6 @@ export const links = () => {
 
 export const meta = () => {
   return baseMeta({
-    title: 'Engineer + AI Researcher',
     description: `Portfolio of ${config.name} — CS Engineering student at IIIT Senapati, Research Intern at IIIT Vadodara & IIT Tirupati. Specialist on Codeforces, Guardian on LeetCode. Building intelligent systems.`,
   });
 };
