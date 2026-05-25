@@ -115,6 +115,12 @@
     top: 6%;
     left: 14%;
 
+    /* In alternate layout the model is on the LEFT — mirror shift so it moves
+       away from the text column (left) instead of into it (right) */
+    .summary[data-alternate='true'] & {
+      left: -14%;
+    }
+
     @media (--mediaDesktop) {
       --width: 180%;
     }
@@ -124,6 +130,10 @@
 
       top: 10%;
       left: 0;
+
+      .summary[data-alternate='true'] & {
+        left: 0;
+      }
     }
 
     @media (--mediaMobile) {
@@ -131,6 +141,10 @@
 
       top: 0;
       left: 0;
+
+      .summary[data-alternate='true'] & {
+        left: 0;
+      }
     }
 
     @media (--mediaMobileS) {
