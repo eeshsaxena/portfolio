@@ -17,7 +17,6 @@
     bottom: auto;
     z-index: var(--zIndex4);
     isolation: isolate;
-    overflow: hidden;
     background: color-mix(in lab, var(--background) 85%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
