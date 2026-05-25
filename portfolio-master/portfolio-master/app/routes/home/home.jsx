@@ -9,6 +9,7 @@ import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
 import { ExperienceSection } from './experience-section';
 import { SkillsSection } from './skills-section';
+import { AchievementsSection } from './achievements-section';
 import { useEffect, useRef, useState } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
@@ -47,10 +48,11 @@ export const Home = () => {
   const projectTwo = useRef();
   const experienceRef = useRef();
   const skillsRef = useRef();
+  const achievementsRef = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, experienceRef, skillsRef, details];
+    const sections = [intro, projectOne, projectTwo, experienceRef, skillsRef, achievementsRef, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -217,6 +219,11 @@ export const Home = () => {
         id="skills"
         sectionRef={skillsRef}
         visible={visibleSections.includes(skillsRef.current)}
+      />
+      <AchievementsSection
+        id="achievements"
+        sectionRef={achievementsRef}
+        visible={visibleSections.includes(achievementsRef.current)}
       />
       <Profile
         sectionRef={details}
