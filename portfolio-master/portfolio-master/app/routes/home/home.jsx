@@ -96,6 +96,12 @@ export const Home = () => {
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
 
+      <Profile
+        sectionRef={details}
+        visible={visibleSections.includes(details.current)}
+        id="details"
+      />
+
       {/* ── Top Works intro ── */}
       <div style={{
         width: '100%',
@@ -224,11 +230,6 @@ export const Home = () => {
         id="achievements"
         sectionRef={achievementsRef}
         visible={visibleSections.includes(achievementsRef.current)}
-      />
-      <Profile
-        sectionRef={details}
-        visible={visibleSections.includes(details.current)}
-        id="details"
       />
       <Footer />
     </div>
