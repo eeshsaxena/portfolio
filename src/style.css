@@ -28,18 +28,24 @@ body {
     width: 100%;
     top: 64px;
     left: 64px;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .icon-control-container {
     height: 26.5px;
     width: 26.5px;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 @media only screen and (max-width: 768px) {
     .interface-wrapper {
-        width: 100%;
-        top: 24px;
-        left: 24px;
+        width: calc(100% - 32px);
+        top: 20px;
+        left: 16px;
     }
 
     .icon-control-container {

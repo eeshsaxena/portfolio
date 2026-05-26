@@ -183,7 +183,6 @@ export const Navbar = () => {
                 to={pathname}
                 key={label}
                 className={styles.mobileNavLink}
-                data-visible={visible}
                 aria-current={getCurrent(pathname)}
                 onClick={handleMobileNavClick}
                 style={cssProps({

@@ -32,8 +32,10 @@ const InterfaceUI: React.FC<InterfaceUIProps> = ({}) => {
     useEffect(() => {
         if (!loading && initLoad) {
             document.addEventListener('mousedown', initMouseDownHandler);
+            document.addEventListener('touchstart', initMouseDownHandler);
             return () => {
                 document.removeEventListener('mousedown', initMouseDownHandler);
+                document.removeEventListener('touchstart', initMouseDownHandler);
             };
         }
     }, [loading, initLoad]);

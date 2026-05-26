@@ -153,12 +153,15 @@ const styles: StyleSheetCSS = {
         display: 'flex',
         marginBottom: 4,
         boxSizing: 'border-box',
+        maxWidth: '100%',
+        overflow: 'hidden',
     },
     wrapper: {
         position: 'absolute',
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
+        maxWidth: '100%',
+        width: 'auto',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
     },
@@ -172,6 +175,8 @@ const styles: StyleSheetCSS = {
     lastRow: {
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 4,
     },
     lastRowChild: {
         marginRight: 4,

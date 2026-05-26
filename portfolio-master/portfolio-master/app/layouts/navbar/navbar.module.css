@@ -240,5 +240,11 @@
       opacity: 1;
       transform: none;
     }
+
+    /* Shown when parent mobile nav is visible */
+    .mobileNav[data-visible='true'] & {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

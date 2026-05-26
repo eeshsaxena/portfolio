@@ -32,9 +32,9 @@ const HelpPrompt: React.FC<HelpPromptProps> = () => {
         setTimeout(() => {
             typeHelpText(0, '');
         }, 500);
-        document.addEventListener('mousedown', () => {
-            setVisible(false);
-        });
+        const hideHandler = () => setVisible(false);
+        document.addEventListener('mousedown', hideHandler);
+        document.addEventListener('touchstart', hideHandler);
         UIEventBus.on('enterMonitor', () => {
             setVisible(false);
         });
@@ -80,7 +80,7 @@ const vars = {
 const styles: StyleSheetCSS = {
     container: {
         position: 'absolute',
-        bottom: 64,
+        bottom: 'max(64px, 10vh)',
         background: 'black',
         padding: 4,
         paddingLeft: 16,
@@ -88,6 +88,8 @@ const styles: StyleSheetCSS = {
         textAlign: 'center',
         display: 'flex',
         alignItems: 'flex-end',
+        maxWidth: 'calc(100% - 32px)',
+        boxSizing: 'border-box',
     },
     blinkingContainer: {
         // width: 100,

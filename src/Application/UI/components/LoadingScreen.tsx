@@ -339,7 +339,7 @@ const styles: StyleSheetCSS = {
         height: '100%',
         display: 'flex',
         boxSizing: 'border-box',
-        padding: 48,
+        padding: 'clamp(16px, 4vw, 48px)',
     },
     startPopup: {
         backgroundColor: '#000',
@@ -348,11 +348,13 @@ const styles: StyleSheetCSS = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        maxWidth: 500,
+        maxWidth: 'min(500px, 90vw)',
+        width: '90vw',
+        boxSizing: 'border-box',
         // alignItems: 'center',
     },
     headerInfo: {
-        marginLeft: 64,
+        marginLeft: 'clamp(16px, 5vw, 64px)',
     },
     red: {
         color: '#00ff00',
