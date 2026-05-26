@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useHydrated } from '~/hooks/useHydrated';
 import styles from './music-player.module.css';
 
 const PLAYLIST = [
@@ -24,7 +25,14 @@ function shuffle(arr) {
 }
 
 export const MusicPlayer = () => {
-  const [playlist] = useState(() => shuffle(PLAYLIST));
+  // Render the canonical (un-shuffled) order on the server and during
+  // the initial client render so the markup matches; once hydrated,
+  // shuffle on the client only.
+  const hydrated = useHydrated();
+  const [playlist, setPlaylist] = useState(PLAYLIST);
+  useEffect(() => {
+    if (hydrated) setPlaylist(shuffle(PLAYLIST));
+  }, [hydrated]);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [ready, setReady] = useState(false);
