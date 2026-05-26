@@ -11,6 +11,12 @@
   z-index: 1;
   background: var(--background);
 
+  /* In landscape mobile the viewport is short — 100vh leaves a big
+     gap below short content. Let the section size to its content. */
+  @media (max-width: 820px) and (max-height: 480px) {
+    min-height: auto;
+  }
+
   @media (--mediaTablet) {
     padding-top: 50px;
     padding-right: var(--spaceXL);
