@@ -9,6 +9,7 @@
   justify-content: center;
   position: relative;
   z-index: 1;
+  background: var(--background);
 
   @media (--mediaTablet) {
     padding-top: 50px;
