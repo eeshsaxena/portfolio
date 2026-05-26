@@ -1,3 +1,92 @@
 .home {
   overflow-x: hidden;
 }
+
+/* ─── "Top Works" intro header ─────────────────────────────── */
+
+.topWorks {
+  width: 100%;
+  max-width: var(--maxWidthL);
+  margin: 0 auto;
+  padding: var(--space3XL) var(--spaceXL) var(--spaceL);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spaceL);
+  flex-wrap: wrap;
+  border-bottom: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+
+  @media (--mediaMobile) {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: var(--space2XL) var(--spaceL) var(--spaceM);
+  }
+}
+
+.topWorksLabel {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.topWorksTitle {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: var(--fontWeightMedium);
+  color: var(--textTitle);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.topWorksMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+
+  @media (--mediaMobile) {
+    align-items: flex-start;
+  }
+}
+
+.topWorksBadge {
+  font-family: var(--monoFontStack);
+  font-size: 11px;
+  color: var(--textLight);
+  background: color-mix(in lab, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in lab, var(--text) 12%, transparent);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+.topWorksTagline {
+  font-family: var(--fontStack);
+  font-size: var(--fontSizeBodyS);
+  color: var(--textBody);
+  margin: 0;
+  max-width: 320px;
+  text-align: right;
+  line-height: 1.6;
+
+  @media (--mediaMobile) {
+    text-align: left;
+    max-width: none;
+  }
+}
+
+.topWorksLink {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
