@@ -6,10 +6,11 @@
   z-index: calc(var(--zIndex4) + 10);
   font-family: var(--fontStack);
 
+  /* Anchor to the right on mobile (was full-width before — pill
+     drifted to the left edge and overlapped section content). */
   @media (max-width: 480px) {
-    bottom: var(--spaceL);
+    bottom: var(--spaceM);
     right: var(--spaceM);
-    left: var(--spaceM);
   }
 }
 
@@ -109,7 +110,9 @@
 
 /* ── Full card ──────────────────────────────────────── */
 .card {
-  width: 280px;
+  /* Stay 280px on desktop; on narrow screens shrink to fit the
+     viewport (minus the wrapper's right margin and a small gutter). */
+  width: min(280px, calc(100vw - 2 * var(--spaceM)));
   background: color-mix(in lab, var(--background) 90%, transparent);
   backdrop-filter: blur(24px) saturate(140%);
   -webkit-backdrop-filter: blur(24px) saturate(140%);
@@ -120,10 +123,6 @@
     0 8px 40px color-mix(in lab, var(--accent) 20%, transparent),
     0 2px 8px rgba(0,0,0,0.3);
   animation: slideUp 0.3s var(--bezierFastoutSlowin);
-
-  @media (max-width: 480px) {
-    width: 100%;
-  }
 }
 
 @keyframes slideUp {

@@ -68,11 +68,12 @@
   padding: 4px 12px;
   text-align: center;
   align-self: flex-start;
+  justify-self: flex-start;
   white-space: nowrap;
   flex-shrink: 0;
+  width: fit-content;
 
   @media (--mediaMobile) {
-    display: inline-block;
     text-align: left;
   }
 }
