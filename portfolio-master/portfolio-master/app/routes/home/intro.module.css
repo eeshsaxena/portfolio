@@ -129,7 +129,7 @@
   flex-shrink: 0;
   align-items: center;
   line-height: 1;
-  animation-duration: 2.2s;
+  animation-duration: 1.2s;
   animation-delay: var(--delay);
   animation-fill-mode: forwards;
   animation-timing-function: var(--bezierFastoutSlowin);
@@ -140,7 +140,7 @@
   &::after {
     content: '';
     background: var(--accent);
-    animation-duration: 2.2s;
+    animation-duration: 1.2s;
     animation-delay: var(--delay);
     animation-fill-mode: forwards;
     animation-timing-function: var(--bezierFastoutSlowin);
