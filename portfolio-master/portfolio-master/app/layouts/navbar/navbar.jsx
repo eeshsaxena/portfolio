@@ -196,7 +196,7 @@ export const Navbar = () => {
             ))}
             <NavbarIcons />
             <a
-              href="https://eeshsaxena-portfolio.pages.dev/3d.html?scene=1"
+              href="/3d"
               className={styles.mobileNavLink}
               style={{ opacity: 1, transform: 'none', color: 'var(--accent)', fontFamily: 'var(--fontMono)', fontSize: '13px', letterSpacing: '0.05em' }}
             >
@@ -207,7 +207,7 @@ export const Navbar = () => {
       </Transition>
       {!isMobile && (
         <a
-          href="https://eeshsaxena-portfolio.pages.dev/3d.html?scene=1"
+          href="/3d"
           data-navbar-item
           style={{
             display: 'inline-flex',
