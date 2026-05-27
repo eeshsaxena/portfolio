@@ -17,10 +17,12 @@ import {
 import { baseMeta } from '~/utils/meta';
 import styles from './uses.module.css';
 
-export const meta = () => {
+export const meta = ({ matches }) => {
+  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
   return baseMeta({
     title: 'Uses',
     description: 'A list of hardware and software I use to do my thing',
+    canonicalUrl,
   });
 };
 
