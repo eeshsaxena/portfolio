@@ -80,8 +80,9 @@ const roles = [
   'Motion Design',
 ];
 
-export const meta = () => {
-  return baseMeta({ title, description, prefix: 'Projects' });
+export const meta = ({ matches }) => {
+  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
+  return baseMeta({ title, description, prefix: 'Projects', canonicalUrl });
 };
 
 export const SmartSparrow = () => {

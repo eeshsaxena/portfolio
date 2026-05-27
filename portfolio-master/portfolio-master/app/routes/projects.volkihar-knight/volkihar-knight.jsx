@@ -52,8 +52,9 @@ const description =
   'A lore-friendly armor mod for The Elder Scrolls V: Skyrim. Released on PC and Xbox One with over one million downloads across both platforms.';
 const roles = ['3D Modelling', 'Texturing', 'Graphic Design'];
 
-export const meta = () => {
-  return baseMeta({ title, description, prefix: 'Projects' });
+export const meta = ({ matches }) => {
+  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
+  return baseMeta({ title, description, prefix: 'Projects', canonicalUrl });
 };
 
 export function VolkiharKnight() {

@@ -15,11 +15,13 @@ import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import styles from './contact.module.css';
 
-export const meta = () => {
+export const meta = ({ matches }) => {
+  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
   return baseMeta({
     title: 'Contact',
     description:
       "Send me a message if you're interested in discussing a project or if you just want to say hi",
+    canonicalUrl,
   });
 };
 

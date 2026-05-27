@@ -3,7 +3,7 @@ import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.
 import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
 import { Footer } from '~/components/footer';
 import { MusicPlayer } from '~/components/music-player/music-player';
-import { baseMeta } from '~/utils/meta';
+import { baseMeta, profilePageJsonLd } from '~/utils/meta';
 import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
@@ -34,9 +34,12 @@ export const links = () => {
   ];
 };
 
-export const meta = () => {
+export const meta = ({ matches }) => {
+  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
   return baseMeta({
     description: `Portfolio of ${config.name} — CS Engineering student at IIIT Senapati, Research Intern at IIIT Vadodara & IIT Tirupati. Specialist on Codeforces, Guardian on LeetCode. Building intelligent systems.`,
+    canonicalUrl,
+    jsonLd: profilePageJsonLd,
   });
 };
 
