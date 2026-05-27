@@ -120,7 +120,7 @@ const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 400;
     src: url(${GothamBook}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: normal;
   }
 
@@ -128,7 +128,7 @@ const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 400;
     src: url(${GothamBookItalic}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: italic;
   }
 
@@ -136,7 +136,7 @@ const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 500;
     src: url(${GothamMedium}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: normal;
   }
 
@@ -144,7 +144,7 @@ const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 500;
     src: url(${GothamMediumItalic}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: italic;
   }
 
@@ -152,7 +152,7 @@ const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 700;
     src: url(${GothamBold}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: normal;
   }
 
@@ -160,7 +160,7 @@ const fontStyles = squish(`
     font-family: Gotham;
     font-weight: 700;
     src: url(${GothamBoldItalic}) format('woff2');
-    font-display: block;
+    font-display: swap;
     font-style: italic;
   }
 
