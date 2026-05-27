@@ -10,11 +10,13 @@ export async function loader() {
   return json({ posts, featured });
 }
 
-export function meta() {
+export function meta({ matches }) {
+  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
   return baseMeta({
     title: 'Articles',
     description:
       'A collection of technical design and development articles. May contain incoherent ramblings.',
+    canonicalUrl,
   });
 }
 
