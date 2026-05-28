@@ -1,29 +1,30 @@
-# henryheffernan.com
+# Eesh Saxena — Portfolio
 
-This is one of two repositories created for my portfolio website <a href="https://henryheffernan.com/"><samp>henryheffernan.com</samp></a>. If you are looking for the 2D OS repository you can find it <a href="https://github.com/henryjeff/portfolio-inner-site"><samp>here</samp></a>! Thanks for taking the time to check this out. If you have any questions of comments, feel free to shoot me an email at <samp><a href="mailto:henryheffernan@gmail.com">henryheffernan@gmail.com</a></samp> or you can DM me on twitter <a href="https://twitter.com/henryheffernan"><samp>@henryheffernan</samp></a>.
+Source for [eeshsaxena.com](https://eeshsaxena.com), a dual-mode personal portfolio:
 
-<br>
+- **2D site** (`/`) — a fast Remix + Cloudflare Pages portfolio.
+- **3D experience** (`/3d`) — an interactive Three.js scene.
+- **EeshOS** (`/os`) — a small in-browser OS shown on the 3D monitor.
 
-To setup a dev environment:
-
-```bash
-# Clone the repository
-
-# Install dependencies 
-npm i
-
-# Run the local dev server
-npm run dev
-```
-
-To serve a production build:
+## Develop
 
 ```bash
-# Install dependencies if not already done - 'npi i'
-
-# Build for production
-npm run build
-
-# Serve the build using express
-npm start
+npm install          # install root (3D) dependencies
+npm run dev          # 3D scene (webpack dev server)
+npm run dev:simple   # 2D Remix site
+npm run dev:all      # run both together
 ```
+
+## Build & deploy
+
+```bash
+npm run build:unified   # build the 3D scene and assemble it into the 2D project
+npm run deploy          # build everything and deploy to Cloudflare Pages
+```
+
+The whole site ships as a single Cloudflare Pages project on eeshsaxena.com.
+
+## Credits
+
+The 3D scene is built on an open-source Three.js portfolio base (MIT licensed —
+see `LICENSE.md`), customized and extended throughout.
