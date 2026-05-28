@@ -79,6 +79,30 @@ export async function loader() {
       tags: ['JavaScript', 'GSAP', 'HTML', 'CSS'],
       github: `${githubUrl}/leclerc-replica`,
     },
+    {
+      index: 10,
+      title: 'Weather Dashboard',
+      description:
+        'A clean weather app that pulls live forecasts from a public API, with city search and saved locations.',
+      tags: ['React', 'JavaScript', 'REST API', 'CSS'],
+      github: githubUrl,
+    },
+    {
+      index: 11,
+      title: 'Library Management System',
+      description:
+        'A CRUD system for managing books, members, and loans, with search, due-date tracking, and an admin dashboard.',
+      tags: ['MySQL', 'Express', 'Node.js', 'EJS'],
+      github: githubUrl,
+    },
+    {
+      index: 12,
+      title: 'Image Caption Generator',
+      description:
+        'A CNN encoder with an LSTM decoder that writes natural-language captions for images, trained on the Flickr8k dataset.',
+      tags: ['Python', 'PyTorch', 'CNN', 'LSTM'],
+      github: githubUrl,
+    },
   ];
 
   return json({ projects, githubUrl });
