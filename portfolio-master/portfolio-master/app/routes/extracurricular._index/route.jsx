@@ -93,7 +93,10 @@ export default function Extracurricular() {
               type="password"
               name="password"
               placeholder="Password"
-              autoComplete="current-password"
+              autoComplete="off"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
               autoFocus
               required
             />
