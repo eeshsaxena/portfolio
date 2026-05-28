@@ -1,4 +1,4 @@
-/* ── Floating wrapper ──────────────────────────────── */
+/* Floating mute toggle for looping background music */
 .player {
   position: fixed;
   bottom: var(--spaceXL);
@@ -6,15 +6,13 @@
   z-index: calc(var(--zIndex4) + 10);
   font-family: var(--fontStack);
 
-  /* Anchor to the right on mobile (was full-width before - pill
-     drifted to the left edge and overlapped section content). */
   @media (max-width: 480px) {
     bottom: var(--spaceM);
     right: var(--spaceM);
   }
 }
 
-/* ── Hidden YouTube iframe ─────────────────────────── */
+/* Hidden YouTube iframe (audio source only) */
 .ytWrap {
   position: absolute;
   width: 1px;
@@ -26,7 +24,7 @@
   right: 0;
 }
 
-/* ── Mini pill (collapsed) ─────────────────────────── */
+/* The single control: tap to mute / unmute */
 .pill {
   display: flex;
   align-items: center;
@@ -36,25 +34,22 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid color-mix(in lab, var(--accent) 30%, transparent);
   border-radius: 50px;
-  padding: 8px 16px 8px 12px;
+  padding: 8px 14px;
   cursor: pointer;
   color: var(--textBody);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   box-shadow: 0 4px 24px color-mix(in lab, var(--accent) 15%, transparent);
   white-space: nowrap;
-  max-width: 260px;
+  max-width: 240px;
 
   &:hover {
     transform: translateY(-2px);
     border-color: color-mix(in lab, var(--accent) 60%, transparent);
     box-shadow: 0 8px 32px color-mix(in lab, var(--accent) 25%, transparent);
   }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-  }
 }
 
+/* Equalizer bars (animate only while sound is on) */
 .pillBars {
   display: flex;
   align-items: flex-end;
@@ -69,18 +64,14 @@
     background: var(--accent);
     border-radius: 2px;
     transition: height 0.2s ease;
-
-    &:nth-child(1) { animation-delay: 0s; }
-    &:nth-child(2) { animation-delay: 0.15s; }
-    &:nth-child(3) { animation-delay: 0.3s; }
   }
 
   &.active span {
     animation: eq 0.7s ease infinite alternate;
 
-    &:nth-child(1) { height: 8px; }
-    &:nth-child(2) { height: 14px; }
-    &:nth-child(3) { height: 6px; }
+    &:nth-child(1) { height: 8px; animation-delay: 0s; }
+    &:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+    &:nth-child(3) { height: 6px; animation-delay: 0.3s; }
   }
 }
 
@@ -98,241 +89,7 @@
   max-width: 150px;
 }
 
-.pillGenre {
-  font-size: 10px;
-  font-family: var(--monoFontStack);
-  color: var(--accent);
-  background: color-mix(in lab, var(--accent) 12%, transparent);
-  border-radius: 10px;
-  padding: 2px 7px;
+.icon {
   flex-shrink: 0;
-}
-
-/* ── Full card ──────────────────────────────────────── */
-.card {
-  /* Stay 280px on desktop; on narrow screens shrink to fit the
-     viewport (minus the wrapper's right margin and a small gutter). */
-  width: min(280px, calc(100vw - 2 * var(--spaceM)));
-  background: color-mix(in lab, var(--background) 90%, transparent);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  border: 1px solid color-mix(in lab, var(--accent) 25%, transparent);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow:
-    0 8px 40px color-mix(in lab, var(--accent) 20%, transparent),
-    0 2px 8px rgba(0,0,0,0.3);
-  animation: slideUp 0.3s var(--bezierFastoutSlowin);
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px) scale(0.96); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* ── Card header ─────────────────────────────────────── */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 14px 0;
-}
-
-.genreTag {
-  font-size: 10px;
-  font-family: var(--monoFontStack);
   color: var(--accent);
-  background: color-mix(in lab, var(--accent) 12%, transparent);
-  border-radius: 10px;
-  padding: 3px 10px;
-  letter-spacing: 0.06em;
-}
-
-.closeBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--textLight);
-  padding: 4px;
-  border-radius: 50%;
-  display: flex;
-  transition: color 0.2s ease, background 0.2s ease;
-
-  svg { width: 18px; height: 18px; }
-
-  &:hover {
-    color: var(--accent);
-    background: color-mix(in lab, var(--accent) 10%, transparent);
-  }
-}
-
-/* ── Album art ─────────────────────────────────────── */
-.artWrap {
-  position: relative;
-  margin: 12px 14px;
-  border-radius: 12px;
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-}
-
-.art {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-
-  .artWrap:hover & { transform: scale(1.04); }
-}
-
-.artOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, color-mix(in lab, var(--background) 60%, transparent), transparent 60%);
-  transition: opacity 0.3s ease;
-
-  &.artPlaying::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 2px solid color-mix(in lab, var(--accent) 50%, transparent);
-    border-radius: 12px;
-    animation: pulse 2s ease infinite;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50%       { opacity: 1; }
-}
-
-/* ── Song info ─────────────────────────────────────── */
-.info {
-  padding: 0 14px 6px;
-}
-
-.title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--textTitle);
-  margin: 0 0 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.artist {
-  font-size: 12px;
-  color: var(--textLight);
-  margin: 0;
-}
-
-/* ── Progress ──────────────────────────────────────── */
-.progressWrap {
-  padding: 6px 14px 2px;
-  cursor: pointer;
-
-  &:hover .progressFill::after {
-    opacity: 1;
-  }
-}
-
-.progressBg {
-  height: 4px;
-  background: color-mix(in lab, var(--text) 12%, transparent);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progressFill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 4px;
-  transition: width 0.3s linear;
-  position: relative;
-}
-
-.times {
-  display: flex;
-  justify-content: space-between;
-  padding: 2px 14px 0;
-  font-size: 10px;
-  font-family: var(--monoFontStack);
-  color: var(--textLight);
-}
-
-/* ── Controls ──────────────────────────────────────── */
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px 14px;
-}
-
-.ctrl {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--textLight);
-  display: flex;
-  align-items: center;
-  padding: 6px;
-  border-radius: 50%;
-  transition: color 0.15s ease, background 0.15s ease, transform 0.15s ease;
-
-  &:hover {
-    color: var(--accent);
-    background: color-mix(in lab, var(--accent) 10%, transparent);
-    transform: scale(1.1);
-  }
-
-  &:active { transform: scale(0.92); }
-}
-
-.playBtn {
-  background: var(--accent);
-  border: none;
-  cursor: pointer;
-  color: var(--background);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px color-mix(in lab, var(--accent) 50%, transparent);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-
-  &:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 24px color-mix(in lab, var(--accent) 70%, transparent);
-  }
-
-  &:active { transform: scale(0.94); }
-}
-
-/* ── Equalizer bars (playing indicator) ────────────── */
-.bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 18px;
-  width: 18px;
-
-  span {
-    display: block;
-    width: 4px;
-    background: color-mix(in lab, var(--accent) 40%, transparent);
-    border-radius: 2px;
-    height: 4px;
-  }
-
-  &.barsActive span {
-    background: var(--accent);
-    animation: eq 0.7s ease infinite alternate;
-
-    &:nth-child(1) { animation-delay: 0s; }
-    &:nth-child(2) { animation-delay: 0.2s; }
-    &:nth-child(3) { animation-delay: 0.4s; }
-  }
 }
