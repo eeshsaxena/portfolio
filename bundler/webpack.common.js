@@ -13,11 +13,33 @@ module.exports = {
     devtool: 'source-map',
     plugins: [
         new CopyWebpackPlugin({
-            patterns: [{ from: path.resolve(__dirname, '../static') }],
+            patterns: [
+                {
+                    from: path.resolve(__dirname, '../static'),
+                    // Only the assets the 3D scene loads at runtime.
+                    // The chooser/simple/os pages are assembled separately
+                    // (see scripts/assemble.cjs) so they don't collide with
+                    // the 3D entry or bloat the /3d bundle.
+                    globOptions: {
+                        ignore: [
+                            '**/index.html',
+                            '**/choose.html',
+                            '**/_redirects',
+                            '**/.gitkeep',
+                            '**/simple/**',
+                            '**/simple-old/**',
+                            '**/os/**',
+                            '**/resume/**',
+                            '**/resume.pdf',
+                            '**/draco/**',
+                        ],
+                    },
+                },
+            ],
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
-            filename: '3d.html',
+            filename: 'index.html',
             minify: true,
         }),
         new MiniCSSExtractPlugin(),

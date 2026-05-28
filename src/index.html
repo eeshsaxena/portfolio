@@ -49,6 +49,15 @@
       box-sizing: border-box;
     }
 
+    /* ── Kill the cyan tap-highlight on all CSS3D elements ── */
+    #css,
+    #css * {
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-touch-callout: none !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+
     #monitor-videos {
       pointer-events: none;
       position: 'absolute';
@@ -126,9 +135,11 @@
   <meta name="description"
     content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
 
+  <link rel="canonical" href="https://eeshsaxena.com/3d">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://eeshsaxena.github.io/">
+  <meta property="og:url" content="https://eeshsaxena.com/3d">
   <meta property="og:title" content="Eesh Saxena - CS Engineer & AI Researcher">
   <meta property="og:description"
     content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
@@ -139,8 +150,8 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta name="twitter:card" content="summary_large_image">
 
-  <meta property="twitter:url" content="https://eeshsaxena.github.io/">
-  <meta name="twitter:url" content="https://eeshsaxena.github.io/">
+  <meta property="twitter:url" content="https://eeshsaxena.com/3d">
+  <meta name="twitter:url" content="https://eeshsaxena.com/3d">
 
   <meta property="twitter:title" content="Eesh Saxena - CS Engineer & AI Researcher">
   <meta name="twitter:title" content="Eesh Saxena - CS Engineer & AI Researcher">
@@ -150,12 +161,12 @@
   <meta name="twitter:description"
     content="I'm Eesh, a CS Engineering student at IIIT Senapati, Manipur. Research Intern at IIIT Vadodara and IIT Tirupati, passionate about AI/ML, NLP, and competitive programming.">
 
-  <meta property="twitter:image" content="https://henryheffernan.com/images/preview-new.jpg">
-  <meta name="twitter:image" content="https://henryheffernan.com/images/preview-new.jpg">
+  <meta property="twitter:image" content="https://eeshsaxena.com/social-image.png">
+  <meta name="twitter:image" content="https://eeshsaxena.com/social-image.png">
 
   <!-- Images -->
-  <meta property="og:image" content="https://henryheffernan.com/images/preview-new.jpg">
-  <meta property="og:image:secure" content="https://henryheffernan.com/images/preview-new.jpg">
+  <meta property="og:image" content="https://eeshsaxena.com/social-image.png">
+  <meta property="og:image:secure" content="https://eeshsaxena.com/social-image.png">
 
   <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
 
@@ -171,23 +182,14 @@
 </head>
 
 <body>
-  <!-- Redirect to 2D by default; only load 3D when ?scene=3d is present -->
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      if (!params.has('scene')) {
-        window.location.replace('https://eeshsaxena-portfolio-simple.pages.dev');
-      }
-    })();
-  </script>
   <div id="css"></div>
   <div id="webgl"></div>
   <div id="overlay"></div>
   <div id="ui-interactive"></div>
   <div id="ui"></div>
 
-  <!-- Switch view button -->
-  <a id="switch-view" href="/choose.html" onclick="localStorage.removeItem('portfolioChoice')">
+  <!-- Switch back to the 2D portfolio -->
+  <a id="switch-view" href="/" onclick="localStorage.removeItem('portfolioChoice')">
     <span>⬡</span> Switch View
   </a>
   <div id="monitor-videos">

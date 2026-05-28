@@ -66,11 +66,9 @@ export default class Camera extends EventEmitter {
             orbitControlsStart: new OrbitControlsStart(),
         };
 
-        document.addEventListener('mousedown', (event) => {
-            event.preventDefault();
+        const handleSceneClick = (clientX?: number, clientY?: number, target?: EventTarget | null) => {
             // @ts-ignore
-            if (event.target.id === 'prevent-click') return;
-            // print target and current keyframe
+            if (target && target.id === 'prevent-click') return;
             if (
                 this.currentKeyframe === CameraKey.IDLE ||
                 this.targetKeyframe === CameraKey.IDLE
@@ -82,7 +80,18 @@ export default class Camera extends EventEmitter {
             ) {
                 this.transition(CameraKey.IDLE);
             }
+        };
+
+        document.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            handleSceneClick(event.clientX, event.clientY, event.target);
         });
+
+        // Mobile touch support
+        document.addEventListener('touchstart', (event) => {
+            const touch = event.touches[0];
+            handleSceneClick(touch?.clientX, touch?.clientY, event.target);
+        }, { passive: true });
 
         this.setPostLoadTransition();
         this.setInstance();

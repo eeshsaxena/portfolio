@@ -4,6 +4,9 @@
     "scripts": {
         "start": "node server/index.ts",
         "build": "webpack --config ./bundler/webpack.prod.js",
+        "assemble": "node ./scripts/assemble.cjs",
+        "build:unified": "npm run build && npm run assemble",
+        "deploy": "npm run build:unified && npm --prefix portfolio-master/portfolio-master run deploy",
         "dev": "webpack serve --config ./bundler/webpack.dev.js",
         "dev:simple": "npm run dev --prefix portfolio-master/portfolio-master",
         "dev:all": "concurrently -n 3D,Simple -c cyan,green \"npm run dev\" \"npm run dev:simple\""

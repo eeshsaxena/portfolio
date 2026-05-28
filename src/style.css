@@ -1,12 +1,24 @@
 * {
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 html,
 body {
     overflow: hidden;
+    touch-action: pan-x pan-y;
 }
+
+/* Kill cyan tap glow on CSS3D renderer elements */
+#css, #css * {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
 
 .webgl {
     position: fixed;

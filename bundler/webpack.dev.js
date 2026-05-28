@@ -22,7 +22,7 @@ module.exports = merge(
         {
             host: 'local-ip',
             port: portFinderSync.getPort(8080),
-            open: '/choose.html',
+            open: '/',
             https: false,
             allowedHosts: 'all',
             hot: false,
@@ -46,9 +46,7 @@ module.exports = merge(
                 const domain1 = `http${https}://${localIp}:${port}`
                 const domain2 = `http${https}://localhost:${port}`
 
-                console.log(`Project running at:\n  - ${infoColor(domain1)}\n  - ${infoColor(domain2)}`)
-                console.log(`  Choose page: ${infoColor(`${domain2}/choose.html`)}`)
-                console.log(`  Simple View: ${infoColor(`${domain2}/simple/index.html`)}`)
+                console.log(`3D scene running at:\n  - ${infoColor(domain1)}\n  - ${infoColor(domain2)}`)
 
                 return middlewares
             }
