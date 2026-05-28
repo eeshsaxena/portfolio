@@ -621,9 +621,9 @@
     <div class="icon-img">🛠️</div>
     <div class="icon-label">Skills.exe</div>
   </div>
-  <div class="icon" onclick="openResumeLink()">
+  <div class="icon" onclick="openWindow('resume')">
     <div class="icon-img">📄</div>
-    <div class="icon-label">Resume.pdf</div>
+    <div class="icon-label">Resume.exe</div>
   </div>
 </div>
 
@@ -638,7 +638,7 @@
   <div id="tb-achievements" class="taskbar-btn" onclick="toggleWindow('achievements')">🏆 Achieve</div>
   <div id="tb-skills"    class="taskbar-btn" onclick="toggleWindow('skills')">🛠️ Skills</div>
   <div class="taskbar-sep"></div>
-  <div class="taskbar-btn" onclick="openResumeLink()" style="border-color:rgba(0,255,136,0.4);color:var(--green)">📄 Resume</div>
+  <div id="tb-resume" class="taskbar-btn" onclick="toggleWindow('resume')" style="border-color:rgba(0,255,136,0.4);color:var(--green)">📄 Resume</div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;margin-left:auto">
     <div id="taskbar-clock">00:00:00</div>
     <div id="taskbar-date">--/--/----</div>
@@ -1027,6 +1027,46 @@
       </div>
     </div>
     <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> which skills</div>
+  </div>
+</div>
+
+<!-- RESUME WINDOW -->
+<div class="window hidden" id="win-resume" style="width:480px;top:70px;left:240px">
+  <div class="win-titlebar" data-win="resume">
+    <div class="win-dot close" onclick="closeWindow('resume')"></div>
+    <div class="win-dot min"   onclick="minWindow('resume')"></div>
+    <div class="win-dot max"   onclick="maxWindow('resume')"></div>
+    <div class="win-title">RESUME.EXE</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="win-body">
+    <div class="section">
+      <div class="sec-header">R&Eacute;SUM&Eacute;</div>
+      <div class="value" style="font-size:12px;line-height:1.8;color:var(--text-dim)">
+        CS Engineering @ IIIT Senapati &middot; AI/ML &amp; NLP researcher &middot; competitive
+        programmer. Research interns at IIIT Vadodara &amp; IIT Tirupati. 1500+ problems solved.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">HIGHLIGHTS</div>
+      <ul style="margin:0;padding-left:18px;font-size:12px;line-height:1.95;color:var(--text-dim)">
+        <li>Research Intern &mdash; IIIT Vadodara (Reversible Data Hiding)</li>
+        <li>Winter Research Intern &mdash; IIT Tirupati SEVA Lab (Multi-Object Tracking)</li>
+        <li>RajNLP-50K &mdash; India&rsquo;s first open Rajasthani&ndash;Hindi corpus</li>
+        <li>Cardiac Edge AI &mdash; 140&times; compressed arrhythmia model on Arduino</li>
+        <li>Specialist on Codeforces &middot; Guardian on LeetCode</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">DOWNLOAD</div>
+      <div class="contact-links">
+        <a class="contact-btn" href="/resume.pdf" download="Eesh_Saxena_Resume.pdf" style="border-color:rgba(0,255,136,0.5);color:var(--green)">&#8595; Download PDF</a>
+        <a class="contact-btn" href="/resume" target="_blank">&#8599; Open full r&eacute;sum&eacute;</a>
+      </div>
+    </div>
+    <div class="prompt-line"><span class="prompt-sym">eesh@os:~$</span> cat resume.pdf</div>
   </div>
 </div>
 

@@ -35,6 +35,13 @@ fs.cpSync(build3d, dest3d, { recursive: true });
 reset(destOs);
 fs.cpSync(osSrc, destOs, { recursive: true });
 
+// Ship the résumé PDF at the domain root (/resume.pdf) so both the 2D
+// /resume page and the 3D OS resume window can link to it.
+const resumeSrc = path.join(root, 'static', 'resume.pdf');
+if (fs.existsSync(resumeSrc)) {
+  fs.cpSync(resumeSrc, path.join(remixPublic, 'resume.pdf'));
+}
+
 // Drop the stale single-file copy from earlier hand-assembly, if present.
 fs.rmSync(path.join(remixPublic, '3d.html'), { force: true });
 
