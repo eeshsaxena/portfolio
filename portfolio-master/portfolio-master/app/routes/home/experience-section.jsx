@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Link } from '@remix-run/react';
 import styles from './experience-section.module.css';
 
-const EXPERIENCES = [
+export const EXPERIENCES = [
   {
     role: 'Research Intern',
     org: 'IIIT Vadodara',
@@ -68,7 +68,7 @@ export const ExperienceSection = ({ id, sectionRef, visible }) => {
         </div>
 
         <div className={styles.footer}>
-          <Link to="/details" className={styles.seeMore}>
+          <Link prefetch="intent" to="/experience" className={styles.seeMore}>
             View full experience & stack →
           </Link>
         </div>

@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react';
 import styles from './skills-section.module.css';
 
-const SKILLS = {
+export const SKILLS = {
   Languages:  ['C++', 'Python', 'JavaScript', 'SQL'],
   Frameworks: ['React.js', 'Node.js', 'Express.js', 'PyTorch', 'NumPy', 'OpenCV', 'TFLite'],
   'AI / ML':  ['LangChain', 'HuggingFace', 'Ollama', 'Transformers', 'MuRIL'],
@@ -9,7 +9,7 @@ const SKILLS = {
   Tools:      ['Git', 'Linux', 'VS Code', 'Vercel', 'Cloudflare'],
 };
 
-const CATEGORY_COLORS = {
+export const CATEGORY_COLORS = {
   Languages:  'var(--accent)',
   Frameworks: '#7c6fcd',
   'AI / ML':  '#e44d7b',
@@ -51,7 +51,7 @@ export const SkillsSection = ({ id, sectionRef, visible }) => {
         </div>
 
         <div className={styles.footer}>
-          <Link to="/details" className={styles.seeMore}>
+          <Link prefetch="intent" to="/stack" className={styles.seeMore}>
             View full stack & tools setup →
           </Link>
         </div>
