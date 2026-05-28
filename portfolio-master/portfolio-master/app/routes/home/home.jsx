@@ -11,6 +11,7 @@ import { ExperienceSection } from './experience-section';
 import { SkillsSection } from './skills-section';
 import { AchievementsSection } from './achievements-section';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from '@remix-run/react';
 import config from '~/config.json';
 import styles from './home.module.css';
 
@@ -117,14 +118,14 @@ export const Home = () => {
           <p className={styles.topWorksTagline}>
             AI research at the intersection of NLP, Edge Computing, and Graph-based reasoning.
           </p>
-          <a
-            href="https://github.com/eeshsaxena"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            unstable_viewTransition
+            prefetch="intent"
+            to="/projects"
             className={styles.topWorksLink}
           >
-            View all on GitHub →
-          </a>
+            View all projects →
+          </Link>
         </div>
       </div>
       <ProjectSummary

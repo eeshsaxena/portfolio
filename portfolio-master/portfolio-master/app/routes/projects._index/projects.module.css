@@ -1,0 +1,216 @@
+.projects {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── Hero header (mirrors the home "Top Works" block) ─── */
+
+.hero {
+  width: 100%;
+  max-width: var(--maxWidthL);
+  margin: 0 auto;
+  padding: calc(var(--space3XL) + 60px) var(--spaceXL) var(--spaceL);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spaceL);
+  flex-wrap: wrap;
+  border-bottom: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+
+  @media (--mediaMobile) {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: calc(var(--space2XL) + 60px) var(--spaceL) var(--spaceM);
+  }
+}
+
+.label {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: var(--fontWeightMedium);
+  color: var(--textTitle);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+
+  @media (--mediaMobile) {
+    align-items: flex-start;
+  }
+}
+
+.badge {
+  font-family: var(--monoFontStack);
+  font-size: 11px;
+  color: var(--textLight);
+  background: color-mix(in lab, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in lab, var(--text) 12%, transparent);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+.tagline {
+  font-family: var(--fontStack);
+  font-size: var(--fontSizeBodyS);
+  color: var(--textBody);
+  margin: 0;
+  max-width: 320px;
+  text-align: right;
+  line-height: 1.6;
+
+  @media (--mediaMobile) {
+    text-align: left;
+    max-width: none;
+  }
+}
+
+.link {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+/* ─── Project grid ─── */
+
+.grid {
+  width: 100%;
+  max-width: var(--maxWidthL);
+  margin: 0 auto;
+  padding: var(--space2XL) var(--spaceXL) var(--space3XL);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spaceL);
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+    padding: var(--spaceXL) var(--spaceL) var(--space2XL);
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--spaceL);
+  border: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+  border-radius: 8px;
+  background: color-mix(in lab, var(--text) 3%, transparent);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: project-fade-up 0.6s var(--bezierFastoutSlowin) var(--delay, 0ms) forwards;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    border-color: color-mix(in lab, var(--accent) 40%, transparent);
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+@keyframes project-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cardIndex {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: var(--fontWeightMedium);
+  color: var(--textTitle);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  font-family: var(--fontStack);
+  font-size: var(--fontSizeBodyS);
+  color: var(--textBody);
+  margin: 0;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--monoFontStack);
+  font-size: 10px;
+  color: var(--textLight);
+  border: 1px solid color-mix(in lab, var(--text) 12%, transparent);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.cardLinks {
+  display: flex;
+  gap: var(--spaceL);
+  margin-top: 4px;
+}
+
+.cardLink {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.cardLinkSecondary {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--textLight);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text);
+  }
+}
