@@ -20,7 +20,7 @@ export function Projects() {
         <div className={styles.meta}>
           <span className={styles.badge}>{count} Projects</span>
           <p className={styles.tagline}>
-            AI research at the intersection of NLP, Edge Computing, and Graph-based reasoning.
+            Work across NLP, edge computing, and graph-based reasoning.
           </p>
           <a
             href={githubUrl}

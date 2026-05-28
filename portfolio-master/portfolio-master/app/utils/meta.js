@@ -35,7 +35,7 @@ export function baseMeta({
   type = 'website',
   jsonLd,
 }) {
-  const titleText = [prefix, title].filter(Boolean).join(' — ');
+  const titleText = [prefix, title].filter(Boolean).join(' | ');
   const pageUrl = canonicalUrl || url;
 
   return [
@@ -48,7 +48,7 @@ export function baseMeta({
     { name: 'revisit-after', content: '7 days' },
     { property: 'og:image', content: ogImage },
     { property: 'og:image:type', content: 'image/png' },
-    { property: 'og:image:alt', content: `${name} — Portfolio` },
+    { property: 'og:image:alt', content: `${name} Portfolio` },
     { property: 'og:image:width', content: '1280' },
     { property: 'og:image:height', content: '800' },
     { property: 'og:title', content: titleText },
@@ -95,7 +95,7 @@ export function articleJsonLd({ title, description, date, url: articleUrl, image
 }
 
 /**
- * WebSite schema — helps Google generate sitelinks and provides a
+ * WebSite schema - helps Google generate sitelinks and provides a
  * search action target. Placed at the root so it appears on every page.
  */
 export const websiteJsonLd = {
@@ -108,7 +108,7 @@ export const websiteJsonLd = {
 };
 
 /**
- * ProfilePage schema for the homepage — signals to Google that this
+ * ProfilePage schema for the homepage - signals to Google that this
  * is the canonical profile page for the person, separate from
  * blog/portfolio pages.
  */

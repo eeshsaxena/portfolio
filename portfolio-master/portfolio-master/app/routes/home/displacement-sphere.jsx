@@ -61,7 +61,7 @@ export const DisplacementSphere = props => {
         powerPreference: 'high-performance',
       });
     } catch (e) {
-      // WebGL not supported — canvas stays hidden
+      // WebGL not supported - canvas stays hidden
       return;
     }
 

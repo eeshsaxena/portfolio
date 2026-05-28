@@ -10,7 +10,7 @@ export function meta({ matches }) {
   return baseMeta({
     title: 'Résumé',
     description:
-      'View or download the résumé of Eesh Saxena — AI/ML researcher and software engineer, CS Engineering at IIIT Senapati.',
+      'View or download the résumé of Eesh Saxena, an AI/ML researcher and software engineer studying CS Engineering at IIIT Senapati.',
     canonicalUrl,
   });
 }
@@ -27,7 +27,7 @@ export default function Resume() {
         </div>
         <div className={styles.meta}>
           <p className={styles.tagline}>
-            The one-page version — read it inline or grab the PDF.
+            The one-page version: read it inline or grab the PDF.
           </p>
           <div className={styles.actions}>
             <a

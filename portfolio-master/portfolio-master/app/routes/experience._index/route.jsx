@@ -30,7 +30,7 @@ export function meta({ matches }) {
   return baseMeta({
     title: 'Experience',
     description:
-      'Full research and work experience of Eesh Saxena — internships at IIIT Vadodara and IIT Tirupati, plus the core technical stack.',
+      'The research and work experience of Eesh Saxena: internships at IIIT Vadodara and IIT Tirupati, plus the core technical stack.',
     canonicalUrl,
   });
 }

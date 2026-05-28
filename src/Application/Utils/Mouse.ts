@@ -23,7 +23,7 @@ export default class Mouse extends EventEmitter {
             this.inComputer = event.inComputer ? true : false;
         });
 
-        // Touch tracking — map first touch to normalized device coords
+        // Touch tracking - map first touch to normalized device coords
         window.addEventListener('touchmove', (event: TouchEvent) => {
             if (event.touches.length > 0) {
                 const touch = event.touches[0];

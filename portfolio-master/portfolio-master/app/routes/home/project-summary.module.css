@@ -115,7 +115,7 @@
     top: 6%;
     left: 14%;
 
-    /* In alternate layout the model is on the LEFT — mirror shift so it moves
+    /* In alternate layout the model is on the LEFT - mirror shift so it moves
        away from the text column (left) instead of into it (right) */
     .summary[data-alternate='true'] & {
       left: -14%;

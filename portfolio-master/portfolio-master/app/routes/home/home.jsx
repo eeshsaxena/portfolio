@@ -38,7 +38,7 @@ export const links = () => {
 export const meta = ({ matches }) => {
   const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
   return baseMeta({
-    description: `Portfolio of ${config.name} — CS Engineering student at IIIT Senapati, Research Intern at IIIT Vadodara & IIT Tirupati. Specialist on Codeforces, Guardian on LeetCode. Building intelligent systems.`,
+    description: `I'm ${config.name}, a CS Engineering student at IIIT Senapati and a research intern at IIIT Vadodara and IIT Tirupati. I build things with AI/ML and NLP, and compete on Codeforces (Specialist) and LeetCode (Guardian).`,
     canonicalUrl,
     jsonLd: profilePageJsonLd,
   });
@@ -116,7 +116,7 @@ export const Home = () => {
         <div className={styles.topWorksMeta}>
           <span className={styles.topWorksBadge}>02 Projects featured</span>
           <p className={styles.topWorksTagline}>
-            AI research at the intersection of NLP, Edge Computing, and Graph-based reasoning.
+            Work across NLP, edge computing, and graph-based reasoning.
           </p>
           <Link
             unstable_viewTransition
@@ -155,7 +155,7 @@ export const Home = () => {
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
         title="RajNLP-50K Corpus"
-        description="India's first open Rajasthani-Hindi code-switched corpus — 50K sentences. Fine-tuned MuRIL outperforms GPT-4o on NER, sentiment &amp; toxicity tasks."
+        description="India's first open Rajasthani-Hindi code-switched corpus of 50K sentences. Fine-tuned MuRIL beats GPT-4o on NER, sentiment, and toxicity tasks."
         buttonText="View on HuggingFace"
         buttonLink="https://github.com/eeshsaxena"
         model={{

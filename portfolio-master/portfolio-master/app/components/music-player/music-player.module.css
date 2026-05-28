@@ -6,7 +6,7 @@
   z-index: calc(var(--zIndex4) + 10);
   font-family: var(--fontStack);
 
-  /* Anchor to the right on mobile (was full-width before — pill
+  /* Anchor to the right on mobile (was full-width before - pill
      drifted to the left edge and overlapped section content). */
   @media (max-width: 480px) {
     bottom: var(--spaceM);

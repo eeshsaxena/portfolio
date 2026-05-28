@@ -7,7 +7,7 @@ banner: /static/hello-world-banner.jpg
 
 ## Problem
 
-Cardiovascular disease is the world's leading cause of death. Continuous cardiac monitoring currently requires bulky hospital equipment or expensive wearables. The goal of this project was to push state-of-the-art arrhythmia detection onto a **$30 Arduino Nano 33 BLE Sense** — a microcontroller with 256KB RAM and no GPU.
+Cardiovascular disease is the world's leading cause of death. Continuous cardiac monitoring currently requires bulky hospital equipment or expensive wearables. The goal of this project was to push state-of-the-art arrhythmia detection onto a **$30 Arduino Nano 33 BLE Sense**, a microcontroller with 256KB RAM and no GPU.
 
 ## Arrhythmia Classes
 
@@ -43,7 +43,7 @@ Teacher logits + intermediate feature maps
 Student (30K parameters, ~112KB)
 ```
 
-Standard knowledge distillation transfers soft label distributions. **Spectral distillation** additionally aligns the frequency-domain representations of intermediate feature maps — crucial for preserving temporal cardiac signal structure that would otherwise be lost during aggressive compression.
+Standard knowledge distillation transfers soft label distributions. **Spectral distillation** additionally aligns the frequency-domain representations of intermediate feature maps, which is crucial for preserving temporal cardiac signal structure that would otherwise be lost during aggressive compression.
 
 ### Sensor Fusion
 
@@ -57,12 +57,12 @@ A learned fusion layer combines complementary information: ECG captures electric
 
 | Metric | Teacher | Student | Ratio |
 |--------|---------|---------|-------|
-| Parameters | 4.2M | 30K | 140× |
-| Model size | 16.8 MB | 120 KB | 140× |
-| Inference time | 45ms (GPU) | 38ms (Arduino) | — |
-| F1 Score | 99.1% | 98.7% | −0.4% |
+| Parameters | 4.2M | 30K | 140x |
+| Model size | 16.8 MB | 120 KB | 140x |
+| Inference time | 45ms (GPU) | 38ms (Arduino) | n/a |
+| F1 Score | 99.1% | 98.7% | -0.4% |
 
-**140× compression with only 0.4% F1 loss** — making clinical-grade arrhythmia detection feasible on a $30 device.
+**140x compression with only 0.4% F1 loss**, making clinical-grade arrhythmia detection feasible on a $30 device.
 
 ## Deployment
 
@@ -80,4 +80,4 @@ The student model is quantized to **INT8** using TensorFlow Lite and deployed vi
 
 ## Impact
 
-This project demonstrates that **edge AI for healthcare** is achievable without expensive hardware. The same approach can be extended to seizure detection, sleep apnea monitoring, and other continuous physiological monitoring tasks — making preventive healthcare accessible globally.
+This project shows that **edge AI for healthcare** is achievable without expensive hardware. The same approach extends to seizure detection, sleep apnea monitoring, and other continuous physiological monitoring.

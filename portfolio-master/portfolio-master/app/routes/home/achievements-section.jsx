@@ -41,7 +41,7 @@ const CP_PROFILES = [
 const EXTRAS = [
   { label: 'Problems solved (total)', value: '1500+', icon: '✅' },
   { label: 'Contests participated', value: '50+', icon: '🏁' },
-  { label: 'Best — CodeChef Starters 180', value: 'Global #1', icon: '🥇' },
+  { label: 'Best: CodeChef Starters 180', value: 'Global #1', icon: '🥇' },
 ];
 // ─────────────────────────────────────────────────────────────
 

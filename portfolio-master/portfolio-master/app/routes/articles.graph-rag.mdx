@@ -7,13 +7,13 @@ banner: /static/hello-world-banner.jpg
 
 ## Overview
 
-Large language models (LLMs) are powerful but prone to hallucination — especially on multi-hop questions that require reasoning across multiple pieces of evidence. Retrieval-Augmented Generation (RAG) helps ground model outputs in retrieved documents, but flat vector-based retrieval struggles to capture structured relationships between concepts.
+Large language models (LLMs) are powerful but prone to hallucination, especially on multi-hop questions that require reasoning across multiple pieces of evidence. Retrieval-Augmented Generation (RAG) helps ground model outputs in retrieved documents, but flat vector-based retrieval struggles to capture structured relationships between concepts.
 
 This project proposes a **Conflict-Aware Graph RAG** pipeline that addresses this by combining knowledge graph construction with entropy-based conflict resolution.
 
 ## How It Works
 
-### Step 1 — Knowledge Graph Construction
+### Step 1: Knowledge Graph Construction
 
 Unstructured text is parsed by an LLM (GPT-4o / LLaMA 3) to extract entities and their relationships as structured triples:
 
@@ -24,13 +24,13 @@ e.g. (Eesh Saxena, interned_at, IIT Tirupati)
 
 These triples are stored in a **Neo4j** graph database, enabling efficient multi-hop traversal during retrieval.
 
-### Step 2 — Graph-Guided Retrieval
+### Step 2: Graph-Guided Retrieval
 
-At query time, rather than performing flat cosine similarity over document chunks, we traverse the knowledge graph from the query's seed entities — collecting supporting evidence paths up to a configurable hop depth.
+At query time, rather than performing flat cosine similarity over document chunks, we traverse the knowledge graph from the query's seed entities, collecting supporting evidence paths up to a configurable hop depth.
 
 This structured traversal surfaces chains of reasoning that flat retrieval would miss.
 
-### Step 3 — Conflict Detection
+### Step 3: Conflict Detection
 
 Multiple retrieved paths may contain contradictory information. We compute an **entropy score** over conflicting triples at each node:
 
@@ -39,7 +39,7 @@ Multiple retrieved paths may contain contradictory information. We compute an **
 
 This prevents the model from confidently hallucinating when evidence is ambiguous.
 
-### Step 4 — Answer Generation
+### Step 4: Answer Generation
 
 The filtered, conflict-resolved evidence paths are provided to the LLM as structured context. The model generates an answer grounded in the graph's structured knowledge rather than parametric memory alone.
 
@@ -57,4 +57,4 @@ On multi-hop QA benchmarks (HotpotQA, MuSiQue), the conflict-aware graph retriev
 
 ## Key Takeaways
 
-Graph-structured retrieval is significantly more effective than flat chunk retrieval for questions requiring multi-step reasoning. The entropy-based conflict module adds a lightweight but effective safety layer that reduces confident hallucination — a critical requirement for deployment in high-stakes domains like healthcare or legal QA.
+Graph-structured retrieval is significantly more effective than flat chunk retrieval for questions requiring multi-step reasoning. The entropy-based conflict module adds a lightweight but effective safety layer that reduces confident hallucination, which matters a lot for high-stakes domains like healthcare or legal QA.

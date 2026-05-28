@@ -7,7 +7,7 @@ banner: /static/hello-world-banner.jpg
 
 ## Motivation
 
-India's linguistic landscape is deeply code-switched — people routinely mix two or more languages within a single sentence. Rajasthani, spoken by over 80 million people, is almost entirely absent from existing NLP benchmarks. Models trained on Hindi or English fail catastrophically on Rajasthani-Hindi mixed text, making NLP tools inaccessible to a huge population.
+India's linguistic landscape is deeply code-switched: people routinely mix two or more languages within a single sentence. Rajasthani, spoken by over 80 million people, is almost entirely absent from existing NLP benchmarks. Models trained on Hindi or English fail catastrophically on Rajasthani-Hindi mixed text, making NLP tools inaccessible to a huge population.
 
 **RajNLP-50K** is the first step toward fixing that.
 
@@ -56,12 +56,12 @@ We fine-tuned and evaluated the following models:
 | XLM-RoBERTa | 75.8 | 77.1 | 71.4 |
 | **MuRIL (fine-tuned)** | **84.3** | **83.7** | **79.6** |
 
-Fine-tuned MuRIL — Google's Multilingual Representations for Indian Languages model — significantly outperforms GPT-4o on all three tasks, demonstrating that targeted fine-tuning on regional language data beats large general-purpose models.
+Fine-tuned MuRIL (Google's Multilingual Representations for Indian Languages model) clearly outperforms GPT-4o on all three tasks. Targeted fine-tuning on regional data beats large general-purpose models here.
 
 ## Key Findings
 
-1. **GPT-4o struggles** with Rajasthani lexicon — it often treats Rajasthani words as misspellings of Hindi equivalents
-2. **Transliteration variance** is the biggest challenge — the same word can appear in 4–6 different romanized spellings
+1. **GPT-4o struggles** with Rajasthani lexicon: it often treats Rajasthani words as misspellings of Hindi equivalents
+2. **Transliteration variance** is the biggest challenge: the same word can appear in 4-6 different romanized spellings
 3. **MuRIL's pre-training** on Indian language Wikipedia gives it a significant head start over non-India-focused multilingual models
 
 ## Impact

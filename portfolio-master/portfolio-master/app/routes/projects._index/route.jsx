@@ -19,7 +19,7 @@ export async function loader() {
       index: 2,
       title: 'RajNLP-50K Corpus',
       description:
-        "India's first open Rajasthani–Hindi code-switched corpus — 50K sentences. Fine-tuned MuRIL outperforms GPT-4o on NER, sentiment, and toxicity detection tasks.",
+        "India's first open Rajasthani-Hindi code-switched corpus of 50K sentences. Fine-tuned MuRIL beats GPT-4o on NER, sentiment, and toxicity detection.",
       tags: ['NLP', 'MuRIL', 'Code-Switching', 'Corpus'],
       article: '/articles/rajnlp-50k',
       github: githubUrl,
@@ -28,7 +28,7 @@ export async function loader() {
       index: 3,
       title: 'Cardiac Edge AI',
       description:
-        '140× compressed deep-learning model for real-time 5-class arrhythmia detection on an Arduino Nano 33 BLE — ~99% F1 in under 256KB via spectral knowledge distillation and ECG+PPG sensor fusion.',
+        '140x compressed deep-learning model for real-time 5-class arrhythmia detection on an Arduino Nano 33 BLE. Hits ~99% F1 in under 256KB using spectral knowledge distillation and ECG+PPG sensor fusion.',
       tags: ['Edge AI', 'TinyML', 'Knowledge Distillation', 'Arduino'],
       article: '/articles/cardiac-edge-ai',
       github: githubUrl,
@@ -43,7 +43,7 @@ export function meta({ matches }) {
   return baseMeta({
     title: 'Projects',
     description:
-      'All projects by Eesh Saxena — AI research at the intersection of NLP, edge computing, and graph-based reasoning.',
+      'Projects by Eesh Saxena across NLP, edge computing, and graph-based reasoning.',
     canonicalUrl,
   });
 }

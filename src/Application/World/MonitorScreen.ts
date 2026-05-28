@@ -183,7 +183,7 @@ export default class MonitorScreen extends EventEmitter {
         };
 
         // Set iframe attributes
-        // PROD — Load EeshOS (local web OS)
+        // PROD - Load EeshOS (local web OS)
         iframe.src = '/os/index.html';
         /**
          * In dev mode, the static folder is served by webpack-dev-server,

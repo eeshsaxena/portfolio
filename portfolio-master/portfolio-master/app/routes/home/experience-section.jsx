@@ -10,12 +10,12 @@ export const EXPERIENCES = [
     period: '2026 (6 months)',
     type: 'Image Security / RDH',
     description:
-      'Analysed Zhang (IEEE SPL 2011) on Reversible Data Hiding in Encrypted Images. Studied 30+ related works, implemented the encryption–embedding–extraction pipeline in Python, and achieved 100% reconstruction fidelity with a 0.5 bpp embedding rate.',
+      'Analysed Zhang (IEEE SPL 2011) on Reversible Data Hiding in Encrypted Images. Studied 30+ related works, implemented the encryption, embedding, and extraction pipeline in Python, and achieved 100% reconstruction fidelity with a 0.5 bpp embedding rate.',
     tags: ['Python', 'Image Encryption', 'RDH', 'PSNR', 'IEEE'],
   },
   {
     role: 'Winter Research Intern',
-    org: 'IIT Tirupati — SEVA Lab',
+    org: 'IIT Tirupati, SEVA Lab',
     supervisor: 'Under Dr. Chalavadi Vishnu',
     period: '2025 (Winter)',
     type: 'Computer Vision / MOT',

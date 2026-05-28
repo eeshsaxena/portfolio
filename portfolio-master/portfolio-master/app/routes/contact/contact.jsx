@@ -25,7 +25,7 @@ export const meta = ({ matches }) => {
   });
 };
 
-// No-op action — form is handled client-side via Web3Forms
+// No-op action - form is handled client-side via Web3Forms
 export async function action() {
   return null;
 }
@@ -81,7 +81,7 @@ export const Contact = () => {
     setErrors({});
 
     try {
-      // Web3Forms — free email service (250/month, no backend needed)
+      // Web3Forms - free email service (250/month, no backend needed)
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -121,7 +121,7 @@ export const Contact = () => {
       <Transition unmount in={!success} timeout={1600}>
         {({ status, nodeRef }) => (
           <div className={styles.wrapper} ref={nodeRef} data-status={status}>
-            {/* Left panel — contact info */}
+            {/* Left panel - contact info */}
             <aside className={styles.infoPanel}>
               <Heading
                 className={styles.infoTitle}
@@ -169,7 +169,7 @@ export const Contact = () => {
               </div>
             </aside>
 
-            {/* Right panel — form */}
+            {/* Right panel - form */}
             <form className={styles.form} onSubmit={handleSubmit}>
               <Heading
                 className={styles.title}

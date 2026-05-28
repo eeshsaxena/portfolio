@@ -29,11 +29,11 @@ const ProfileText = ({ visible, titleId }) => (
       using transformer-based approaches (MOTIP, CVPR 2025).
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Outside research, I'm a passionate competitive programmer — Specialist on Codeforces
-      (1582), Guardian on LeetCode (1873), and 4★ on CodeChef (1866). I've solved 1500+
-      problems and ranked globally in contests. Feel free to{' '}
-      <Link href="/contact">reach out</Link> — always open to research collaborations,
-      internships, or interesting conversations about AI.
+      Outside research I spend a lot of time on competitive programming: Specialist on
+      Codeforces (1582), Guardian on LeetCode (1873), and 4★ on CodeChef (1866). I've
+      solved 1500+ problems and placed well in global contests. Want to talk research,
+      internships, or AI?{' '}
+      <Link href="/contact">Get in touch</Link>.
     </Text>
   </Fragment>
 );

@@ -154,7 +154,7 @@
     left: 0;
     right: 0;
     /* Parent .navbar uses backdrop-filter which creates a containing
-       block — `bottom: 0` would resolve to the bottom of the 48px-tall
+       block - `bottom: 0` would resolve to the bottom of the 48px-tall
        navbar (height: 0). Use viewport-relative height instead. */
     height: calc(100dvh - var(--space2XL));
     width: 100%;
