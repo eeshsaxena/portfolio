@@ -11,7 +11,12 @@ export async function loader({ request }) {
   const module = await import(`../articles.${slug}.mdx`);
   const text = await import(`../articles.${slug}.mdx?raw`);
   const readTime = readingTime(text.default);
-  const ogImage = `${config.url}/static/${slug}-og.jpg`;
+  // Use a per-article OG image when one has been added at
+  // /static/<slug>-og.jpg, otherwise fall back to the branded site image so
+  // social-share previews never 404.
+  const ogImage = module.frontmatter?.ogImage
+    ? `${config.url}${module.frontmatter.ogImage}`
+    : `${config.url}/social-image.png`;
   const articleUrl = `${config.url}/articles/${slug}`;
 
   return json({

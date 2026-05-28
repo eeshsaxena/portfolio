@@ -7,9 +7,11 @@ const articleModules = import.meta.glob('./articles.*.mdx', { eager: true });
 
 const STATIC_ROUTES = [
   { path: '/', changefreq: 'monthly', priority: 1.0 },
-  { path: '/contact', changefreq: 'monthly', priority: 0.8 },
+  { path: '/projects', changefreq: 'monthly', priority: 0.9 },
+  { path: '/experience', changefreq: 'monthly', priority: 0.8 },
+  { path: '/stack', changefreq: 'monthly', priority: 0.7 },
   { path: '/articles', changefreq: 'weekly', priority: 0.9 },
-  { path: '/uses', changefreq: 'monthly', priority: 0.6 },
+  { path: '/contact', changefreq: 'monthly', priority: 0.8 },
 ];
 
 function escapeXml(value) {
