@@ -51,7 +51,10 @@ export async function action({ request, context }) {
       headers: { 'Set-Cookie': await commitSession(session) },
     });
   }
-  return json({ error: 'Incorrect password. Try again.' }, { status: 401 });
+  return json(
+    { error: 'You are not allowed. The password is incorrect.' },
+    { status: 401 }
+  );
 }
 
 export default function Extracurricular() {
