@@ -169,6 +169,16 @@ export const Home = () => {
           ],
         }}
       />
+      <div className={styles.moreWorks}>
+        <Link
+          unstable_viewTransition
+          prefetch="intent"
+          to="/projects"
+          className={styles.moreWorksLink}
+        >
+          Show more works →
+        </Link>
+      </div>
       <ExperienceSection
         id="experience"
         sectionRef={experienceRef}
