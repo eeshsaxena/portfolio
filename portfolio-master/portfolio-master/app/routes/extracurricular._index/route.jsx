@@ -31,11 +31,15 @@ export async function loader({ request, context }) {
   const { getSession } = sessionStorage(context);
   const session = await getSession(request.headers.get('Cookie'));
   const authed = session.get('authed') === true;
-  return json({
-    authed,
-    activities: authed ? ACTIVITIES : [],
-    interests: authed ? INTERESTS : [],
-  });
+  return json(
+    {
+      authed,
+      activities: authed ? ACTIVITIES : [],
+      interests: authed ? INTERESTS : [],
+    },
+    // Gated + cookie-dependent: never cache at the edge or in the browser.
+    { headers: { 'Cache-Control': 'no-store, must-revalidate' } }
+  );
 }
 
 export async function action({ request, context }) {
