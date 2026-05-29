@@ -95,9 +95,14 @@ export default function Extracurricular() {
           </Form>
         ) : (
           <>
-            <RouterLink prefetch="intent" to="/blog" className={styles.blogLink}>
-              📰 Read my newspaper blog →
-            </RouterLink>
+            <div className={styles.gatedLinks}>
+              <RouterLink prefetch="intent" to="/blog" className={styles.blogLink}>
+                📰 Read my newspaper blog →
+              </RouterLink>
+              <RouterLink prefetch="intent" to="/admin" className={styles.blogLink}>
+                ✍️ Write a new post →
+              </RouterLink>
+            </div>
 
             <h3 className={styles.sub}>Activities</h3>
             <ul className={styles.points}>

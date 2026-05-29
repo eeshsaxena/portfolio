@@ -141,11 +141,17 @@
 
 /* ── Unlocked content ── */
 
+.gatedLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spaceM);
+  margin: 0 0 var(--spaceXL);
+}
+
 .blogLink {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 var(--spaceXL);
   padding: 12px 20px;
   font-family: var(--monoFontStack);
   font-size: 13px;
