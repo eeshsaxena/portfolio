@@ -108,24 +108,31 @@ export default function Extracurricular() {
           </Form>
         ) : (
           <>
-            <div className={styles.timeline}>
+            <h3 className={styles.sub}>Activities</h3>
+            <ul className={styles.points}>
               {activities.map((a, i) => (
-                <article key={i} className={styles.card}>
-                  <div className={styles.cardTop}>
-                    <div>
-                      <h2 className={styles.role}>{a.role}</h2>
-                      <p className={styles.org}>
-                        {a.org}
-                        {a.period ? (
-                          <span className={styles.period}> · {a.period}</span>
-                        ) : null}
-                      </p>
-                    </div>
+                <li key={i} className={styles.point}>
+                  <div className={styles.pointHead}>
+                    <span className={styles.pointTitle}>{a.role}</span>
+                    {a.org ? <span className={styles.pointOrg}>{a.org}</span> : null}
+                    {a.period ? (
+                      <span className={styles.pointMeta}>{a.period}</span>
+                    ) : null}
+                    {a.url ? (
+                      <a
+                        className={styles.pointLink}
+                        href={a.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Read ↗
+                      </a>
+                    ) : null}
                   </div>
-                  {a.note ? <p className={styles.note}>{a.note}</p> : null}
-                </article>
+                  {a.note ? <p className={styles.pointNote}>{a.note}</p> : null}
+                </li>
               ))}
-            </div>
+            </ul>
 
             <h3 className={styles.sub}>Competitive Programming</h3>
             <div className={styles.cpGrid}>

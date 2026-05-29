@@ -39,11 +39,13 @@ export const ACTIVITIES = [
   {
     role: 'Article Writer',
     org: 'The Indian Express',
-    note: 'Contribute articles and opinion pieces.',
+    note: 'Articles and opinion pieces.',
+    // TODO: replace with your author/blog URL on The Indian Express.
+    url: 'https://indianexpress.com',
   },
   {
     role: 'Book Reviews',
-    note: 'Write reviews of the books I read.',
+    note: 'Reviews of the books I read.',
   },
 ];
 
