@@ -3,9 +3,6 @@ import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { isUnlocked } from '~/utils/extra-session.server';
 import styles from './admin.module.css';
 
-const REPO = 'eeshsaxena/portfolio';
-const BASE = 'portfolio-master/portfolio-master';
-
 export function meta() {
   return [
     { title: 'Write a post' },
@@ -31,60 +28,15 @@ function slugify(s) {
   );
 }
 
-const yaml = s => `'${String(s).replace(/'/g, "''")}'`;
-
-function utf8ToBase64(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-
-function bytesToBase64(bytes) {
-  let binary = '';
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
-  }
-  return btoa(binary);
-}
-
-async function ghPut(token, path, contentBase64, message) {
-  const url = `https://api.github.com/repos/${REPO}/contents/${path}`;
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    Accept: 'application/vnd.github+json',
-    'User-Agent': 'eeshsaxena-portfolio-writer',
-    'Content-Type': 'application/json',
-  };
-
-  // If the file already exists we need its sha to overwrite it.
-  let sha;
-  const head = await fetch(`${url}?ref=main`, { headers });
-  if (head.ok) sha = (await head.json()).sha;
-
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers,
-    body: JSON.stringify({
-      message,
-      content: contentBase64,
-      branch: 'main',
-      ...(sha ? { sha } : {}),
-    }),
-  });
-
-  if (!res.ok) {
-    throw new Error(`GitHub ${path} -> ${res.status}: ${await res.text()}`);
-  }
-}
-
 export async function action({ request, context }) {
   if (!(await isUnlocked(request, context))) {
     throw redirect('/extracurricular');
   }
 
-  const token = context.cloudflare.env.GITHUB_TOKEN;
-  if (!token) {
+  const kv = context.cloudflare.env.BLOG_KV;
+  if (!kv) {
     return json(
-      { error: 'GITHUB_TOKEN is not configured on the server yet.' },
+      { error: 'Blog storage (KV) is not bound on the server yet.' },
       { status: 500 }
     );
   }
@@ -101,40 +53,18 @@ export async function action({ request, context }) {
   if (!pdf || typeof pdf === 'string' || pdf.size === 0) {
     return json({ error: 'Please attach a PDF.' }, { status: 400 });
   }
-  if (pdf.size > 8 * 1024 * 1024) {
-    return json({ error: 'PDF is too large (keep it under 8 MB).' }, { status: 400 });
+  if (pdf.size > 20 * 1024 * 1024) {
+    return json({ error: 'PDF is too large (keep it under 20 MB).' }, { status: 400 });
   }
 
   const slug = slugify(title);
   const date = new Date().toISOString().slice(0, 10);
 
-  const mdx = `---
-title: ${yaml(title)}
-abstract: ${yaml(abstract || title)}
-date: ${yaml(date)}
-pdf: /blog/${slug}.pdf
----
-
-${body}
-`;
-
-  try {
-    const pdfBytes = new Uint8Array(await pdf.arrayBuffer());
-    await ghPut(
-      token,
-      `${BASE}/public/blog/${slug}.pdf`,
-      bytesToBase64(pdfBytes),
-      `blog: upload clipping for "${title}"`
-    );
-    await ghPut(
-      token,
-      `${BASE}/app/routes/blog.${slug}.mdx`,
-      utf8ToBase64(mdx),
-      `blog: publish "${title}"`
-    );
-  } catch (e) {
-    return json({ error: `Publish failed: ${e.message}` }, { status: 502 });
-  }
+  // Store the clipping bytes and the post (with light metadata for fast listing).
+  await kv.put(`pdf:${slug}`, await pdf.arrayBuffer());
+  await kv.put(`post:${slug}`, JSON.stringify({ title, abstract, body, date }), {
+    metadata: { title, abstract, date },
+  });
 
   return json({ ok: true, slug });
 }
@@ -150,8 +80,8 @@ export default function Admin() {
         <span className={styles.label}>// Private</span>
         <h1 className={styles.title}>Write a post</h1>
         <p className={styles.tagline}>
-          Fill this in, attach the newspaper PDF, and hit publish. It commits to
-          GitHub and the site rebuilds itself in a minute or two.
+          Fill this in, attach the newspaper PDF, and hit publish. It saves
+          straight to the site — your post is live immediately, no waiting.
         </p>
       </section>
 
@@ -159,10 +89,11 @@ export default function Admin() {
         {actionData?.ok ? (
           <div className={styles.success}>
             <p>
-              ✅ Published <strong>{actionData.slug}</strong>. It’ll be live at{' '}
-              <code>/blog/{actionData.slug}</code> once the deploy finishes
-              (~1–2 min).
+              ✅ Published. It’s live now at <code>/blog/{actionData.slug}</code>.
             </p>
+            <a className={styles.link} href={`/blog/${actionData.slug}`}>
+              View it →
+            </a>{' '}
             <a className={styles.link} href="/admin">
               Write another →
             </a>
@@ -182,7 +113,7 @@ export default function Admin() {
               <textarea className={styles.textarea} name="body" rows={12} required />
             </label>
             <label className={styles.field}>
-              <span>Newspaper PDF (max 8 MB)</span>
+              <span>Newspaper PDF (max 20 MB)</span>
               <input
                 className={styles.input}
                 name="pdf"

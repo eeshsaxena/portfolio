@@ -2,28 +2,19 @@ import { json, redirect } from '@remix-run/cloudflare';
 import { Link as RouterLink, useLoaderData } from '@remix-run/react';
 import { DecoderText } from '~/components/decoder-text';
 import { Footer } from '~/components/footer';
-import { formatDate } from '~/utils/date';
 import { isUnlocked } from '~/utils/extra-session.server';
+import { formatDate } from '~/utils/date';
 import styles from '../blog/blog.module.css';
 
 export async function loader({ request, context }) {
-  // Private: only readable once unlocked via the Extra password.
   if (!(await isUnlocked(request, context))) {
     throw redirect('/extracurricular');
   }
-  const modules = import.meta.glob('../blog.*.mdx', { eager: true });
-  const build = await import('virtual:remix/server-build');
-
-  const posts = Object.entries(modules)
-    .map(([file, mod]) => {
-      const id = file.replace('../', 'routes/').replace(/\.mdx$/, '');
-      const slug = build.routes[id]?.path;
-      return { slug, frontmatter: mod.frontmatter };
-    })
-    .filter(p => p.slug)
-    .sort((a, b) =>
-      (a.frontmatter.date || '') < (b.frontmatter.date || '') ? 1 : -1
-    );
+  const kv = context.cloudflare.env.BLOG_KV;
+  const list = kv ? await kv.list({ prefix: 'post:' }) : { keys: [] };
+  const posts = list.keys
+    .map(k => ({ slug: k.name.replace(/^post:/, ''), ...(k.metadata || {}) }))
+    .sort((a, b) => ((a.date || '') < (b.date || '') ? 1 : -1));
 
   return json(
     { posts },
@@ -56,23 +47,23 @@ export default function BlogIndex() {
 
       <div className={styles.list}>
         {posts.length === 0 ? (
-          <p className={styles.empty}>No posts yet.</p>
+          <p className={styles.empty}>
+            No posts yet — add one from the <a href="/admin">writer</a>.
+          </p>
         ) : (
-          posts.map(({ slug, frontmatter }) => (
+          posts.map(p => (
             <RouterLink
-              key={slug}
+              key={p.slug}
               prefetch="intent"
-              to={`/blog/${slug}`}
+              to={`/blog/${p.slug}`}
               className={styles.item}
             >
-              {frontmatter.date ? (
-                <time className={styles.itemDate}>
-                  {formatDate(frontmatter.date)}
-                </time>
+              {p.date ? (
+                <time className={styles.itemDate}>{formatDate(p.date)}</time>
               ) : null}
-              <h2 className={styles.itemTitle}>{frontmatter.title}</h2>
-              {frontmatter.abstract ? (
-                <p className={styles.itemAbstract}>{frontmatter.abstract}</p>
+              <h2 className={styles.itemTitle}>{p.title || p.slug}</h2>
+              {p.abstract ? (
+                <p className={styles.itemAbstract}>{p.abstract}</p>
               ) : null}
               <span className={styles.itemLink}>Read →</span>
             </RouterLink>
