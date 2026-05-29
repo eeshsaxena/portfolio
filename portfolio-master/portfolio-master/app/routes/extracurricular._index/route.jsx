@@ -2,7 +2,7 @@ import { json, redirect, createCookieSessionStorage } from '@remix-run/cloudflar
 import { Form, useLoaderData, useActionData, useNavigation } from '@remix-run/react';
 import { DecoderText } from '~/components/decoder-text';
 import { Footer } from '~/components/footer';
-import { ACTIVITIES, INTERESTS } from './data.server';
+import { ACTIVITIES, INTERESTS, CP } from './data.server';
 import styles from './extracurricular.module.css';
 
 function sessionStorage(context) {
@@ -36,6 +36,7 @@ export async function loader({ request, context }) {
       authed,
       activities: authed ? ACTIVITIES : [],
       interests: authed ? INTERESTS : [],
+      cp: authed ? CP : [],
     },
     // Gated + cookie-dependent: never cache at the edge or in the browser.
     { headers: { 'Cache-Control': 'no-store, must-revalidate' } }
@@ -62,7 +63,7 @@ export async function action({ request, context }) {
 }
 
 export default function Extracurricular() {
-  const { authed, activities, interests } = useLoaderData();
+  const { authed, activities, interests, cp } = useLoaderData();
   const actionData = useActionData();
   const navigation = useNavigation();
   const submitting = navigation.state === 'submitting';
@@ -123,6 +124,23 @@ export default function Extracurricular() {
                   </div>
                   {a.note ? <p className={styles.note}>{a.note}</p> : null}
                 </article>
+              ))}
+            </div>
+
+            <h3 className={styles.sub}>Competitive Programming</h3>
+            <div className={styles.cpGrid}>
+              {cp.map(p => (
+                <a
+                  key={p.platform}
+                  className={styles.cpCard}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className={styles.cpPlatform}>{p.platform}</span>
+                  <span className={styles.cpRank}>{p.rank}</span>
+                  <span className={styles.cpRating}>{p.rating}</span>
+                </a>
               ))}
             </div>
 

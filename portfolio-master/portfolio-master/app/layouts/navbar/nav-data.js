@@ -18,10 +18,6 @@ export const navLinks = [
     pathname: '/resume',
   },
   {
-    label: 'Extra',
-    pathname: '/extracurricular',
-  },
-  {
     label: 'Contact',
     pathname: '/contact',
   },

@@ -222,3 +222,52 @@
   border-radius: 4px;
   padding: 6px 12px;
 }
+
+/* ── Competitive programming profiles ── */
+.cpGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spaceM);
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cpCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--spaceM) var(--spaceL);
+  border: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+  border-radius: 8px;
+  background: color-mix(in lab, var(--text) 3%, transparent);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: color-mix(in lab, var(--accent) 45%, transparent);
+    transform: translateY(-3px);
+  }
+}
+
+.cpPlatform {
+  font-family: var(--monoFontStack);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cpRank {
+  font-family: var(--fontStack);
+  font-size: 1.05rem;
+  font-weight: var(--fontWeightMedium);
+  color: var(--textTitle);
+}
+
+.cpRating {
+  font-family: var(--monoFontStack);
+  font-size: 12px;
+  color: var(--textLight);
+}

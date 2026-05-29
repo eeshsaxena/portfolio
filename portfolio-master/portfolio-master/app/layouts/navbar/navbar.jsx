@@ -172,6 +172,18 @@ export const Navbar = () => {
           ))}
         </div>
         <NavbarIcons desktop />
+        <RouterLink
+          unstable_viewTransition
+          prefetch="intent"
+          to="/extracurricular"
+          data-navbar-item
+          className={styles.navLink}
+          aria-current={getCurrent('/extracurricular')}
+          onClick={handleNavItemClick}
+          style={{ marginLeft: '10px' }}
+        >
+          Extra
+        </RouterLink>
       </nav>
       <Transition unmount in={menuOpen} timeout={msToNum(tokens.base.durationL)}>
         {({ visible, nodeRef }) => (
@@ -195,6 +207,17 @@ export const Navbar = () => {
               </RouterLink>
             ))}
             <NavbarIcons />
+            <RouterLink
+              unstable_viewTransition
+              prefetch="intent"
+              to="/extracurricular"
+              className={styles.mobileNavLink}
+              aria-current={getCurrent('/extracurricular')}
+              onClick={handleMobileNavClick}
+              style={{ opacity: 1, transform: 'none' }}
+            >
+              Extra
+            </RouterLink>
             <a
               href="/3d"
               className={styles.mobileNavLink}

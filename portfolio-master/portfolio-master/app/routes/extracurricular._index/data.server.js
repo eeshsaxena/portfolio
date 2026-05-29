@@ -36,6 +36,15 @@ export const ACTIVITIES = [
     org: 'State Championship',
     note: 'Placed 4th in the Under-17 category at the state level.',
   },
+  {
+    role: 'Article Writer',
+    org: 'The Indian Express',
+    note: 'Contribute articles and opinion pieces.',
+  },
+  {
+    role: 'Book Reviews',
+    note: 'Write reviews of the books I read.',
+  },
 ];
 
 export const INTERESTS = [
@@ -44,4 +53,27 @@ export const INTERESTS = [
   'Music production',
   'Photography',
   'Stocks & investing',
+];
+
+// Competitive programming profiles. Handles are best-guess (eeshsaxena);
+// update the URLs if your handle differs on any platform.
+export const CP = [
+  {
+    platform: 'Codeforces',
+    rank: 'Specialist',
+    rating: 'max 1582',
+    url: 'https://codeforces.com/profile/eeshsaxena',
+  },
+  {
+    platform: 'LeetCode',
+    rank: 'Guardian',
+    rating: 'max 1873',
+    url: 'https://leetcode.com/u/eeshsaxena',
+  },
+  {
+    platform: 'CodeChef',
+    rank: '4 Star',
+    rating: 'max 1866',
+    url: 'https://www.codechef.com/users/eeshsaxena',
+  },
 ];
