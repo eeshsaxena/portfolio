@@ -9,3 +9,9 @@ node_modules
 
 public/draco
 storybook-static
+
+# Generated into the 2D project's public/ at build time (assemble.cjs + remix):
+# the 3D scene, EeshOS, and the résumé PDF. Source assets in public/ ARE tracked.
+/public/3d/
+/public/os/
+/public/resume.pdf

@@ -1,0 +1,19 @@
+/* Eesh Saxena Portfolio */
+/* https://eeshsaxena.com */
+
+/* TEAM */
+
+Name: Eesh Saxena
+Role: Developer & Designer
+Email: eeshsaxena@gmail.com
+GitHub: github.com/eeshsaxena
+LinkedIn: linkedin.com/in/eeshsaxena
+Location: Gandhinagar, Gujarat, India
+
+/* SITE */
+
+Last update: 2025
+Standards: HTML5, CSS3, JavaScript ES2023
+Components: React, Remix, Three.js
+Hosting: Cloudflare Pages
+Language: English

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <style>
+    #f { fill: #111; }
+    @media (prefers-color-scheme: dark) { #f { fill: #fff; } }
+  </style>
+  <g id="f">
+    <!-- E vertical bar -->
+    <rect x="8" y="8" width="10" height="48"/>
+    <!-- E top bar -->
+    <rect x="8" y="8" width="38" height="10"/>
+    <!-- E middle bar -->
+    <rect x="8" y="27" width="28" height="10"/>
+    <!-- E bottom bar -->
+    <rect x="8" y="46" width="38" height="10"/>
+  </g>
+</svg>
