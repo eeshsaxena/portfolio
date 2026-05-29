@@ -26,6 +26,22 @@ export const ACTIVITIES = [
     period: '2023',
     note: 'Took part in community outreach and on-campus drives.',
   },
+  {
+    role: 'Volunteer',
+    org: 'RSA, Kota',
+    note: 'Volunteered with RSA in Kota.',
+  },
+  {
+    role: 'Lawn Tennis (Under-17)',
+    org: 'State Championship',
+    note: 'Placed 4th in the Under-17 category at the state level.',
+  },
 ];
 
-export const INTERESTS = ['Formula 1', 'Chess', 'Music production', 'Photography'];
+export const INTERESTS = [
+  'Formula 1',
+  'Chess',
+  'Music production',
+  'Photography',
+  'Stocks & investing',
+];

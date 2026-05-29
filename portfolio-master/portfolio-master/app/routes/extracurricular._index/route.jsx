@@ -115,11 +115,13 @@ export default function Extracurricular() {
                       <h2 className={styles.role}>{a.role}</h2>
                       <p className={styles.org}>
                         {a.org}
-                        <span className={styles.period}> · {a.period}</span>
+                        {a.period ? (
+                          <span className={styles.period}> · {a.period}</span>
+                        ) : null}
                       </p>
                     </div>
                   </div>
-                  <p className={styles.note}>{a.note}</p>
+                  {a.note ? <p className={styles.note}>{a.note}</p> : null}
                 </article>
               ))}
             </div>
