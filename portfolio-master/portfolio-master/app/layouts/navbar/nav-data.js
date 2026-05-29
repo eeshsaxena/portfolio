@@ -14,10 +14,6 @@ export const navLinks = [
     pathname: '/articles',
   },
   {
-    label: 'Blog',
-    pathname: '/blog',
-  },
-  {
     label: 'Resume',
     pathname: '/resume',
   },

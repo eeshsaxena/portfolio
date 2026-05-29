@@ -4,7 +4,6 @@ import config from '~/config.json';
 // (title/date) at build time. Article filenames follow the pattern
 // `articles.<slug>.mdx`.
 const articleModules = import.meta.glob('./articles.*.mdx', { eager: true });
-const blogModules = import.meta.glob('./blog.*.mdx', { eager: true });
 
 const STATIC_ROUTES = [
   { path: '/', changefreq: 'monthly', priority: 1.0 },
@@ -13,7 +12,6 @@ const STATIC_ROUTES = [
   { path: '/stack', changefreq: 'monthly', priority: 0.7 },
   { path: '/resume', changefreq: 'monthly', priority: 0.8 },
   { path: '/articles', changefreq: 'weekly', priority: 0.9 },
-  { path: '/blog', changefreq: 'weekly', priority: 0.8 },
   { path: '/contact', changefreq: 'monthly', priority: 0.8 },
 ];
 
@@ -40,20 +38,6 @@ function buildArticleEntries() {
   });
 }
 
-function buildBlogEntries() {
-  return Object.entries(blogModules).map(([file, mod]) => {
-    // ./blog.<slug>.mdx → <slug>
-    const slug = file.replace(/^\.\/blog\./, '').replace(/\.mdx$/, '');
-    const frontmatter = mod?.frontmatter ?? {};
-    return {
-      path: `/blog/${slug}`,
-      lastmod: frontmatter.date || null,
-      changefreq: 'monthly',
-      priority: 0.7,
-    };
-  });
-}
-
 function renderUrl({ path, lastmod, changefreq, priority }) {
   const loc = escapeXml(`${config.url}${path}`);
   const parts = [`    <loc>${loc}</loc>`];
@@ -64,7 +48,8 @@ function renderUrl({ path, lastmod, changefreq, priority }) {
 }
 
 export function loader() {
-  const entries = [...STATIC_ROUTES, ...buildArticleEntries(), ...buildBlogEntries()];
+  // Blog is private (password-gated), so it's intentionally left out of the sitemap.
+  const entries = [...STATIC_ROUTES, ...buildArticleEntries()];
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

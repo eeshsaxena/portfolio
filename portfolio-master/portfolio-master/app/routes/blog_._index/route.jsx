@@ -1,12 +1,16 @@
-import { json } from '@remix-run/cloudflare';
+import { json, redirect } from '@remix-run/cloudflare';
 import { Link as RouterLink, useLoaderData } from '@remix-run/react';
 import { DecoderText } from '~/components/decoder-text';
 import { Footer } from '~/components/footer';
-import { baseMeta } from '~/utils/meta';
 import { formatDate } from '~/utils/date';
+import { isUnlocked } from '~/utils/extra-session.server';
 import styles from '../blog/blog.module.css';
 
-export async function loader() {
+export async function loader({ request, context }) {
+  // Private: only readable once unlocked via the Extra password.
+  if (!(await isUnlocked(request, context))) {
+    throw redirect('/extracurricular');
+  }
   const modules = import.meta.glob('../blog.*.mdx', { eager: true });
   const build = await import('virtual:remix/server-build');
 
@@ -21,17 +25,17 @@ export async function loader() {
       (a.frontmatter.date || '') < (b.frontmatter.date || '') ? 1 : -1
     );
 
-  return json({ posts });
+  return json(
+    { posts },
+    { headers: { 'Cache-Control': 'no-store, must-revalidate' } }
+  );
 }
 
-export function meta({ matches }) {
-  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
-  return baseMeta({
-    title: 'Blog',
-    description:
-      'Newspaper articles by Eesh Saxena, with the original clipping and notes on the story behind each one.',
-    canonicalUrl,
-  });
+export function meta() {
+  return [
+    { title: 'Eesh Saxena | Blog' },
+    { name: 'robots', content: 'noindex, nofollow' },
+  ];
 }
 
 export default function BlogIndex() {

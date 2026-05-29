@@ -141,6 +141,27 @@
 
 /* ── Unlocked content ── */
 
+.blogLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 var(--spaceXL);
+  padding: 12px 20px;
+  font-family: var(--monoFontStack);
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid color-mix(in lab, var(--accent) 35%, transparent);
+  border-radius: 50px;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: color-mix(in lab, var(--accent) 10%, transparent);
+    border-color: var(--accent);
+  }
+}
+
 /* Compact list of activities, all in one box */
 .points {
   list-style: none;

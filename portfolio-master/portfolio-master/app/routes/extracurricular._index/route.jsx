@@ -1,23 +1,10 @@
-import { json, redirect, createCookieSessionStorage } from '@remix-run/cloudflare';
-import { Form, useLoaderData, useActionData, useNavigation } from '@remix-run/react';
+import { json, redirect } from '@remix-run/cloudflare';
+import { Form, Link as RouterLink, useLoaderData, useActionData, useNavigation } from '@remix-run/react';
 import { DecoderText } from '~/components/decoder-text';
 import { Footer } from '~/components/footer';
 import { ACTIVITIES, INTERESTS, CP } from './data.server';
+import { extraSession as sessionStorage } from '~/utils/extra-session.server';
 import styles from './extracurricular.module.css';
-
-function sessionStorage(context) {
-  return createCookieSessionStorage({
-    cookie: {
-      name: '__extra',
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7,
-      path: '/',
-      sameSite: 'lax',
-      secrets: [context.cloudflare.env.SESSION_SECRET || 'dev-secret'],
-      secure: true,
-    },
-  });
-}
 
 export function meta() {
   return [
@@ -108,6 +95,10 @@ export default function Extracurricular() {
           </Form>
         ) : (
           <>
+            <RouterLink prefetch="intent" to="/blog" className={styles.blogLink}>
+              📰 Read my newspaper blog →
+            </RouterLink>
+
             <h3 className={styles.sub}>Activities</h3>
             <ul className={styles.points}>
               {activities.map((a, i) => (

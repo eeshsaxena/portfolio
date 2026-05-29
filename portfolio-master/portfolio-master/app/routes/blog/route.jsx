@@ -1,28 +1,30 @@
-import { json } from '@remix-run/cloudflare';
+import { json, redirect } from '@remix-run/cloudflare';
 import { Outlet, useLoaderData, Link as RouterLink } from '@remix-run/react';
 import { MDXProvider } from '@mdx-js/react';
 import { Footer } from '~/components/footer';
-import { baseMeta } from '~/utils/meta';
 import { formatDate } from '~/utils/date';
-import config from '~/config.json';
+import { isUnlocked } from '~/utils/extra-session.server';
 import styles from './blog.module.css';
 
-export async function loader({ request }) {
+export async function loader({ request, context }) {
+  // Private: only readable once unlocked via the Extra password.
+  if (!(await isUnlocked(request, context))) {
+    throw redirect('/extracurricular');
+  }
   const slug = new URL(request.url).pathname.split('/').filter(Boolean).at(-1);
   const module = await import(`../blog.${slug}.mdx`);
-  return json({ frontmatter: module.frontmatter });
+  return json(
+    { frontmatter: module.frontmatter },
+    { headers: { 'Cache-Control': 'no-store, must-revalidate' } }
+  );
 }
 
-export function meta({ data, matches }) {
-  const { title, abstract } = data.frontmatter;
-  const canonicalUrl = matches.find(m => m.id === 'root')?.data?.canonicalUrl;
-  return baseMeta({
-    title,
-    description: abstract || `${title} — a newspaper writeup by ${config.name}.`,
-    prefix: '',
-    canonicalUrl,
-    type: 'article',
-  });
+export function meta({ data }) {
+  const title = data?.frontmatter?.title || 'Blog';
+  return [
+    { title: `${title} | Blog` },
+    { name: 'robots', content: 'noindex, nofollow' },
+  ];
 }
 
 export default function BlogPost() {
